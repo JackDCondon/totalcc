@@ -1,0 +1,180 @@
+{
+  "Actor": {
+    "types": ["character", "npc"],
+    "templates": {
+      "base": {
+        "hp": {
+          "value": 10,
+          "min": 0,
+          "max": 10
+        },
+        "temphp": {
+          "value": 0,
+          "min": 0,
+          "max": 0
+        },
+
+        "attributes" : {
+          "crittable": {
+            "value" : "I"
+          },
+          "init": {
+            "value" : "0"
+          },
+          "critdice" : {
+            "value" : "1d4"
+          },        
+          "actiondice": {
+            "value": 20
+          },
+          "speed": {
+            "value": "30'"
+          },
+          "hd" : {
+            "value" : "1d4"
+          },
+          "ac" : {
+            "value" : 10
+          },
+          "saves" : {
+            "fort" : {
+              "value" : 0
+            },        
+             "ref" : {
+              "value" : 0
+            },        
+             "will" : {
+              "value" : 0
+            }
+          }
+        },
+
+        "abilities": {
+          "strength": {
+            "value": 10,
+            "raw": 10
+          },
+          "agility": {
+            "value": 10,
+            "raw": 10
+          },
+          "stamina": {
+            "value": 10,
+            "raw": 10
+          },
+          "intelligence": {
+            "value": 10,
+            "raw": 10
+          },
+          "personality": {
+            "value": 10,
+            "raw": 10
+          },
+          "luck": {
+            "value": 10,
+            "raw": 10
+          }
+        }
+      },
+      "levelData": {
+        "level": {
+          "value": 1
+        },
+        "XP": {
+          "value": 10
+        }
+      }
+
+    },
+    "character": {
+      "templates": ["base", "levelData"],
+      "biography": ""
+    },
+    "npc": {
+      "templates": ["base"],
+      "biography": "",
+      "attributes" :
+      {
+        "special" : {
+          "value" : ""
+        },
+        "speed" : {
+          "other" : ""
+        }
+      }
+    }
+  },
+  "Item": {
+    "types": [ "item", "spell", "mutation", "weapon", "armor", "skill", "equiptable" ],
+    "templates": {
+      "common": {
+        "notes": "",
+        "order": -1,
+        "version": 3,
+        "charges" : {
+          "usescharges" : 0,
+          "value" : 1,
+          "max" : 0
+        }
+      },
+      "rollontable" :
+      {
+        "usetable" : ""
+      },
+      "equiptable" :
+      {
+        "iswearing" : 0
+      },
+      "spellbase" :
+      {
+        "save" : "None",
+        "range" : "N/A",
+        "duration" : "1 turn/CL",
+        "expended" : 0
+      }
+    },
+    "item": {
+      "templates": [ "common" ],
+      "quantity": {
+        "canstack" : 0,
+        "value":1,
+        "max":0
+      },
+      "weight": 0
+    },
+    "spell": {
+      "templates": [ "common", "rollontable", "spellbase" ],
+      "spellLevel": 1,
+      "usetable" : "spellresults",
+      "casterability" : "intelligence"
+    },
+    "mutation": {
+      "templates": [ "common", "rollontable", "spellbase" ],
+      "ispassive" : 1,
+      "mutationtype" : "Physical",
+      "usetable" : "mutationresults"
+    },
+    "weapon": {
+      "templates": [ "common", "equiptable"],
+      "weaponstats" : {
+        "range" : "Melee",
+        "damage" : "1d6",
+        "type" : "Slashing",
+        "attack" : 0
+      }
+    },
+    "armor": {
+      "templates": [ "common" , "equiptable"],
+      "acbonus" : 10,
+      "penalty" : 2,
+      "fumble" : "1d4"
+    },
+    "skill": {
+      "templates": [ "common", "rollontable" ],
+      "abilitiesmodifyer" : "strength",
+      "bonus" : 0,
+      "additionalmod" : "",
+      "usetable" : "skillresults"
+    }
+  }
+}

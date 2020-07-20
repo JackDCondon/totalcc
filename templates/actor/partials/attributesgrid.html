@@ -1,0 +1,57 @@
+{{!-- The grid classes are defined in scss/global/_grid.scss. To use,
+    use both the "grid" and "grid-Ncol" class where "N" can be any number
+    from 1 to 12 and will create that number of columns.  --}}
+    <div class="attributes grid grid-3col">
+
+        <div class="attribute flexrow flex-group-center">
+          <label for="data.attributes.ac.value" class="resource-label">AC</label>
+          <input type="text" name="data.attributes.ac.value" value="{{data.attributes.ac.value}}" data-dtype="Number"/>
+        </div>
+
+        <div class="attribute flexrow flex-group-center">
+          <label for="data.attributes.speed.value" class="resource-label">Speed</label>
+          <input type="text" name="data.attributes.speed.value" value="{{data.attributes.speed.value}}" data-dtype="String"/>
+        </div>
+
+        <div class="attribute flexrow flex-group-center">
+          <label for="data.attributes.actiondice.value" class="resource-label">Action Dice</label>
+          <input type="text" name="data.attributes.actiondice.value" value="{{data.attributes.actiondice.value}}" data-dtype="Number"/>
+        </div>
+
+        <div class="attribute flexrow flex-group-center">
+          <label for="data.attributes.critdice.value" class="resource-label">Crit Die</label>
+          <input type="text" name="data.attributes.critdice.value" value="{{data.attributes.critdice.value}}"/>
+        </div>
+
+        <div class="attribute flexrow flex-group-center">
+          <label for="data.attributes.crittable.value" class="resource-label">Crit Table</label>
+          <input type="text" name="data.attributes.crittable.value" value="{{data.attributes.crittable.value}}"/>
+        </div>
+
+        <div class="attribute flexrow flex-group-center">
+          <label for="data.attributes.hd.value" class="resource-label">HD</label>
+          <input type="text" name="data.attributes.hd.value" value="{{data.attributes.hd.value}}"/>
+        </div>
+
+        <div class="attribute flexrow flex-group-center">
+          <label for="data.attributes.saves.fort.value" class="resource-label">Fort Save</label>
+          <input type="text" name="data.attributes.saves.fort.value" value="{{data.attributes.saves.fort.value}}" data-dtype="Number"/>
+        </div>
+
+        <div class="attribute flexrow flex-group-center">
+          <label for="data.attributes.saves.ref.value" class="resource-label">Ref Save</label>
+          <input type="text" name="data.attributes.saves.ref.value" value="{{data.attributes.saves.ref.value}}" data-dtype="Number"/>
+        </div>
+
+        <div class="attribute flexrow flex-group-center">
+          <label for="data.attributes.saves.will.value" class="resource-label">Will Save</label>
+          <input type="text" name="data.attributes.saves.will.value" value="{{data.attributes.saves.will.value}}" data-dtype="Number"/>
+        </div>
+
+        <div class="attribute flexrow flex-group-center">
+            <label for="data.attributes.init.value" class="resource-label">Init</label>
+            <input type="text" name="data.attributes.init.value" value="{{data.attributes.init.value}}" data-dtype="String"/>
+          </div>
+
+
+    </div>
