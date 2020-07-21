@@ -5,7 +5,6 @@ import {totalccItem} from '../item/item.js';
 const sortFunction = (a, b) => a.data.order < b.data.order ? -1 : a.data.order > b.data.order ? 1 : 0;
 
 
-
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -24,27 +23,27 @@ export class totalccActorSheet extends ActorSheet {
   }
 
 
-      /** @inheritdoc */
-      _getHeaderButtons() {
-        let buttons = super._getHeaderButtons();
+  /** @inheritdoc */
+  _getHeaderButtons() {
+    let buttons = super._getHeaderButtons();
 
-        buttons.unshift(
-            {
-                label: "Import Stats",
-                class: "paste-block",
-                icon: "fas fa-paste",
-                onclick: ev => this._onPasteStatBlock(ev)
-            }//,
-         //   {
-             //   label: "Clear",
-             //   class: "clear-sheet",
-          //      icon: "fas fa-eraser",
-          //      onclick: ev => this._onClearSheet(ev)
-          //  }
-        );
+    buttons.unshift(
+        {
+            label: "Import Stats",
+            class: "paste-block",
+            icon: "fas fa-paste",
+            onclick: ev => this._onPasteStatBlock(ev)
+        }//,
+      //   {
+          //   label: "Clear",
+          //   class: "clear-sheet",
+      //      icon: "fas fa-eraser",
+      //      onclick: ev => this._onClearSheet(ev)
+      //  }
+    );
 
-        return buttons
-    }
+    return buttons
+  }
 
 
   /* -------------------------------------------- */
@@ -382,6 +381,16 @@ export class totalccActorSheet extends ActorSheet {
 
   }
 
+
+
+
+  spawnTabControls() {
+    // HERE WE NEED TO SPECIFY OUR TAB GROUPS
+    //if (!this.bTabControlsActive) {
+      
+      //this.bTabControlsActive = true;
+    //}
+  }
 
 
 
