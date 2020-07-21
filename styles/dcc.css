@@ -9,19 +9,19 @@
   font-family: "DuvallSmallCaps";
   src: url("fonts/DuvallSmallCaps.otf"); }
 
-.dcc .window-content {
+.totalcc .window-content {
   height: 100%;
   padding: 5px;
   overflow-y: hidden;
   font-family: "Book Antiqua", "Palatino Linotype", serif; }
 
-.dcc .window-content label {
+.totalcc .window-content label {
   font-family: "DuvallSmallCaps", "Palatino Linotype", serif; }
 
 /* ----------------------------------------- */
 /*  Rollable                                 */
 /* ----------------------------------------- */
-.dcc .rollable:hover {
+.totalcc .rollable:hover {
   color: #000;
   text-shadow: 0 0 10px red;
   cursor: pointer; }
@@ -29,62 +29,62 @@
 /* ----------------------------------------- */
 /*  Actor Sheet                              */
 /* ----------------------------------------- */
-.dcc.sheet.actor {
+.totalcc.sheet.actor {
   min-width: 605px;
   min-height: 631px; }
 
-.dcc .editor,
-.dcc .editor-content {
+.totalcc .editor,
+.totalcc .editor-content {
   height: 100%; }
 
 /* ----------------------------------------- */
 /*  Sheet Header                             */
 /* ----------------------------------------- */
-.dcc .sheet-header {
+.totalcc .sheet-header {
   overflow: hidden;
   justify-content: flex-start;
   margin-bottom: 10px; }
 
-.dcc .sheet-header .profile-img {
+.totalcc .sheet-header .profile-img {
   flex: 0 0 100px;
   height: 100px;
   margin: 5px 10px 0 0; }
 
-.dcc .sheet-header h1.charname {
+.totalcc .sheet-header h1.charname {
   flex: 0 0 100%;
   height: 50px;
   padding: 0;
   margin: 5px 0;
   border-bottom: 0; }
 
-.dcc .sheet-header h1.charname input {
+.totalcc .sheet-header h1.charname input {
   width: 100%;
   height: 100%;
   margin: 0; }
 
-.dcc .alignment {
+.totalcc .alignment {
   margin-left: 15px;
   text-align: center;
   flex: 0 0 10%; }
 
-.dcc .alignment select {
+.totalcc .alignment select {
   font-family: inherit;
   height: 24px;
   width: 90px; }
 
-.dcc .occupation input {
+.totalcc .occupation input {
   width: 100%; }
 
-.dcc .occupation label {
+.totalcc .occupation label {
   margin: 0 0 0 4px; }
 
-.dcc.actor.sheet .character-main-top-row {
+.totalcc.actor.sheet .character-main-top-row {
   flex: 0 0 100px; }
 
 /* ----------------------------------------- */
 /*  Action Dice                                 */
 /* ----------------------------------------- */
-.dcc .action-dice {
+.totalcc .action-dice {
   flex: 0 0 100px;
   text-align: center;
   margin: 0 0 0 10px; }
@@ -92,7 +92,7 @@
 /* ----------------------------------------- */
 /*  Ability Scores                           */
 /* ----------------------------------------- */
-.dcc.sheet.actor .ability-scores {
+.totalcc.sheet.actor .ability-scores {
   flex: 0 0 140px;
   height: 425px;
   list-style: none;
@@ -102,23 +102,23 @@
   border: 2px groove #eeede0;
   border-radius: 5px; }
 
-.dcc.sheet.actor .ability-scores .ability {
+.totalcc.sheet.actor .ability-scores .ability {
   height: 70px;
   text-align: center;
   border-bottom: 2px groove #eeede0;
   padding-top: 3px; }
 
-.dcc.sheet.actor .ability-scores .ability:last-child {
+.totalcc.sheet.actor .ability-scores .ability:last-child {
   border-bottom: none; }
 
-.dcc.sheet.actor .ability-scores .ability input.ability-score {
+.totalcc.sheet.actor .ability-scores .ability input.ability-score {
   height: 30px;
   width: 36px;
   margin: 0 auto;
   line-height: 32px;
   font-size: 24px; }
 
-.dcc.sheet.actor .ability-scores .ability .ability-modifiers {
+.totalcc.sheet.actor .ability-scores .ability .ability-modifiers {
   flex: 0 0 24px;
   height: 23px;
   margin: -16px 0 0 110px;
@@ -131,7 +131,7 @@
 /* ----------------------------------------- */
 /*  Armor                                  */
 /* ----------------------------------------- */
-.dcc .armor-heading {
+.totalcc .armor-heading {
   margin: 8px 0 0 0;
   font-family: "DuvallSmallCaps", "Palatino Linotype", serif;
   font-size: 1.1rem;
@@ -143,43 +143,43 @@
   background-position-x: 70px;
   background-repeat: no-repeat; }
 
-.dcc .armor-list {
+.totalcc .armor-list {
   margin: 0 8px 0 0;
   font-family: "Book Antiqua", "Palatino Linotype", serif;
   padding: 0; }
 
-.dcc .armor-list input {
+.totalcc .armor-list input {
   height: 30px; }
 
-.dcc .armor-list-header {
+.totalcc .armor-list-header {
   margin: 7px 0 2px 0;
   font-family: "DuvallSmallCaps", "Palatino Linotype", serif;
   font-size: .8rem;
   flex: 0 0 10px;
   padding: 0; }
 
-.dcc .armor-bonus {
+.totalcc .armor-bonus {
   flex: 0 0 45px;
   margin: 0 8px 0 8px;
   text-align: center; }
 
-.dcc .armor-checkpenalty {
+.totalcc .armor-checkpenalty {
   flex: 0 0 60px;
   margin: 0 8px 0 0;
   text-align: center; }
 
-.dcc .armor-fumbledie {
+.totalcc .armor-fumbledie {
   flex: 0 0 80px;
   text-align: center; }
 
-.dcc .armor-notes {
+.totalcc .armor-notes {
   flex: 0 0 110px;
   margin: 0 0 0 8px; }
 
 /* ----------------------------------------- */
 /*  Armor Class                              */
 /* ----------------------------------------- */
-.dcc .ac {
+.totalcc .ac {
   background-image: url("./images/shield.png");
   background-size: 60px 76px;
   background-repeat: no-repeat;
@@ -188,12 +188,12 @@
   text-align: center;
   margin: 10px 0 0 6px; }
 
-.dcc .ac label {
+.totalcc .ac label {
   margin: 31px auto 0 auto;
   font-size: 1.1rem;
   line-height: 1.6rem; }
 
-.dcc .ac .ac-value {
+.totalcc .ac .ac-value {
   width: 35px;
   margin: 21px auto 0 auto;
   font-size: 1.6rem;
@@ -214,12 +214,12 @@
 /* ----------------------------------------- */
 /*  Criticals                                */
 /* ----------------------------------------- */
-.dcc .crit-die {
+.totalcc .crit-die {
   flex: 0 0 80px;
   text-align: center;
   margin: 0 0 0 10px; }
 
-.dcc .crit-table {
+.totalcc .crit-table {
   flex: 0 0 80px;
   text-align: center;
   margin: 0 0 0 10px; }
@@ -227,7 +227,7 @@
 /* ----------------------------------------- */
 /*  Hit Dice                                 */
 /* ----------------------------------------- */
-.dcc .hd {
+.totalcc .hd {
   flex: 0 0 50px;
   text-align: center;
   margin: 0 0 0 0; }
@@ -235,7 +235,7 @@
 /* ----------------------------------------- */
 /*  Hit Points                               */
 /* ----------------------------------------- */
-.dcc .hp {
+.totalcc .hp {
   background-image: url("./images/heart.png");
   background-size: 80px 75px;
   background-repeat: no-repeat;
@@ -245,23 +245,23 @@
   text-align: center;
   margin: 0 0 0 5px; }
 
-.dcc .hp .current-label {
+.totalcc .hp .current-label {
   margin: -8px auto 0 28px;
   font-size: 1.1rem;
   line-height: 1.6rem; }
 
-.dcc .hp .current {
+.totalcc .hp .current {
   width: 35px;
   margin: 31px auto 0 23px;
   font-size: 1.6rem;
   height: 25px; }
 
-.dcc .hp .max {
+.totalcc .hp .max {
   width: 25px;
   margin: 7px auto 0 63px;
   height: 17px; }
 
-.dcc .hp .max-label {
+.totalcc .hp .max-label {
   margin: 2px auto 0 65px;
   font-size: .6rem;
   line-height: .8rem; }
@@ -269,19 +269,19 @@
 /* ----------------------------------------- */
 /*  Init                                     */
 /* ----------------------------------------- */
-.dcc .init-and-speed {
+.totalcc .init-and-speed {
   flex: 0 0 100px;
   margin: 7px 0 0 0;
   text-align: right; }
 
-.dcc .init {
+.totalcc .init {
   flex: 0 0 30px;
   align-items: center; }
 
-.dcc .init label {
+.totalcc .init label {
   font-size: 1.1rem; }
 
-.dcc .init .init-value {
+.totalcc .init .init-value {
   width: 40px;
   font-size: 1.1rem;
   text-align: center; }
@@ -289,12 +289,12 @@
 /* ----------------------------------------- */
 /*  Notes                              */
 /* ----------------------------------------- */
-.dcc .notes {
+.totalcc .notes {
   border: 2px groove #eeede0;
   font-size: 1.2rem;
   height: 85%; }
 
-.dcc .notes-label {
+.totalcc .notes-label {
   font-family: "DuvallSmallCaps", "Palatino Linotype", serif;
   font-size: 1.5rem;
   margin-top: 20px; }
@@ -302,20 +302,20 @@
 /* ----------------------------------------- */
 /*  Speed                                    */
 /* ----------------------------------------- */
-.dcc .speed label {
+.totalcc .speed label {
   margin: 10px auto 0 0;
   font-size: 1.1rem; }
 
-.dcc .speed .speed-other {
+.totalcc .speed .speed-other {
   width: 100px;
   margin: 5px 0 0 0; }
 
-.dcc .speed .speed-other-label {
+.totalcc .speed .speed-other-label {
   font-size: .8rem;
   line-height: .8rem;
   margin: 0 7px 0 0; }
 
-.dcc .speed .speed-value {
+.totalcc .speed .speed-value {
   width: 40px;
   font-size: 1.1rem;
   height: 25px;
@@ -324,7 +324,7 @@
 /* ----------------------------------------- */
 /*  Saving Throws                            */
 /* ----------------------------------------- */
-.dcc.sheet.actor .saving-throws {
+.totalcc.sheet.actor .saving-throws {
   flex: 0 0 152px;
   height: 102px;
   list-style: none;
@@ -335,13 +335,13 @@
   border-radius: 5px;
   text-align: left; }
 
-.dcc.sheet.actor .saving-throws .save {
+.totalcc.sheet.actor .saving-throws .save {
   margin-bottom: .25rem; }
 
-.dcc.sheet.actor .saving-throws span {
+.totalcc.sheet.actor .saving-throws span {
   font-family: "Book Antiqua", "Palatino Linotype", serif; }
 
-.dcc.sheet.actor .saving-throws input {
+.totalcc.sheet.actor .saving-throws input {
   margin-bottom: 0;
   width: 36px;
   font-family: "Book Antiqua", "Palatino Linotype", serif;
@@ -350,43 +350,43 @@
 /* ----------------------------------------- */
 /*  Special                                  */
 /* ----------------------------------------- */
-.dcc .special {
+.totalcc .special {
   flex: 0 0 155px;
   margin: 0 8px 0 0; }
 
 /* ----------------------------------------- */
 /*  Tabs                                     */
 /* ----------------------------------------- */
-.dcc .tabs {
+.totalcc .tabs {
   height: 40px; }
 
-.dcc .tabs .item {
+.totalcc .tabs .item {
   line-height: 35px;
   font-weight: bold;
   border: 2px groove #eeede0;
   border-radius: 5px 5px 0 0;
   margin-bottom: 10px; }
 
-.dcc .tabs .item.active {
+.totalcc .tabs .item.active {
   text-decoration: underline;
   text-shadow: none;
   border-bottom: none;
   margin-bottom: 11px; }
 
-.dcc .sheet-body {
+.totalcc .sheet-body {
   overflow: hidden; }
 
-.dcc .sheet-body .tab {
+.totalcc .sheet-body .tab {
   height: 100%;
   overflow-y: auto; }
 
 /* ----------------------------------------- */
 /*  Weapons                                  */
 /* ----------------------------------------- */
-.dcc .weapons {
+.totalcc .weapons {
   margin: 10px 0 0 0; }
 
-.dcc .weapons-heading {
+.totalcc .weapons-heading {
   margin: 10px 0 0 0;
   font-family: "DuvallSmallCaps", "Palatino Linotype", serif;
   font-size: 1.1rem;
@@ -398,54 +398,54 @@
   background-position-x: 155px;
   background-repeat: no-repeat; }
 
-.dcc .weapons-heading.ranged {
+.totalcc .weapons-heading.ranged {
   background-image: url("./images/bow.png");
   background-size: 90px 17px;
   background-position-x: 165px; }
 
-.dcc .weapon-list {
+.totalcc .weapon-list {
   margin: 0 0 0 0;
   font-family: "Book Antiqua", "Palatino Linotype", serif;
   padding: 0; }
 
-.dcc .weapon-list input {
+.totalcc .weapon-list input {
   margin: 0 8px 0 0;
   height: 30px; }
 
-.dcc .weapon-list-header {
+.totalcc .weapon-list-header {
   margin: 0 0 1px 0;
   font-family: "DuvallSmallCaps", "Palatino Linotype", serif;
   font-size: .8rem;
   flex: 0 0 10px;
   padding: 0; }
 
-.dcc .weapon {
+.totalcc .weapon {
   flex: 0 0 35px; }
 
-.dcc .weapon-button {
+.totalcc .weapon-button {
   flex: 0 0 30px;
   margin: 5px 0 0 0;
   background-image: url("/icons/svg/d20-black.svg");
   background-size: 22px 22px;
   background-repeat: no-repeat; }
 
-.dcc .weapon-damage {
+.totalcc .weapon-damage {
   flex: 0 0 80px;
   margin: 0 10px 0 0;
   text-align: center; }
 
-.dcc .weapon-name-label {
+.totalcc .weapon-name-label {
   padding: 0 0 0 30px; }
 
-.dcc .weapon-notes {
+.totalcc .weapon-notes {
   flex: 0 0 110px;
   margin: 0 8px 0 0; }
 
-.dcc .weapon-tohit {
+.totalcc .weapon-tohit {
   flex: 0 0 60px;
   margin: 0 6px 0 0;
   text-align: center; }
 
-.dcc .weapon-special {
+.totalcc .weapon-special {
   flex: 0 0 1;
   text-align: center; }

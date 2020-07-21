@@ -94,7 +94,7 @@
                         <input class="max" type="text" name="data.attributes.hp.max"
                                value="{{data.attributes.hp.max}}"
                                data-dtype="Number"/>
-                        <label class="max-label" for="data.attributes.hp.max">{{localize "DCC.Max"}}</label>
+                        <label class="max-label" for="data.attributes.hp.max">Max</label>
                         <label class="current-label" for="data.attributes.hp.value">{{localize "DCC.HP"}}</label>
                     </div>
 
@@ -109,7 +109,7 @@
                                    data-dtype="Number"/>
                         </div>
                         <div class="speed">
-                            <label for="data.attributes.speed.value">{{localize "DCC.Speed"}}</label>
+                            <label for="data.attributes.speed.value">Speed</label>
                             <input class="speed-value" type="text" id="data.attributes.speed.value"
                                    name="data.attributes.speed.value"
                                    value="{{data.attributes.speed.value}}" data-dtype="Number"/>
@@ -117,9 +117,23 @@
                     </div>
                 </div>
 
+
+                
+                {{> "systems/totalcc/templates/actor/partials/charateritems.html"}}
+
+
+
+
                 {{!-- Inventory --}}
 
-                {{> "systems/totalcc/templates/actor/partials/charateritems.html"}}
+
+
+
+
+
+            </div>
+
+        </div>
 
 
 
@@ -132,6 +146,7 @@
         <div class="tab" data-group="primary" data-tab="notes">
             <h4 class="notes-label">{{localize "DCC.Notes"}}</h4>
             <div class="notes">
+
                 {{editor content=data.details.notes.value target="data.details.notes.value" button=true owner=owner
                          editable=editable}}
             </div>
