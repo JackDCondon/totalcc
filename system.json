@@ -2,7 +2,7 @@
   "name": "totalcc",
   "title": "TotalCC",
   "description": "The TotalCC system for FoundryVTT!",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "minimumCoreVersion": "0.5.5",
   "compatibleCoreVersion": "0.5.5",
   "templateVersion": 3,
@@ -60,7 +60,7 @@
   "secondaryTokenAttribute": "temphp",
   "initiative": "1d20 + @data.attributes.init.value + 1",
   "url": "https://github.com/JackDCondon/totalcc/",
-  "manifest": "https://github.com/JackDCondon/totalcc/blob/master/system.json",
+  "manifest": "https://raw.githubusercontent.com/JackDCondon/totalcc/master/system.json",
   "download": "https://github.com/JackDCondon/totalcc/archive/0.1.0.zip",
   "license": "LICENSE.txt"
 }
