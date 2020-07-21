@@ -10,42 +10,49 @@
                        placeholder="Character Name"/>
             </h1>
 
-            <div class="xp flex1">
-                <label for="data.xp.value">Experience</label>
-                <input type="text" id="data.xp.value" name="data.xp.value"
-                       value="{{data.xp.value}}" maxlength="40"/>
-            </div>
+            <div class="ghettoTable">
+                <div class="row">
 
-            
-            <div class="level flex1">
-                <label for="data.level.value">Level</label>
-                <input type="text" id="data.level.value" name="data.level.value"
-                       value="{{data.level.value}}" maxlength="40"/>
-            </div>
+                    <div class="xp col">
+                        <label for="data.xp.value">Experience</label>
+                        <input type="text" id="data.xp.value" name="data.xp.value"
+                            value="{{data.xp.value}}" maxlength="40"/>
+                    </div>
+
+                    
+                    <div class="level col">
+                        <label for="data.level.value">Level</label>
+                        <input type="text" id="data.level.value" name="data.level.value"
+                            value="{{data.level.value}}" maxlength="40"/>
+                    </div>
 
 
-            <div class="title flex1">
-                <label for="data.details.occupation.value">Title</label>
-                <input type="text" id="data.details.occupation.value" name="data.details.occupation.value"
-                       value="{{data.details.occupation.value}}" maxlength="40"/>
-            </div>
+                    <div class="title col">
+                        <label for="data.details.occupation.value">Title</label>
+                        <input type="text" id="data.details.occupation.value" name="data.details.occupation.value"
+                            value="{{data.details.occupation.value}}" maxlength="40"/>
+                    </div>
 
-            <div class="occupation flex1">
-                <label for="data.details.occupation.value">Occupation</label>
-                <input type="text" id="data.details.occupation.value" name="data.details.occupation.value"
-                       value="{{data.details.occupation.value}}" maxlength="40"/>
-            </div>
+                    <div class="occupation col">
+                        <label for="data.details.occupation.value">Occupation</label>
+                        <input type="text" id="data.details.occupation.value" name="data.details.occupation.value"
+                            value="{{data.details.occupation.value}}" maxlength="40"/>
+                    </div>
 
-            <div class="alignment">
-                <label for="data.details.alignment">Alignment</label>
-                <select id="data.details.alignment" name="data.details.alignment">
-                    {{#select data.details.alignment}}
-                        {{#each config.alignments as |label alignment|}}
-                            <option value="{{alignment}}">{{localize label}}</option>
-                        {{/each}}
-                    {{/select}}
-                </select>
-            </div>
+                    <div class="alignment col">
+                        <label for="data.details.alignment">Alignment</label>
+                        <select id="data.details.alignment" name="data.details.alignment">
+                            {{#select data.details.alignment}}
+                                {{#each config.alignments as |label alignment|}}
+                                    <option value="{{alignment}}">{{localize label}}</option>
+                                {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
+                </div>
+            </div><!-- end ghetto table -->
+
+
         </div>
     </header>
 
@@ -56,104 +63,92 @@
 
         {{!-- Character Tab --}}
         <div class="character flexrow">
-            {{!-- Ability Scores --}}
-            <ul class="ability-scores flexcol">
-                {{#each data.abilities as |ability id|}}
-                    <li class="ability" data-ability="{{id}}">
-                        <label class="ability-name box-title rollable">{{ability.label}}</label>
-                        <br/>
-                        <input class="ability-score" id="data.abilities.{{id}}.value" name="data.abilities.{{id}}.value"
-                               type="text"
-                               value="{{ability.value}}"
-                               data-dtype="Number"
-                               placeholder="10"
-                        />
-                        <div class="ability-modifiers" title="Modifier">
-                            {{numberFormat ability.mod decimals=0 sign=true}}
-                        </div>
-                    </li>
-                {{/each}}
-            </ul>
-
-
-            {{!-- COMBAT TABLE, UNDER Abilitys --}}
-
-            <div class="CombatTable">
-                <div class="CritInfo">
-                    <ul class="CritInfo flexcol">
-                        <li class="CritInfo">
-                            <label class="critdice-label box-title" for="data.attributes.critdice.value">Crit Dice</label>
-
-                            <label class="crittable-label box-title" for="data.attributes.crittable.value">Crit Tbl</label>
+            <div class="flexcol left-col">
+                {{!-- Ability Scores --}}
+                <ul class="ability-scores ">
+                    {{#each data.abilities as |ability id|}}
+                        <li class="ability" data-ability="{{id}}">
+                            <label class="ability-name box-title rollable">{{ability.label}}</label>
+                            <br/>
+                            <input class="ability-score" id="data.abilities.{{id}}.value" name="data.abilities.{{id}}.value"
+                                type="text"
+                                value="{{ability.value}}"
+                                data-dtype="Number"
+                                placeholder="10"
+                            />
+                            <div class="ability-modifiers" title="Modifier">
+                                {{numberFormat ability.mod decimals=0 sign=true}}
+                            </div>
+                            {{#ifeq id "luck" }}
+                            <div class="floating-luck">
+                                <h4>FLEETING</h4>
+                                <span><input class="fleeting-luck" id="data.abilities.luck.fleeting" name="data.abilities.luck.fleeting"
+                                    type="text"
+                                    value="{{data.abilities.luck.fleeting}}"
+                                    data-dtype="Number"
+                                    placeholder="0"
+                                /></span>
+                            </div>
+                            {{/ifeq}}
                         </li>
+                    {{/each}}
+                </ul>
 
-                        <li class="CritInfo">
+
+                {{!-- COMBAT TABLE, UNDER Abilitys --}}
+                <div class="ghettoTable border">
+                    <div class="row">
+                        <div class="col"><label class="critdice-label box-title" for="data.attributes.critdice.value">Crit Dice</label></div>
+                        <div class="col"><label class="crittable-label box-title" for="data.attributes.crittable.value">Crit Tbl</label></div>
+                    </div>
+                    <div class="row separate">
+                        <div class="col">
                             <input class="critdice" type="text" id="data.attributes.critdice.value"
                             name="data.attributes.critdice.value"
-                            value="{{numberFormat data.attributes.critdice.value decimals=0 sign=true}}"
+                            value="{{data.attributes.critdice.value}}"
                             data-dtype="String"/>
-
+                        </div>
+                        <div class="col">
                             <input class="crittable" type="text" id="data.attributes.crittable.value"
                             name="data.attributes.crittable.value"
-                            value="{{numberFormat data.attributes.crittable.value decimals=0 sign=true}}"
+                            value="{{data.attributes.crittable.value}}"
                             data-dtype="String"/>
-                        </li>
+                        </div>
+                    </div>
 
-                    </ul>
-                </div>
-
-                <div class="attack">
-                            <label class="attack-label box-title" for="data.attributes.attack.value">Crit Dice</label>
+                    <div class="row separate">
+                        <div class="col"><label class="attack-label box-title" for="data.attributes.attack.value">Attack</label></div>
+                        <div class="col">
                             <input class="attack" type="text" id="data.attributes.attack.value"
                             name="data.attributes.attack.value"
                             value="{{numberFormat data.attributes.attack.value decimals=0 sign=true}}"
                             data-dtype="String"/>
+                        </div>
+                    </div>
+
+                    <div class="row separate-last">
+                        <div class="col center"><label class="temphp-label box-title" for="data.temphp.value">Armor HP</label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input class="temphpvalue" type="text" id="data.temphp.value"
+                            name="data.temphp.value"
+                            value="{{numberFormat data.temphp.value decimals=0 sign=true}}"
+                            data-dtype="Number"/>
+                        </div>
+                        <div class="col">
+                            <input class="temphpmax" type="text" id="data.temphp.max"
+                            name="data.temphp.max"
+                            value="{{numberFormat data.temphp.max decimals=0 sign=true}}"
+                            data-dtype="Number"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col center small">(min)</div>
+                        <div class="col center small">(max)</div>
+                    </div>
                 </div>
-
-                
-                <div class="temphp">
-                    <li>
-                    <label class="temphp-label box-title" for="data.temphp.value">Armor HP</label>
-                    </li>
-                    <li>
-                        <input class="temphpvalue" type="text" id="data.temphp.value"
-                        name="data.temphp.value"
-                        value="{{numberFormat data.temphp.value decimals=0 sign=true}}"
-                        data-dtype="Number"/> 
-                        <h4>/</h4>
-                        <input class="temphpmax" type="text" id="data.temphp.max"
-                        name="data.temphp.max"
-                        value="{{numberFormat data.temphp.max decimals=0 sign=true}}"
-                        data-dtype="Number"/>
-                    </li>
-                </div>
-
-            </div> 
-            {{!-- END CRIT TABLE --}}
-
-
-
-
-
-                    <label class="init-label box-title rollable" for="data.attributes.init.value">Init</label>
-                    <input class="init-value" type="text" id="data.attributes.init.value"
-                           name="data.attributes.init.value"
-                           value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"
-                           data-dtype="Number"/>
-                </div>
-                <div class="speed">
-                    <label for="data.attributes.speed.value">Speed</label>
-                    <input class="speed-value" type="text" id="data.attributes.speed.value"
-                           name="data.attributes.speed.value"
-                           value="{{data.attributes.speed.value}}" data-dtype="Number"/>
-                </div>
-
-                <div class="speed">
-                    <label for="data.attributes.speed.value">HD</label>
-                    <input class="speed-value" type="text" id="data.attributes.speed.value"
-                           name="data.attributes.speed.value"
-                           value="{{data.attributes.speed.value}}" data-dtype="Number"/>
-                </div>
+                {{!-- END CRIT TABLE --}}
 
             </div>
 

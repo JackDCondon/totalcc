@@ -151,6 +151,7 @@
 
 .totalcc.sheet.actor .ability-scores .ability {
   height: 70px;
+  position: relative;
   text-align: center;
   border-bottom: 2px groove #eeede0;
   padding-top: 3px; }
@@ -541,4 +542,98 @@
 }
 .totalcc .quantity.field-short h4 {
   display: inline-block;
+}
+
+.totalcc .character .flexcol.left-col
+{
+  max-width: 158px;
+}
+
+
+
+.totalcc .ghettoTable {
+  font-size: 0.8em;
+}
+
+.totalcc .ghettoTable.border {
+  border: 2px groove #eeede0;
+  border-radius: 5px;
+  margin: 6px;
+  padding: 4px;
+}
+
+.totalcc .ghettoTable .row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.totalcc .ghettoTable .row.separate {
+  padding-bottom: 5px;
+  border-bottom: 2px groove #eeede0;
+  margin-bottom: 5px;
+}
+
+.totalcc .ghettoTable .row.separate-last {
+  margin-top: -5px;
+}
+
+.totalcc .ghettoTable .col {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.totalcc .ghettoTable .col.center {
+  text-align: center;
+}
+
+.totalcc .ghettoTable .col.small {
+  font-size: 0.75em;
+}
+
+.totalcc .ghettoTable .col label {
+  line-height: 21px;
+}
+.totalcc .ghettoTable.border .col label {
+  line-height: 24px;
+}
+
+
+/*ability thing*/
+.floating-luck {
+  position: absolute;
+  top: 89%;
+  left: 16%;
+  transform: translate(-50%, -50%);
+  background: center center no-repeat url('images/luck-star.png');
+  background-size: cover;
+  font-size: 0.6em;
+  width: 50px;
+  height: 50px;
+}
+
+.floating-luck h4 {
+  text-align: center;
+  width: 100%;
+  display: block;
+  margin: 10px 0 0;
+  padding: 0;
+  font-size: 0.7em;
+  font-weight: bold;
+  font-family: "DuvallSmallCaps", "Palatino Linotype", serif;
+}
+
+.floating-luck input {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 1.7em;
+  line-height: 1em;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
 }
