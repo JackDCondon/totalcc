@@ -17,12 +17,12 @@ _______________________________`;
  * @type {Object}
  */
 DCC.abilities = {
-  "str": "DCC.AbilityStr",
-  "agl": "DCC.AbilityAgl",
-  "sta": "DCC.AbilitySta",
-  "per": "DCC.AbilityPer",
-  "int": "DCC.AbilityInt",
-  "lck": "DCC.AbilityLck",
+  "Strength": "Strength",
+  "Agility": "Agility",
+  "Stamina": "Stamina",
+  "Personality": "Personality",
+  "Intelligence": "Intelligence",
+  "Luck": "Luck",
 };
 
 /**

@@ -1,3 +1,5 @@
+import {DCC} from '../config.js';
+
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -30,7 +32,12 @@ export class totalccItemSheet extends ItemSheet {
   /** @override */
   getData() {
     const data = super.getData();
+
+
+    data.config = DCC;
     return data;
+
+
   }
 
   /* -------------------------------------------- */

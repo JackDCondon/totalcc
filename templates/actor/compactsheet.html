@@ -43,8 +43,8 @@
                         <label for="data.alignment">Alignment</label>
                         <select id="data.alignment" name="data.alignment">
                             {{#select data.details.alignment}}
-                                {{#each config.alignments as |label alignment|}}
-                                    <option value="{{alignment}}">{{localize label}}</option>
+                                {{#each DCC.alignment as |label abilitie|}}
+                                    <option value="{{abilitie}}">{{label}}</option>
                                 {{/each}}
                             {{/select}}
                         </select>
@@ -126,7 +126,7 @@
                         <div class="col">
                             <input class="attack" type="text" id="data.attributes.attack.value"
                             name="data.attributes.attack.value"
-                            value="{{numberFormat data.attributes.attack.value decimals=0 sign=true}}"
+                            value="{{data.attributes.attack.value}}"
                             data-dtype="String"/>
                         </div>
                     </div>
@@ -138,13 +138,13 @@
                         <div class="col">
                             <input class="temphpvalue" type="text" id="data.temphp.value"
                             name="data.temphp.value"
-                            value="{{numberFormat data.temphp.value decimals=0 sign=true}}"
+                            value="{{numberFormat data.temphp.value decimals=0}}"
                             data-dtype="Number"/>
                         </div>
                         <div class="col">
                             <input class="temphpmax" type="text" id="data.temphp.max"
                             name="data.temphp.max"
-                            value="{{numberFormat data.temphp.max decimals=0 sign=true}}"
+                            value="{{numberFormat data.temphp.max decimals=0}}"
                             data-dtype="Number"/>
                         </div>
                     </div>
@@ -214,11 +214,11 @@
                                    value="{{data.attributes.speed.value}}" data-dtype="Number"/>
                         </div>
 
-                        <div class="HD">
+                        <div class="speed">
                             <label for="data.attributes.speed.value">HD</label>
-                            <input class="speed-value" type="text" id="data.attributes.speed.value"
-                                   name="data.attributes.speed.value"
-                                   value="{{data.attributes.speed.value}}" data-dtype="Number"/>
+                            <input class="speed-value" type="text" id="data.attributes.hd.value"
+                                   name="data.attributes.hd.value"
+                                   value="{{data.attributes.hd.value}}" data-dtype="String"/>
                         </div>
 
                     </div>
