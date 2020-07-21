@@ -61,6 +61,6 @@
   "initiative": "1d20 + @data.attributes.init.value + 1",
   "url": "https://github.com/JackDCondon/totalcc/",
   "manifest": "https://raw.githubusercontent.com/JackDCondon/totalcc/master/system.json",
-  "download": "https://github.com/JackDCondon/totalcc/archive/0.1.0.zip",
+  "download": "https://github.com/JackDCondon/totalcc/archive/2.0.5.zipp",
   "license": "LICENSE.txt"
 }
