@@ -524,6 +524,9 @@
   background: rgba(0,0,0,0.2);
 }
 
+.totalcc ol.items-list .item > div:first-child {
+  margin-right: 5px;
+}
 .totalcc ol.items-list .item > div:last-child {
   text-align: right;
   padding-right: 10px;
