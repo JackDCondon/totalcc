@@ -1,5 +1,5 @@
 {{!-- Sheet Tab Navigation --}}
-<nav class="sheet-tabs tabs" data-group="secondary">
+<nav class="sheet-tabs tabs" data-group="primary">
     <a class="item" data-tab="description">Description</a>
     <a class="item" data-tab="items">Items</a>
     <a class="item" data-tab="skills">Skills</a>
@@ -10,12 +10,12 @@
 <section class="content">
 
     {{!-- Biography Tab --}}
-    <div class="tab description flexrow" data-group="secondary" data-tab="description">
+    <div class="tab description flexrow" data-group="primary" data-tab="description">
       {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Owned Items Tab --}}
-    <div class="tab items" data-group="secondary" data-tab="items">
+    <div class="tab items" data-group="primary" data-tab="items">
         <h2>Weapons</h2>
         <ol class="items-list">
           <li class="item flexrow item-header">
@@ -40,13 +40,13 @@
               <h4 class="item-damagetype">{{item.data.weaponstats.type}}</h4>
               <div class="item-charges field-short">
                 {{#if item.data.charges.usescharges}}
-                <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
+                <input value="{{item.data.charges.value}}" type="text" data-dtype="Number"
                 placeholder="1" />
                 {{#if item.data.charges.max}}
                   <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
                 {{/if}}
                 {{else}}
-                N/a
+                <h4>N/a</h4>
                 {{/if}}
               </div>
               <div class="item-controls">
@@ -116,13 +116,13 @@
                 <h4 class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</h4>
                 <div class="field-short quantity">
                   {{#if item.data.quantity.canstack}}
-                    <input value="{{item.data.quantity.value}}" type="Number" data-dtype="Number"
+                    <input value="{{item.data.quantity.value}}" type="text" data-dtype="Number"
                       placeholder="1" />
                       {{#if item.data.quantity.max}}
                       <h4 class="item-quantitymax"> / {{item.data.quantity.max}}</h4>
                       {{/if}}
                   {{else}}
-                      N/a
+                    <h4>N/a</h4>
                   {{/if}}
                   </div>
                   <div class="item-charges">
@@ -133,7 +133,7 @@
                     <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
                     {{/if}}
                     {{else}}
-                    N/a
+                    <h4>N/a</h4>
                     {{/if}}
 
                   </div>
@@ -150,7 +150,7 @@
     </div>
 
     {{!-- Owned Skills Tab --}}
-    <div class="tab skills" data-group="secondary" data-tab="skills">
+    <div class="tab skills" data-group="primary" data-tab="skills">
 
         <h2>Skills</h2>
         <ol class="items-list">
@@ -266,7 +266,7 @@
     </div>
 
     {{!-- Owned Spells Tab --}}
-    <div class="tab spells" data-group="secondary" data-tab="spells">
+    <div class="tab spells" data-group="primary" data-tab="spells">
         <ol class="items-list">
             <li class="item flexrow item-header">
               <div class="item-image"></div>

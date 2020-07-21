@@ -496,3 +496,49 @@
 .totalcc .weapon-special {
   flex: 0 0 1;
   text-align: center; }
+
+
+
+/*****************************
+  * LIAMS HAX
+  *****************************/
+.totalcc ol.items-list {
+  padding-left: 0;
+}
+
+.totalcc ol.items-list .item:nth-child(odd) {
+  background: rgba(0,0,0,0.2);
+}
+
+.totalcc .items-list .item.flexrow {
+  font-size: 0.75em;
+  align-items: center;
+  padding: 0.75em 0;
+}
+
+.totalcc .items-list .item-image {
+  max-width: 24px;
+}
+
+.totalcc .item-charges.field-short input {
+  width: 25px;
+  display: inline-block;
+  font-family: "Signika", sans-serif;
+  font-size: 10.5px;
+}
+
+
+.totalcc .item-charges.field-short h4 {
+  display: inline-block;
+}
+
+
+.totalcc .quantity.field-short input {
+  width: 35px;
+  display: inline-block;
+  font-family: "Signika", sans-serif;
+  font-size: 10.5px;
+}
+.totalcc .quantity.field-short h4 {
+  display: inline-block;
+}

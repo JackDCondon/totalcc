@@ -23,27 +23,27 @@ export class totalccActorSheet extends ActorSheet {
   }
 
 
-      /** @inheritdoc */
-      _getHeaderButtons() {
-        let buttons = super._getHeaderButtons();
+  /** @inheritdoc */
+  _getHeaderButtons() {
+    let buttons = super._getHeaderButtons();
 
-        buttons.unshift(
-            {
-                label: "Import Stats",
-                class: "paste-block",
-                icon: "fas fa-paste",
-                onclick: ev => this._onPasteStatBlock(ev)
-            }//,
-         //   {
-             //   label: "Clear",
-             //   class: "clear-sheet",
-          //      icon: "fas fa-eraser",
-          //      onclick: ev => this._onClearSheet(ev)
-          //  }
-        );
+    buttons.unshift(
+        {
+            label: "Import Stats",
+            class: "paste-block",
+            icon: "fas fa-paste",
+            onclick: ev => this._onPasteStatBlock(ev)
+        }//,
+      //   {
+          //   label: "Clear",
+          //   class: "clear-sheet",
+      //      icon: "fas fa-eraser",
+      //      onclick: ev => this._onClearSheet(ev)
+      //  }
+    );
 
-        return buttons
-    }
+    return buttons
+  }
 
 
   /* -------------------------------------------- */
@@ -186,13 +186,6 @@ export class totalccActorSheet extends ActorSheet {
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
-
-    // HERE WE NEED TO SPECIFY OUR TAB GROUPS
-    let nav = $('.tabs[data-group="secondary"]');
-    new Tabs(nav, {
-      initial: "description",
-      callback: t => console.log("Tab ${t} was clicked")
-    });
 
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
@@ -388,6 +381,16 @@ export class totalccActorSheet extends ActorSheet {
 
   }
 
+
+
+
+  spawnTabControls() {
+    // HERE WE NEED TO SPECIFY OUR TAB GROUPS
+    //if (!this.bTabControlsActive) {
+      
+      //this.bTabControlsActive = true;
+    //}
+  }
 
 
 

@@ -52,17 +52,11 @@
 
     {{!-- Sheet Tab Navigation --}}
 
-    <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="character">Character</a>
-        <a class="item" data-tab="notes">Notes</a>
-    </nav>
-
-
     {{!-- Sheet Body --}}
     <section class="sheet-body">
 
         {{!-- Character Tab --}}
-        <div class="tab character flexrow" data-group="primary" data-tab="character">
+        <div class="character flexrow">
             {{!-- Ability Scores --}}
             <ul class="ability-scores flexcol">
                 {{#each data.abilities as |ability id|}}
@@ -147,16 +141,6 @@
                     </div>
                 </div>
 
-<<<<<<< HEAD
-=======
-
-
-                {{> "systems/totalcc/templates/actor/partials/charateritems.html"}}
-
-
-
-
->>>>>>> 13197130aa5e112a2a9178aa9eed674a6fa24bea
                 {{!-- Inventory --}}
                 <div class="inventory">
                     {{> "systems/totalcc/templates/actor/partials/charateritems.html"}}
@@ -164,22 +148,6 @@
             </div>
         </div>
 
-
-
-
-        {{!-- End Character Tab --}}
-
-
-
-        {{!-- Notes Tab --}}
-        <div class="tab" data-group="primary" data-tab="notes">
-            <h4 class="notes-label">Notes</h4>
-            <div class="notes">
-
-                {{editor content=data.details.notes.value target="data.details.notes.value" button=true owner=owner
-                         editable=editable}}
-            </div>
-        </div>
     </section>
 </form>
 
