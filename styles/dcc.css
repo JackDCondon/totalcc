@@ -72,11 +72,56 @@
   height: 24px;
   width: 90px; }
 
+.totalcc .occupation {
+  margin-left: 15px;
+  text-align: left;
+  flex: 0 0 10%; 
+}
+
 .totalcc .occupation input {
   width: 100%; }
 
 .totalcc .occupation label {
   margin: 0 0 0 4px; }
+
+
+.totalcc .xp {
+  margin-left: 15px;
+  text-align: left;
+  flex: 0 0 10%; }
+
+.totalcc .xp input {
+    width: 100%; }
+  
+.totalcc .xp label {
+    margin: 0 0 0 4px; }
+
+.totalcc .level {
+  margin-left: 15px;
+  text-align: left;
+  flex: 0 0 10%; }
+
+
+.totalcc .level input {
+  width: 100%; }
+    
+.totalcc .level label {
+  margin: 0 0 0 4px; }
+
+
+.totalcc .title {
+    margin-left: 15px;
+    text-align: left;
+    flex: 0 0 10%; }
+  
+.totalcc .title input {
+      width: 100%; }
+    
+.totalcc .title label {
+      margin: 0 0 0 4px; }
+
+
+
 
 .totalcc.actor.sheet .character-main-top-row {
   flex: 0 0 100px; }
