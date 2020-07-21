@@ -10,7 +10,6 @@
                        placeholder="Character Name"/>
             </h1>
 
-
             <div class="xp flex1">
                 <label for="data.xp.value">Experience</label>
                 <input type="text" id="data.xp.value" name="data.xp.value"
@@ -81,6 +80,90 @@
                     </li>
                 {{/each}}
             </ul>
+
+
+            {{!-- COMBAT TABLE, UNDER Abilitys --}}
+
+            <div class="CombatTable">
+                <div class="CritInfo">
+                    <ul class="CritInfo flexcol">
+                        <li class="CritInfo">
+                            <label class="critdice-label box-title" for="data.attributes.critdice.value">Crit Dice</label>
+
+                            <label class="crittable-label box-title" for="data.attributes.crittable.value">Crit Tbl</label>
+                        </li>
+
+                        <li class="CritInfo">
+                            <input class="critdice" type="text" id="data.attributes.critdice.value"
+                            name="data.attributes.critdice.value"
+                            value="{{numberFormat data.attributes.critdice.value decimals=0 sign=true}}"
+                            data-dtype="String"/>
+
+                            <input class="crittable" type="text" id="data.attributes.crittable.value"
+                            name="data.attributes.crittable.value"
+                            value="{{numberFormat data.attributes.crittable.value decimals=0 sign=true}}"
+                            data-dtype="String"/>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="attack">
+                            <label class="attack-label box-title" for="data.attributes.attack.value">Crit Dice</label>
+                            <input class="attack" type="text" id="data.attributes.attack.value"
+                            name="data.attributes.attack.value"
+                            value="{{numberFormat data.attributes.attack.value decimals=0 sign=true}}"
+                            data-dtype="String"/>
+                </div>
+
+                
+                <div class="temphp">
+                    <li>
+                    <label class="temphp-label box-title" for="data.temphp.value">Armor HP</label>
+                    </li>
+                    <li>
+                        <input class="temphpvalue" type="text" id="data.temphp.value"
+                        name="data.temphp.value"
+                        value="{{numberFormat data.temphp.value decimals=0 sign=true}}"
+                        data-dtype="Number"/> 
+                        <h4>/</h4>
+                        <input class="temphpmax" type="text" id="data.temphp.max"
+                        name="data.temphp.max"
+                        value="{{numberFormat data.temphp.max decimals=0 sign=true}}"
+                        data-dtype="Number"/>
+                    </li>
+                </div>
+
+            </div> 
+            {{!-- END CRIT TABLE --}}
+
+
+
+
+
+                    <label class="init-label box-title rollable" for="data.attributes.init.value">Init</label>
+                    <input class="init-value" type="text" id="data.attributes.init.value"
+                           name="data.attributes.init.value"
+                           value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"
+                           data-dtype="Number"/>
+                </div>
+                <div class="speed">
+                    <label for="data.attributes.speed.value">Speed</label>
+                    <input class="speed-value" type="text" id="data.attributes.speed.value"
+                           name="data.attributes.speed.value"
+                           value="{{data.attributes.speed.value}}" data-dtype="Number"/>
+                </div>
+
+                <div class="speed">
+                    <label for="data.attributes.speed.value">HD</label>
+                    <input class="speed-value" type="text" id="data.attributes.speed.value"
+                           name="data.attributes.speed.value"
+                           value="{{data.attributes.speed.value}}" data-dtype="Number"/>
+                </div>
+
+            </div>
+
+
 
             {{!-- Body Col To the Right of Abilities --}}
             <div class="flexcol dcccol2">
