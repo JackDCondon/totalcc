@@ -1,5 +1,5 @@
 {{!-- Sheet Tab Navigation --}}
-<nav class="sheet-tabs tabs" data-group="primary">
+<nav class="sheet-tabs tabs" data-group="secondary">
     <a class="item" data-tab="description">Description</a>
     <a class="item" data-tab="items">Items</a>
     <a class="item" data-tab="skills">Skills</a>
@@ -7,152 +7,152 @@
 </nav>
 
 {{!-- Sheet Body --}}
-<section class="sheet-body">
+<section class="content">
 
     {{!-- Biography Tab --}}
-    <div class="tab biography" data-group="primary" data-tab="description">
-        {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
+    <div class="tab description flexrow" data-group="secondary" data-tab="description">
+      {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Owned Items Tab --}}
-<div class="tab items" data-group="primary" data-tab="items">
-    <h2>Weapons</h2>
-    <ol class="items-list">
-      <li class="item flexrow item-header">
-        <div class="item-image"></div>
-        <div class="item-name">Name</div>
-        <div class="item-range">Range</div>
-        <div class="item-attack">Attack</div>
-        <div class="item-damage">Damage</div>
-        <div class="item-damagetype">Type</div>
-        <div class="item-charges">Charges</div>
-        <div class="item-controls">
-          <a class="item-control item-create" title="Create item" data-type="weapon"><i class="fas fa-plus"></i> Add Weapon</a>
-        </div>
-      </li>
-  {{#each actor.weapons as |item id|}}
-      <li class="item flexrow" data-item-id="{{item._id}}">
-          <div class="item-image rollable"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
-          <h4 class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</h4>
-          <h4 class="item-range">{{item.data.weaponstats.range}}</h4>
-          <h4 class="item-attack">{{item.data.weaponstats.attack}}</h4>
-          <h4 class="item-damage">{{item.data.weaponstats.damage}}</h4>
-          <h4 class="item-damagetype">{{item.data.weaponstats.type}}</h4>
-          <div class="item-charges field-short">
-            {{#if item.data.charges.usescharges}}
-            <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
-            placeholder="1" />
-            {{#if item.data.charges.max}}
-              <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
-            {{/if}}
-            {{else}}
-            N/a
-            {{/if}}
-          </div>
-          <div class="item-controls">
-              <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-              <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-          </div>
-      </li>
-  {{/each}}
-  </ol>
-
-
-    <h2>Armor</h2>
-    <ol class="items-list">
-        <li class="item flexrow item-header">
-          <div class="item-image"></div>
-          <div class="item-name">Name</div>
-          <div class="item-AC">AC</div>
-          <div class="item-Penalty">Penalty</div>
-          <div class="item-FumbleDice">FumbleDice</div>
-          <div class="item-charges">Charges</div>
-          <div class="item-controls">
-            <a class="item-control item-create" title="Create item" data-type="armor"><i class="fas fa-plus"></i> Add Armor</a>
-          </div>
-        </li>
-    {{#each actor.armor as |item id|}}
-        <li class="item flexrow" data-item-id="{{item._id}}">
-            <div class="item-image rollable"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
-            <h4 class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</h4>
-            <h4 class="item-ACBonus">{{item.data.acbonus}}</h4>
-            <h4 class="item-Penalty">{{item.data.penalty}}</h4>
-            <h4 class="item-Fumble">{{item.data.fumble}}</h4>
-            <div class="item-charges field-short">
-              {{#if item.data.charges.usescharges}}
-              <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
-              placeholder="1" />
-              {{#if item.data.charges.max}}
-                <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
-              {{/if}}
-              {{else}}
-              N/a
-              {{/if}}
-            </div>
+    <div class="tab items" data-group="secondary" data-tab="items">
+        <h2>Weapons</h2>
+        <ol class="items-list">
+          <li class="item flexrow item-header">
+            <div class="item-image"></div>
+            <div class="item-name">Name</div>
+            <div class="item-range">Range</div>
+            <div class="item-attack">Attack</div>
+            <div class="item-damage">Damage</div>
+            <div class="item-damagetype">Type</div>
+            <div class="item-charges">Charges</div>
             <div class="item-controls">
-                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+              <a class="item-control item-create" title="Create item" data-type="weapon"><i class="fas fa-plus"></i> Add Weapon</a>
             </div>
-        </li>
-    {{/each}}
-    </ol>
-
-    <h2>Gear</h2>
-
-
-    <ol class="items-list">
-        <li class="item flexrow item-header">
-          <div class="item-image"></div>
-          <div class="item-name">Name</div>
-          <div class="item-quantity">Quantity</div>
-          <div class="item-charges">Charges</div>
-          <div class="item-controls">
-            <a class="item-control item-create" title="Create item" data-type="item"><i class="fas fa-plus"></i> Add item</a>
-          </div>
-        </li>
-    {{#each actor.gear as |item id|}}
-        <li class="item flexrow" data-item-id="{{item._id}}">
-            <div class="item-image rollable"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
-            <h4 class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</h4>
-            <div class="field-short quantity">
-              {{#if item.data.quantity.canstack}}
-                <input value="{{item.data.quantity.value}}" type="Number" data-dtype="Number"
-                  placeholder="1" />
-                  {{#if item.data.quantity.max}}
-                  <h4 class="item-quantitymax"> / {{item.data.quantity.max}}</h4>
-                  {{/if}}
-              {{else}}
-                  N/a
-              {{/if}}
-              </div>
-              <div class="item-charges">
+          </li>
+      {{#each actor.weapons as |item id|}}
+          <li class="item flexrow" data-item-id="{{item._id}}">
+              <div class="item-image rollable"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+              <h4 class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</h4>
+              <h4 class="item-range">{{item.data.weaponstats.range}}</h4>
+              <h4 class="item-attack">{{item.data.weaponstats.attack}}</h4>
+              <h4 class="item-damage">{{item.data.weaponstats.damage}}</h4>
+              <h4 class="item-damagetype">{{item.data.weaponstats.type}}</h4>
+              <div class="item-charges field-short">
                 {{#if item.data.charges.usescharges}}
                 <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
                 placeholder="1" />
                 {{#if item.data.charges.max}}
-                <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
+                  <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
                 {{/if}}
                 {{else}}
                 N/a
                 {{/if}}
-
               </div>
-            <div class="item-controls">
-                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-            </div>
-        </li>
-    {{/each}}
-    </ol>
+              <div class="item-controls">
+                  <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                  <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+              </div>
+          </li>
+      {{/each}}
+      </ol>
+
+
+        <h2>Armor</h2>
+        <ol class="items-list">
+            <li class="item flexrow item-header">
+              <div class="item-image"></div>
+              <div class="item-name">Name</div>
+              <div class="item-AC">AC</div>
+              <div class="item-Penalty">Penalty</div>
+              <div class="item-FumbleDice">FumbleDice</div>
+              <div class="item-charges">Charges</div>
+              <div class="item-controls">
+                <a class="item-control item-create" title="Create item" data-type="armor"><i class="fas fa-plus"></i> Add Armor</a>
+              </div>
+            </li>
+        {{#each actor.armor as |item id|}}
+            <li class="item flexrow" data-item-id="{{item._id}}">
+                <div class="item-image rollable"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                <h4 class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</h4>
+                <h4 class="item-ACBonus">{{item.data.acbonus}}</h4>
+                <h4 class="item-Penalty">{{item.data.penalty}}</h4>
+                <h4 class="item-Fumble">{{item.data.fumble}}</h4>
+                <div class="item-charges field-short">
+                  {{#if item.data.charges.usescharges}}
+                  <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
+                  placeholder="1" />
+                  {{#if item.data.charges.max}}
+                    <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
+                  {{/if}}
+                  {{else}}
+                  N/a
+                  {{/if}}
+                </div>
+                <div class="item-controls">
+                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                </div>
+            </li>
+        {{/each}}
+        </ol>
+
+        <h2>Gear</h2>
+
+
+        <ol class="items-list">
+            <li class="item flexrow item-header">
+              <div class="item-image"></div>
+              <div class="item-name">Name</div>
+              <div class="item-quantity">Quantity</div>
+              <div class="item-charges">Charges</div>
+              <div class="item-controls">
+                <a class="item-control item-create" title="Create item" data-type="item"><i class="fas fa-plus"></i> Add item</a>
+              </div>
+            </li>
+        {{#each actor.gear as |item id|}}
+            <li class="item flexrow" data-item-id="{{item._id}}">
+                <div class="item-image rollable"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                <h4 class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</h4>
+                <div class="field-short quantity">
+                  {{#if item.data.quantity.canstack}}
+                    <input value="{{item.data.quantity.value}}" type="Number" data-dtype="Number"
+                      placeholder="1" />
+                      {{#if item.data.quantity.max}}
+                      <h4 class="item-quantitymax"> / {{item.data.quantity.max}}</h4>
+                      {{/if}}
+                  {{else}}
+                      N/a
+                  {{/if}}
+                  </div>
+                  <div class="item-charges">
+                    {{#if item.data.charges.usescharges}}
+                    <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
+                    placeholder="1" />
+                    {{#if item.data.charges.max}}
+                    <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
+                    {{/if}}
+                    {{else}}
+                    N/a
+                    {{/if}}
+
+                  </div>
+                <div class="item-controls">
+                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                </div>
+            </li>
+        {{/each}}
+        </ol>
 
 
 
-</div>
+    </div>
 
     {{!-- Owned Skills Tab --}}
-    <div class="tab skills" data-group="primary" data-tab="skills">
+    <div class="tab skills" data-group="secondary" data-tab="skills">
 
-      <h2>Skills</h2>
+        <h2>Skills</h2>
         <ol class="items-list">
             <li class="item flexrow item-header">
               <div class="item-image"></div>
@@ -188,85 +188,85 @@
         {{/each}}
         </ol>
 
-    <h2>Passive Mutations</h2>
-    <ol class="items-list">
-        <li class="item flexrow item-header">
-          <div class="item-image"></div>
-          <div class="item-name">Name</div>
-          <div class="item-mutationtype">Type</div>
-          <div class="item-charge">Charges</div>
-          <div class="item-controls">
-            <a class="item-control item-create" title="Create item" data-type="mutation"><i class="fas fa-plus"></i> Add Mutation</a>
-          </div>
-        </li>
-    {{#each actor.passiveMutations as |item id|}}
-        <li class="item flexrow" data-item-id="{{item._id}}">
-            <div class="item-image rollable"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
-            <h4 class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</h4>
-            <h4 class="item-mutationtype">{{item.data.mutationtype}}</h4>
-            <div class="item-charges">
-              {{#if item.data.charges.usescharges}}
-              <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
-              placeholder="1" />
-              {{#if item.data.charges.max}}
-              <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
-              {{/if}}
-              {{else}}
-              N/a
-              {{/if}}
-            <div class="item-controls">
-                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-            </div>
-        </li>
-    {{/each}}
-    </ol>
+        <h2>Passive Mutations</h2>
+        <ol class="items-list">
+            <li class="item flexrow item-header">
+              <div class="item-image"></div>
+              <div class="item-name">Name</div>
+              <div class="item-mutationtype">Type</div>
+              <div class="item-charge">Charges</div>
+              <div class="item-controls">
+                <a class="item-control item-create" title="Create item" data-type="mutation"><i class="fas fa-plus"></i> Add Mutation</a>
+              </div>
+            </li>
+        {{#each actor.passiveMutations as |item id|}}
+            <li class="item flexrow" data-item-id="{{item._id}}">
+                <div class="item-image rollable"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                <h4 class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</h4>
+                <h4 class="item-mutationtype">{{item.data.mutationtype}}</h4>
+                <div class="item-charges">
+                  {{#if item.data.charges.usescharges}}
+                  <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
+                  placeholder="1" />
+                  {{#if item.data.charges.max}}
+                  <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
+                  {{/if}}
+                  {{else}}
+                  N/a
+                  {{/if}}
+                <div class="item-controls">
+                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                </div>
+            </li>
+        {{/each}}
+        </ol>
 
-<h2>Active Mutations</h2>
-<ol class="items-list">
-    <li class="item flexrow item-header">
-      <div class="item-image"></div>
-      <div class="item-name">Name</div>
-      <div class="item-mutationtype">Type</div>
-      <div class="item-range">Range</div>
-      <div class="item-save">Save</div>
-      <div class="item-duration">Duration</div>
-      <div class="item-expended">Expended</div>
-      <div class="item-charge">Charges</div>
-      <div class="item-controls">
-        <a class="item-control item-create" title="Create item" data-type="mutation"><i class="fas fa-plus"></i> Add Mutation</a>
-      </div>
-    </li>
-{{#each actor.activeMutations as |item id|}}
-    <li class="item flexrow" data-item-id="{{item._id}}">
-        <div class="item-image rollable"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
-        <h4 class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</h4>
-        <h4 class="item-mutationtype">{{item.data.mutationtype}}</h4>
-        <h4 class="item-range">{{item.data.range}}</h4>
-        <h4 class="item-save">{{item.data.save}}</h4>
-        <h4 class="item-duration">{{item.data.duration}}</h4>
-        <input class = "expended" type="checkbox" name="{{item.data.expended}}" id="item.data.expended" data-dtype="Boolean" {{checked item.data.expended}}/>
-        <div class="item-charges">
-          {{#if item.data.charges.usescharges}}
-          <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
-          placeholder="1" />
-          {{#if item.data.charges.max}}
-          <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
-          {{/if}}
-          {{else}}
-          N/a
-          {{/if}}
-        <div class="item-controls">
-            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-        </div>
-    </li>
-{{/each}}
-</ol>
-</div>
+        <h2>Active Mutations</h2>
+        <ol class="items-list">
+            <li class="item flexrow item-header">
+              <div class="item-image"></div>
+              <div class="item-name">Name</div>
+              <div class="item-mutationtype">Type</div>
+              <div class="item-range">Range</div>
+              <div class="item-save">Save</div>
+              <div class="item-duration">Duration</div>
+              <div class="item-expended">Expended</div>
+              <div class="item-charge">Charges</div>
+              <div class="item-controls">
+                <a class="item-control item-create" title="Create item" data-type="mutation"><i class="fas fa-plus"></i> Add Mutation</a>
+              </div>
+            </li>
+        {{#each actor.activeMutations as |item id|}}
+            <li class="item flexrow" data-item-id="{{item._id}}">
+                <div class="item-image rollable"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                <h4 class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</h4>
+                <h4 class="item-mutationtype">{{item.data.mutationtype}}</h4>
+                <h4 class="item-range">{{item.data.range}}</h4>
+                <h4 class="item-save">{{item.data.save}}</h4>
+                <h4 class="item-duration">{{item.data.duration}}</h4>
+                <input class = "expended" type="checkbox" name="{{item.data.expended}}" id="item.data.expended" data-dtype="Boolean" {{checked item.data.expended}}/>
+                <div class="item-charges">
+                  {{#if item.data.charges.usescharges}}
+                  <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
+                  placeholder="1" />
+                  {{#if item.data.charges.max}}
+                  <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
+                  {{/if}}
+                  {{else}}
+                  N/a
+                  {{/if}}
+                <div class="item-controls">
+                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                </div>
+            </li>
+        {{/each}}
+        </ol>
+    </div>
 
     {{!-- Owned Spells Tab --}}
-    <div class="tab spells" data-group="primary" data-tab="spells">
+    <div class="tab spells" data-group="secondary" data-tab="spells">
         <ol class="items-list">
             <li class="item flexrow item-header">
               <div class="item-image"></div>

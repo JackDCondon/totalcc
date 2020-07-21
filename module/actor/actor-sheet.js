@@ -5,7 +5,6 @@ import {totalccItem} from '../item/item.js';
 const sortFunction = (a, b) => a.data.order < b.data.order ? -1 : a.data.order > b.data.order ? 1 : 0;
 
 
-
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -187,6 +186,13 @@ export class totalccActorSheet extends ActorSheet {
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
+
+    // HERE WE NEED TO SPECIFY OUR TAB GROUPS
+    let nav = $('.tabs[data-group="secondary"]');
+    new Tabs(nav, {
+      initial: "description",
+      callback: t => console.log("Tab ${t} was clicked")
+    });
 
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
