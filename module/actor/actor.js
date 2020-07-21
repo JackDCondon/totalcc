@@ -64,7 +64,7 @@ export class totalccActor extends Actor {
       {
         LuckMod = CharData.abilities.luck.mod;
 
-        if (weapon.isMelee() === 1)
+        if (WeaponData.ismelee)
         {
           AbilityMod = CharData.abilities.strength.mod;
           DamageFormula = `${WeaponData.weaponstats.damage} + ${AbilityMod}`
@@ -76,7 +76,13 @@ export class totalccActor extends Actor {
     }
 
 
-      const formula = `1d${CharData.attributes.actiondice.value} + ${AbilityMod} + ${WeaponData.weaponstats.attack}`
+      let formula = `1d${CharData.attributes.actiondice.value} + ${AbilityMod} + ${WeaponData.weaponstats.attack}`
+
+      //ADD ATTACK MOD
+      if (CharData.attributes.attack.value !== "")
+      {
+        formula += ` + ${CharData.attributes.attack.value}`;
+      }
 
       /* Roll the Attack */
       let roll = new Roll(formula, {'critical': 20});
@@ -234,6 +240,9 @@ export class totalccActor extends Actor {
 
     async rollFromTable(ItemData, roll, label) {
       let entry;
+      let table;
+
+      
       const Packname = `totalcc.${ItemData.data.data.usetable}`;
       const pack = game.packs.get(Packname);
       if (pack)
@@ -241,18 +250,28 @@ export class totalccActor extends Actor {
       await pack.getIndex(); //Load the compendium index
       entry = pack.index.find(entity => entity.name.startsWith(ItemData.name));
       }
-      if (!entry)
+
+      if (entry)
+      {
+        table = await pack.getEntity(entry._id);
+      }
+      else
+      {
+        table = game.tables.find(entity => entity.name.startsWith(ItemData.name));
+      }
+
+      if (!roll._rolled)
+      {
+        roll.roll();
+      }
+
+      if (!table)
       {
         roll.roll().toMessage({
           speaker: ChatMessage.getSpeaker({ actor: this.actor }),
           flavor: label
         });
         return;
-      }
-      const table = await pack.getEntity(entry._id);
-      if (!roll._rolled)
-      {
-        roll.roll();
       }
       const tableresult = await table.draw({'roll': roll, 'displayChat': true});
 

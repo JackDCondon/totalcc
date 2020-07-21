@@ -23,6 +23,9 @@
           },
           "critdice" : {
             "value" : "1d4"
+          }, 
+          "attack" : {
+            "value" : "1"
           },        
           "actiondice": {
             "value": 20
@@ -72,7 +75,8 @@
           },
           "luck": {
             "value": 10,
-            "raw": 10
+            "raw": 10,
+            "fleeting" : 0
           }
         }
       },

@@ -13,7 +13,18 @@ export class totalccItem extends Item {
     const itemData = this.data;
     const actorData = this.actor ? this.actor.data : {};
     const data = itemData.data;
+    if (itemData.type === "weapon")
+    {
+      this._prepareWeapon(data);
+    }
   }
+
+
+  _prepareWeapon(data) {
+  data.ismelee = (this.data.data.weaponstats.range === "Melee");
+  }
+
+
 
   /**
    * Handle clickable rolls.
@@ -79,11 +90,4 @@ export class totalccItem extends Item {
   }
 
 
-  async isMelee() {
-  if (this.data.data.weaponstats.range === "Melee")
-  {
-    return 1;
-  }
-  return 0;
-  }
 }
