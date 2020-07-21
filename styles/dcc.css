@@ -524,6 +524,13 @@
   background: rgba(0,0,0,0.2);
 }
 
+.totalcc ol.items-list .item > div:last-child {
+  text-align: right;
+  padding-right: 10px;
+  box-sizing: border-box;
+  max-width: 40px;
+}
+
 .totalcc .items-list .item.flexrow {
   font-size: 0.75em;
   align-items: center;
