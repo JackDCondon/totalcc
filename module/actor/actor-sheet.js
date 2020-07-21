@@ -63,8 +63,13 @@ export class totalccActorSheet extends ActorSheet {
 
     if (this.actor.data.type == 'npc')
     {
-      this.options.template = "systems/totalcc/templates/actor/npc-sheet.html"
+      //this.options.template = "systems/totalcc/templates/actor/npc-sheet.html"
+      data.data.isNPC = true;
+    } else {
+      data.data.isNPC = false;
     }
+
+    console.log(data);
 
     return data;
   }

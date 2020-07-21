@@ -9,7 +9,7 @@
                 <input name="name" type="text" value="{{actor.name}}"
                        placeholder="Character Name"/>
             </h1>
-
+            {{#unless data.isNPC }}
             <div class="ghettoTable">
                 <div class="row">
 
@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </div><!-- end ghetto table -->
-
+            {{/unless}}
 
         </div>
     </header>
@@ -65,6 +65,7 @@
         <div class="character flexrow">
             <div class="flexcol left-col">
                 {{!-- Ability Scores --}}
+                {{#unless data.isNPC }}
                 <ul class="ability-scores ">
                     {{#each data.abilities as |ability id|}}
                         <li class="ability" data-ability="{{id}}">
@@ -76,9 +77,12 @@
                                 data-dtype="Number"
                                 placeholder="10"
                             />
+
+                            
                             <div class="ability-modifiers" title="Modifier">
                                 {{numberFormat ability.mod decimals=0 sign=true}}
                             </div>
+                            
                             {{#ifeq id "luck" }}
                             <div class="floating-luck">
                                 <h4>FLEETING</h4>
@@ -90,10 +94,11 @@
                                 /></span>
                             </div>
                             {{/ifeq}}
+                            
                         </li>
                     {{/each}}
                 </ul>
-
+                {{/unless}}
 
                 {{!-- COMBAT TABLE, UNDER Abilitys --}}
                 <div class="ghettoTable border">

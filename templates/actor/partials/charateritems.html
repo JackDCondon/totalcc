@@ -10,8 +10,10 @@
 <section class="content">
 
     {{!-- Biography Tab --}}
-    <div class="tab description flexrow" data-group="primary" data-tab="description">
-      {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
+    <div class="tab description" data-group="primary" data-tab="description">
+      <div class="notes">
+        {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
+      </div>
     </div>
 
     {{!-- Owned Items Tab --}}
@@ -247,7 +249,7 @@
                 <h4 class="item-range">{{item.data.range}}</h4>
                 <h4 class="item-save">{{item.data.save}}</h4>
                 <h4 class="item-duration">{{item.data.duration}}</h4>
-                <input class = "expended" type="checkbox" name="{{item.data.expended}}" id="item.data.expended" data-dtype="Boolean" {{checked item.data.expended}}/>
+                <div class="item-expended"><input type="checkbox" name="{{item.data.expended}}" id="item.data.expended" data-dtype="Boolean" {{checked item.data.expended}}/></div>
                 <div class="item-charges">
                   {{#if item.data.charges.usescharges}}
                   <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"

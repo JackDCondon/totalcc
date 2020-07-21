@@ -12,7 +12,7 @@
 .totalcc .window-content {
   height: 100%;
   padding: 5px;
-  overflow-y: hidden;
+  overflow-y: scroll;
   font-family: "Book Antiqua", "Palatino Linotype", serif; }
 
 .totalcc .window-content label {
@@ -340,7 +340,17 @@
 .totalcc .notes {
   border: 2px groove #eeede0;
   font-size: 1.2rem;
-  height: 85%; }
+  min-height: 200px;
+  display: flex;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+.totalcc .notes .editor {
+  height: auto;
+  width: auto;
+  flex: 1;
+}
 
 .totalcc .notes-label {
   font-family: "DuvallSmallCaps", "Palatino Linotype", serif;
@@ -422,7 +432,7 @@
   margin-bottom: 11px; }
 
 .totalcc .sheet-body {
-  overflow: hidden; }
+  /*overflow: hidden;*/ }
 
 .totalcc .sheet-body .tab {
   height: 100%;
@@ -501,8 +511,11 @@
 
 
 /*****************************
-  * LIAMS HAX
-  *****************************/
+* LIAMS HAX
+*****************************/
+/* ----------------------------------------- */
+/*  Item list haxe                           */
+/* ----------------------------------------- */
 .totalcc ol.items-list {
   padding-left: 0;
 }
@@ -550,7 +563,9 @@
 }
 
 
-
+/* ----------------------------------------- */
+/*  Ghetto table                             */
+/* ----------------------------------------- */
 .totalcc .ghettoTable {
   font-size: 0.8em;
 }
@@ -560,6 +575,7 @@
   border-radius: 5px;
   margin: 6px;
   padding: 4px;
+  max-height: 168px;
 }
 
 .totalcc .ghettoTable .row {
@@ -600,9 +616,9 @@
 .totalcc .ghettoTable.border .col label {
   line-height: 24px;
 }
-
-
-/*ability thing*/
+/* ----------------------------------------- */
+/*  Fleeting luck                            */
+/* ----------------------------------------- */
 .floating-luck {
   position: absolute;
   top: 89%;
@@ -637,3 +653,23 @@
   margin: 0;
   background: transparent;
 }
+
+/* ----------------------------------------- */
+/*  Description editor 100% hack stuff       */
+/* ----------------------------------------- */
+.totalcc .flexcol.dcccol2 {
+  align-items: stretch;
+}
+
+.totalcc .inventory section.content {
+  height: 100%;
+}
+
+.totalcc .inventory section.content .notes {
+  min-height: calc(100% - 6px);
+}
+
+.totalcc .sheet-body {
+  height: calc(100% - 110px)
+}
+.totalcc .sheet-body .character { height: 100%; }
