@@ -260,11 +260,6 @@ export class totalccActor extends Actor {
         table = game.tables.find(entity => entity.name.startsWith(ItemData.name));
       }
 
-      if (!roll._rolled)
-      {
-        roll.roll();
-      }
-
       if (!table)
       {
         roll.roll().toMessage({
@@ -272,6 +267,11 @@ export class totalccActor extends Actor {
           flavor: label
         });
         return;
+      }
+
+      if (!roll._rolled)
+      {
+        roll.roll();
       }
       const tableresult = await table.draw({'roll': roll, 'displayChat': true});
 

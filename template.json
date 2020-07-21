@@ -31,7 +31,7 @@
           "init": {
             "value" : "0"
           },
-          "init": {
+          "fumble": {
             "value" : "0"
           },
           "critdice" : {
@@ -100,8 +100,8 @@
             "fleeting" : 0,
             "label" : "Luck"
           }
-        }
-      },
+        },
+        
       "levelData": {
         "level": {
           "value": 1
