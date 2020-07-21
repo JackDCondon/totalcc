@@ -55,28 +55,34 @@
         "abilities": {
           "strength": {
             "value": 10,
-            "raw": 10
+            "raw": 10,
+            "lable" : "Strength"
           },
           "agility": {
             "value": 10,
-            "raw": 10
+            "raw": 10,
+            "lable" : "Agility"
           },
           "stamina": {
             "value": 10,
-            "raw": 10
+            "raw": 10,
+            "lable" : "Stamina"
           },
           "intelligence": {
             "value": 10,
-            "raw": 10
+            "raw": 10,
+            "lable" : "Intelligence"
           },
           "personality": {
             "value": 10,
-            "raw": 10
+            "raw": 10,
+            "lable" : "Personality"
           },
           "luck": {
             "value": 10,
             "raw": 10,
-            "fleeting" : 0
+            "fleeting" : 0,
+            "lable" : "Luck"
           }
         }
       },

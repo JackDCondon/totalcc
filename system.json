@@ -8,7 +8,7 @@
   "templateVersion": 2,
   "author": "John Doe",
   "esmodules": ["module/totalcc.js"],
-  "styles": ["css/totalcc.css"],
+  "styles": ["styles/dcc.css"],
   "scripts": [],
   "packs": [
     {

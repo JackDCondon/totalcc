@@ -16,7 +16,7 @@ export class totalccActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["totalcc", "sheet", "actor"],
-      template: "systems/totalcc/templates/actor/actor-sheet.html",
+      template: "systems/totalcc/templates/actor/compactsheet.html",
       width: 800,
       height: 1000,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
