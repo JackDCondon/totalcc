@@ -106,7 +106,7 @@ export class totalccActor extends Actor {
 
       /** Handle Fumbles **/
       let fumble = "";
-      let fumbleDie = "1d4";
+      let fumbleDie = CharData.attributes.fumble.value;
       
       if (Number(roll.dice[0].results[0]) === 1) {
           const pack = game.packs.get('totalcc.fumbles');
