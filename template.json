@@ -12,6 +12,16 @@
           "value": 0,
           "min": 0,
           "max": 0
+        }
+      },
+
+        "detailstemplate":{
+          "occupation": {
+            "value": ""
+          },
+          "title": {
+            "value": ""
+          }
         },
 
         "attributes" : {
@@ -38,6 +48,9 @@
           },
           "ac" : {
             "value" : 10
+          },
+          "alignment" : {
+            "value" : "Clan Of Cog"
           },
           "saves" : {
             "fort" : {
@@ -97,7 +110,7 @@
 
     },
     "character": {
-      "templates": ["base", "levelData"],
+      "templates": ["base", "levelData", "details"],
       "biography": ""
     },
     "npc": {

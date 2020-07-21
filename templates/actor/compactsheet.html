@@ -28,20 +28,20 @@
 
 
                     <div class="title col">
-                        <label for="data.details.occupation.value">Title</label>
-                        <input type="text" id="data.details.occupation.value" name="data.details.occupation.value"
-                            value="{{data.details.occupation.value}}" maxlength="40"/>
+                        <label for="data.occupation.value">Title</label>
+                        <input type="text" id="data.title.value" name="data.title.value"
+                            value="{{data.title.value}}" maxlength="40"/>
                     </div>
 
                     <div class="occupation col">
-                        <label for="data.details.occupation.value">Occupation</label>
-                        <input type="text" id="data.details.occupation.value" name="data.details.occupation.value"
-                            value="{{data.details.occupation.value}}" maxlength="40"/>
+                        <label for="data.occupation.value">Occupation</label>
+                        <input type="text" id="data.occupation.value" name="data.occupation.value"
+                            value="{{data.occupation.value}}" maxlength="40"/>
                     </div>
 
                     <div class="alignment col">
-                        <label for="data.details.alignment">Alignment</label>
-                        <select id="data.details.alignment" name="data.details.alignment">
+                        <label for="data.alignment">Alignment</label>
+                        <select id="data.alignment" name="data.alignment">
                             {{#select data.details.alignment}}
                                 {{#each config.alignments as |label alignment|}}
                                     <option value="{{alignment}}">{{localize label}}</option>
@@ -214,7 +214,7 @@
                                    value="{{data.attributes.speed.value}}" data-dtype="Number"/>
                         </div>
 
-                        <div class="speed">
+                        <div class="HD">
                             <label for="data.attributes.speed.value">HD</label>
                             <input class="speed-value" type="text" id="data.attributes.speed.value"
                                    name="data.attributes.speed.value"
