@@ -2,7 +2,7 @@
   "name": "totalcc",
   "title": "TotalCC",
   "description": "The TotalCC system for FoundryVTT!",
-  "version": "0.1.1",
+  "version": "1.0.4",
   "minimumCoreVersion": "0.5.5",
   "compatibleCoreVersion": "0.5.5",
   "templateVersion": 3,
