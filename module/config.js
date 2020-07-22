@@ -17,19 +17,19 @@ _______________________________`;
  * @type {Object}
  */
 DCC.abilities = {
-  "Strength": "Strength",
-  "Agility": "Agility",
-  "Stamina": "Stamina",
-  "Personality": "Personality",
-  "Intelligence": "Intelligence",
-  "Luck": "Luck",
+  "strength": "Strength",
+  "agility": "Agility",
+  "stamina": "Stamina",
+  "personality": "Personality",
+  "intelligence": "Intelligence",
+  "luck": "Luck",
 };
 
 /**
  * The set of Ability Score Modifiers used within the system
  * @type {Object}
  */
-DCC.abilities.modifiers = {
+DCC.abilitiesmodifiers = {
   "0": -3,
   "1": -3,
   "2": -3,

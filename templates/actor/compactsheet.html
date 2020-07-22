@@ -67,9 +67,9 @@
                 {{!-- Ability Scores --}}
                 {{#unless data.isNPC }}
                 <ul class="ability-scores ">
-                    {{#each data.abilities as |ability id|}}
+                    {{#each data.DCC.abilities as |ability id|}}
                         <li class="ability" data-ability="{{id}}">
-                            <label class="ability-name box-title rollable">{{ability.label}}</label>
+                            <label class="ability-name box-title rollable">{{ability}}</label>
                             <br/>
                             <input class="ability-score" id="data.abilities.{{id}}.value" name="data.abilities.{{id}}.value"
                                 type="text"
@@ -88,9 +88,9 @@
                                 <h4>FLEETING</h4>
                                 <span><input class="fleeting-luck" id="data.abilities.luck.fleeting" name="data.abilities.luck.fleeting"
                                     type="text"
-                                    value="{{data.abilities.luck.fleeting}}"
+                                    value="{{#with ../data.abilities.luck as |luck| }}{{luck.fleeting}}{{/with}}"
                                     data-dtype="Number"
-                                    placeholder="0"
+                                    placeholder="10"
                                 /></span>
                             </div>
                             {{/ifeq}}
@@ -180,7 +180,7 @@
                                 <label for="data.saves.{{id}}.value"
                                        class="save-name box-title rollable"
                                 >{{id}}</label>
-                                <input id="data.saves.{{id}}.value" name="data.saves.{{id}}.value"
+                                <input id="data.attributes.saves.{{id}}.value" name="data.attributes.saves.{{id}}.value"
                                        type="text"
                                        value="{{ numberFormat save.value decimals=0 sign=true }}"
                                        data-dtype="Number"
@@ -214,8 +214,8 @@
                             <label class="init-label box-title rollable" for="data.attributes.init.value">Init</label>
                             <input class="init-value" type="text" id="data.attributes.init.value"
                                    name="data.attributes.init.value"
-                                   value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"
-                                   data-dtype="Number"/>
+                                   value="{{data.attributes.init.value}}"
+                                   data-dtype="String"/>
                         </div>
                         <div class="speed">
                             <label for="data.attributes.speed.value">Speed</label>

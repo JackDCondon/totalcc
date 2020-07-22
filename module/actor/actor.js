@@ -37,7 +37,7 @@ export class totalccActor extends Actor {
 
     // Ability modifiers
     for (let [id, abl] of Object.entries(data.abilities)) {
-      abl.mod = DCC.abilities.modifiers[abl.value] || 0;
+      abl.mod = DCC.abilitiesmodifiers[abl.value] || 0;
     }
 
   }

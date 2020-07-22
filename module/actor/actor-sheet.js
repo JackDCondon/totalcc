@@ -1,5 +1,6 @@
 import {parseNPC} from './npc-parser.js';
 import {totalccItem} from '../item/item.js';
+import {DCC} from '../config.js';
 
 //Sort function for orde
 const sortFunction = (a, b) => a.data.order < b.data.order ? -1 : a.data.order > b.data.order ? 1 : 0;
@@ -68,6 +69,8 @@ export class totalccActorSheet extends ActorSheet {
     } else {
       data.data.isNPC = false;
     }
+
+    data.data.DCC = DCC;
 
     console.log(data);
 

@@ -12,19 +12,10 @@
           "value": 0,
           "min": 0,
           "max": 0
-        }
-      },
-
-        "detailstemplate":{
-          "occupation": {
-            "value": ""
-          },
-          "title": {
-            "value": ""
-          }
         },
 
-        "attributes" : {
+        "attributes" : 
+        {
           "crittable": {
             "value" : "I"
           },
@@ -59,61 +50,74 @@
             "fort" : {
               "value" : 0
             },        
-             "ref" : {
+            "ref" : {
               "value" : 0
             },        
-             "will" : {
+            "will" : {
               "value" : 0
             }
           }
-        },
+        }
+      },
 
-        "abilities": {
-          "strength": {
-            "value": 10,
-            "raw": 10,
-            "label" : "Strength"
-          },
-          "agility": {
-            "value": 10,
-            "raw": 10,
-            "label" : "Agility"
-          },
-          "stamina": {
-            "value": 10,
-            "raw": 10,
-            "label" : "Stamina"
-          },
-          "intelligence": {
-            "value": 10,
-            "raw": 10,
-            "label" : "Intelligence"
-          },
-          "personality": {
-            "value": 10,
-            "raw": 10,
-            "label" : "Personality"
-          },
-          "luck": {
-            "value": 10,
-            "raw": 10,
-            "fleeting" : 0,
-            "label" : "Luck"
-          }
+      "detailstemplate":
+      {
+        "occupation": 
+        {
+          "value": ""
         },
+        "title": 
+        {
+          "value": ""
+        }
+      },
         
-      "levelData": {
+      "chardata": 
+      {
         "level": {
           "value": 1
         },
         "XP": {
           "value": 10
+        },
+        "abilities": 
+        {
+          "strength": 
+          {
+            "value": 10,
+            "raw": 10
+          },
+          "agility": 
+          {
+            "value": 10,
+            "raw": 10
+          },
+          "stamina": 
+          {
+            "value": 10,
+            "raw": 10
+          },
+          "intelligence": 
+          {
+            "value": 10,
+            "raw": 10
+          },
+          "personality": 
+          {
+            "value": 10,
+            "raw": 10
+          },
+          "luck":
+          {
+            "value": 10,
+            "raw": 10,
+            "fleeting" : 0
+          }
         }
       }
-
     },
     "character": {
-      "templates": ["base", "levelData", "details"],
+      "templates": ["base", "levelData", "details", "chardata"],
       "biography": ""
     },
     "npc": {
