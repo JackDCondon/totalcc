@@ -188,6 +188,30 @@ export class totalccActorSheet extends ActorSheet {
     return item.update({ "data.expended": event.target.checked });
   }
 
+  async _onEquiptChange(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.getOwnedItem(itemId);
+    const OwningActor = this.actor;
+
+
+    if (event.target.checked && item.data.equiptitemgroup != "")
+    {
+      this.actor.data.items.forEach(function(entry) 
+      {
+        if (entry.data.iswearing) 
+        {
+          if (entry.data.equiptitemgroup == item.data.data.equiptitemgroup)
+          {
+            const otherItem = OwningActor.getOwnedItem(entry._id);
+            otherItem.update({ "data.iswearing": false })
+          }
+        }
+      });
+    }
+    return item.update({ "data.iswearing": event.target.checked });
+  }
+
 
   /* -------------------------------------------- */
 
@@ -223,8 +247,18 @@ export class totalccActorSheet extends ActorSheet {
     .click((ev) => ev.target.select())
     .change(this._onQtChange.bind(this));
 
+
+
+
     html
-    .find(".expended")
+    .find(".item-controls input")
+    .click((ev) => ev.target.select())
+    .change(this._onEquiptChange.bind(this));
+
+
+
+    html
+    .find(".expended input")
     .click((ev) => ev.target.select())
     .change(this._onExpendedChange.bind(this));
 

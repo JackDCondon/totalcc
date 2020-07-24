@@ -40,18 +40,11 @@
               <h4 class="item-attack">{{item.data.weaponstats.attack}}</h4>
               <h4 class="item-damage">{{item.data.weaponstats.damage}}</h4>
               <h4 class="item-damagetype">{{item.data.weaponstats.type}}</h4>
-              <div class="item-charges field-short">
-                {{#if item.data.charges.usescharges}}
-                <input value="{{item.data.charges.value}}" type="text" data-dtype="Number"
-                placeholder="1" />
-                {{#if item.data.charges.max}}
-                  <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
-                {{/if}}
-                {{else}}
-                <h4>N/a</h4>
-                {{/if}}
-              </div>
+
+              {{> systems/totalcc/templates/actor/partials/chargescomp.html item=item}}
+
               <div class="item-controls">
+                <input class="itemequipt" type="checkbox" name="{{item.data.iswearing}}" id="item.data.iswearing" data-dtype="Boolean" {{checked item.data.iswearing}}/>
                   <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                   <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
               </div>
@@ -80,18 +73,9 @@
                 <h4 class="item-ACBonus">{{item.data.acbonus}}</h4>
                 <h4 class="item-Penalty">{{item.data.penalty}}</h4>
                 <h4 class="item-Fumble">{{item.data.fumble}}</h4>
-                <div class="item-charges field-short">
-                  {{#if item.data.charges.usescharges}}
-                  <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
-                  placeholder="1" />
-                  {{#if item.data.charges.max}}
-                    <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
-                  {{/if}}
-                  {{else}}
-                  N/a
-                  {{/if}}
-                </div>
+                {{> systems/totalcc/templates/actor/partials/chargescomp.html item=item}}
                 <div class="item-controls">
+                  <input class="itemequipt" type="checkbox" name="{{item.data.iswearing}}" id="item.data.iswearing" data-dtype="Boolean" {{checked item.data.iswearing}}/>
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                 </div>
@@ -127,18 +111,9 @@
                     <h4>N/a</h4>
                   {{/if}}
                   </div>
-                  <div class="item-charges">
-                    {{#if item.data.charges.usescharges}}
-                    <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
-                    placeholder="1" />
-                    {{#if item.data.charges.max}}
-                    <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
-                    {{/if}}
-                    {{else}}
-                    <h4>N/a</h4>
-                    {{/if}}
 
-                  </div>
+                {{> systems/totalcc/templates/actor/partials/chargescomp.html item=item}}
+
                 <div class="item-controls">
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -172,17 +147,9 @@
                 <h4 class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</h4>
                 <h4 class="item-bonus">{{item.data.bonus}}</h4>
                 <h4 class="item-bonus">{{item.data.abilitiesmodifyer}}</h4>
-                <div class="item-charges">
-                  {{#if item.data.charges.usescharges}}
-                  <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
-                  placeholder="1" />
-                  {{#if item.data.charges.max}}
-                  <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
-                  {{/if}}
-                  {{else}}
-                  N/a
-                  {{/if}}
-                </div>
+
+                {{> systems/totalcc/templates/actor/partials/chargescomp.html item=item}}
+
                 <div class="item-controls">
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -207,17 +174,9 @@
                 <div class="item-image rollable"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
                 <h4 class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</h4>
                 <h4 class="item-mutationtype">{{item.data.mutationtype}}</h4>
-                <div class="item-charges">
-                  {{#if item.data.charges.usescharges}}
-                  <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
-                  placeholder="1" />
-                  {{#if item.data.charges.max}}
-                  <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
-                  {{/if}}
-                  {{else}}
-                  N/a
-                  {{/if}}
-                </div>
+
+                {{> systems/totalcc/templates/actor/partials/chargescomp.html item=item}}
+
                 <div class="item-controls">
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -249,18 +208,10 @@
                 <h4 class="item-range">{{item.data.range}}</h4>
                 <h4 class="item-save">{{item.data.save}}</h4>
                 <h4 class="item-duration">{{item.data.duration}}</h4>
-                <div class="item-expended"><input type="checkbox" name="{{item.data.expended}}" id="item.data.expended" data-dtype="Boolean" {{checked item.data.expended}}/></div>
-                <div class="item-charges">
-                  {{#if item.data.charges.usescharges}}
-                  <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
-                  placeholder="1" />
-                  {{#if item.data.charges.max}}
-                  <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
-                  {{/if}}
-                  {{else}}
-                  N/a
-                  {{/if}}
-                </div>
+                <div class="item-expended expended"><input type="checkbox" name="{{item.data.expended}}" id="item.data.expended" data-dtype="Boolean" {{checked item.data.expended}}/></div>
+                
+                {{> systems/totalcc/templates/actor/partials/chargescomp.html item=item}}
+
                 <div class="item-controls">
                     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

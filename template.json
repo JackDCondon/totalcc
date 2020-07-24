@@ -29,8 +29,11 @@
             "value" : "1d4"
           }, 
           "attack" : {
-            "value" : "1"
-          },        
+            "value" : "0"
+          },       
+          "ranged" : {
+            "value" : "0"
+          },   
           "actiondice": {
             "value": 20
           },
@@ -135,7 +138,7 @@
     }
   },
   "Item": {
-    "types": [ "item", "spell", "mutation", "weapon", "armor", "skill", "equiptable" ],
+    "types": [ "item", "spell", "mutation", "weapon", "armor", "skill"],
     "templates": {
       "common": {
         "notes": "",
@@ -153,7 +156,8 @@
       },
       "equiptable" :
       {
-        "iswearing" : 0
+        "iswearing" : 0,
+        "equiptitemgroup" : ""
       },
       "spellbase" :
       {

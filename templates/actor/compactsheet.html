@@ -90,7 +90,7 @@
                                     type="text"
                                     value="{{#with ../data.abilities.luck as |luck| }}{{luck.fleeting}}{{/with}}"
                                     data-dtype="Number"
-                                    placeholder="10"
+                                    placeholder="0"
                                 /></span>
                             </div>
                             {{/ifeq}}
@@ -121,25 +121,36 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col"><label class="attack-label box-title" for="data.attributes.attack.value">Melee</label></div>
+                        <div class="col"><label class="ranged-label box-title" for="data.attributes.ranged.value">Ranged</label></div>
+                    </div>
                     <div class="row separate">
-                        <div class="col"><label class="attack-label box-title" for="data.attributes.attack.value">Attack</label></div>
                         <div class="col">
                             <input class="attack" type="text" id="data.attributes.attack.value"
                             name="data.attributes.attack.value"
                             value="{{data.attributes.attack.value}}"
                             data-dtype="String"/>
                         </div>
-                    </div>
-
-                    <div class="row separate">
-                        <div class="col"><label class="attack-label box-title" for="data.attributes.fumble.value">Fumble</label></div>
                         <div class="col">
-                            <input class="attack" type="text" id="data.attributes.fumble.value"
-                            name="data.attributes.fumble.value"
-                            value="{{data.attributes.fumble.value}}"
+                            <input class="ranged" type="text" id="data.attributes.ranged.value"
+                            name="data.attributes.ranged.value"
+                            value="{{data.attributes.ranged.value}}"
                             data-dtype="String"/>
                         </div>
                     </div>
+ 
+
+                    <div class="row separate">
+                        <div class="col"><label class="attack-label box-title" for="data.attributes.fumble.value">Fumble</label></div>
+                            <div class="col">
+                                <input class="attack" type="text" id="data.attributes.fumble.value"
+                                name="data.attributes.fumble.value"
+                                value="{{data.attributes.fumble.value}}"
+                                data-dtype="String"/>
+                            </div>
+                    </div>
+
 
                     <div class="row separate-last">
                         <div class="col center"><label class="temphp-label box-title" for="data.temphp.value">Armor HP</label></div>

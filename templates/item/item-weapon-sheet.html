@@ -24,6 +24,14 @@
                 <label class="resource-label">Weight</label>
                   <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
               </div>
+
+              <select id="data.equiptitemgroup" name="data.equiptitemgroup">
+                {{#select data.equiptitemgroup}}
+                    {{#each config.weapongroups as |label key|}}
+                        <option value="{{key}}">{{label}}</option>
+                    {{/each}}
+                {{/select}}
+            </select>
             </div>
         </div>
     </header>

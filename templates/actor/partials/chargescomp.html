@@ -1,11 +1,11 @@
 <div class="item-charges field-short">
-    {{#if item.data.charges.usescharges}}
-    <input value="{{item.data.charges.value}}" type="Number" data-dtype="Number"
-    placeholder="1" />
-    {{#if item.data.charges.max}}
-      <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
-    {{/if}}
-    {{else}}
-    <h4 class="item-charges"> N/A </h4>
-    {{/if}}
-  </div>
+  {{#if item.data.charges.usescharges}}
+  <input value="{{item.data.charges.value}}" type="text" data-dtype="Number"
+  placeholder="1" />
+  {{#if item.data.charges.max}}
+    <h4 class="item-chargesmax"> / {{item.data.charges.max}}</h4>
+  {{/if}}
+  {{else}}
+  <h4>N/a</h4>
+  {{/if}}
+</div>

@@ -55,6 +55,27 @@ DCC.abilitiesmodifiers = {
   "22":5
 };
 
+
+/**
+ * The set of Ability Score Modifiers used within the system
+ * @type {Object}
+ */
+DCC.weapongroups = {
+  "primaryhand" : "Primary Hand",
+  "offhand" : "Off Hand",
+  "" : "Other"
+};
+
+DCC.armorgroup = {
+  "body" : "Body",
+  "shield" : "Shield",
+  "robe" : "Robe",
+  "helmet" : "Helmet",
+  "boots" : "Boots",
+  "" : "Other"
+};
+
+
 /* -------------------------------------------- */
 
 /**
