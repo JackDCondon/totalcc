@@ -191,20 +191,26 @@ export class totalccActorSheet extends ActorSheet {
   async _onEquiptChange(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.getOwnedItem(itemId);
-    const OwningActor = this.actor;
+    let OwningActor = this.actor;
+    if (this.token)
+    {
+      OwningActor = this.token.actor;
+    }
+
+    const item = OwningActor.getOwnedItem(itemId);
 
 
     if (event.target.checked && item.data.data.equiptitemgroup != "")
     {
-      this.actor.data.items.forEach(function(entry) 
+      OwningActor.data.items.forEach(function(entry) 
       {
         if (entry.data.iswearing) 
         {
           if (entry.data.equiptitemgroup == item.data.data.equiptitemgroup)
           {
             const otherItem = OwningActor.getOwnedItem(entry._id);
-            otherItem.update({ "data.iswearing": false })
+            entry.data.iswearing = false;
+            otherItem.update({ "data.iswearing": false });
           }
         }
       });

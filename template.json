@@ -166,10 +166,17 @@
         "range" : "N/A",
         "duration" : "1 turn/CL",
         "expended" : 0
+      },
+      "artifact" :
+      {
+        "artifact" : {
+          "tl" : 0,
+          "cm" : 0
+        }
       }
     },
     "item": {
-      "templates": [ "common" ],
+      "templates": [ "common", "artifact" ],
       "quantity": {
         "canstack" : 0,
         "value":1,
@@ -190,7 +197,7 @@
       "usetable" : "mutationresults"
     },
     "weapon": {
-      "templates": [ "common", "equiptable"],
+      "templates": [ "common", "equiptable", "artifact"],
       "weaponstats" : {
         "range" : "Melee",
         "damage" : "1d6",
@@ -200,7 +207,7 @@
       "equiptitemgroup" : "primaryhand"
     },
     "armor": {
-      "templates": [ "common" , "equiptable"],
+      "templates": [ "common" , "equiptable", "artifact"],
       "acbonus" : 0,
       "penalty" : 0,
       "fumble" : "1d4",
