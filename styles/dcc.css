@@ -694,3 +694,12 @@
   height: calc(100% - 110px)
 }
 .totalcc .sheet-body .character { height: 100%; }
+
+
+
+.totalcc .ghettoTable .row .gridwrapper {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: 40px;
+}

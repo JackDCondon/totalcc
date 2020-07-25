@@ -12,13 +12,23 @@ export class totalccItem extends Item {
     super.prepareData();
 
     // Get the Item's data
-    const itemData = this.data;
+    const item = this.data;
     const actorData = this.actor ? this.actor.data : {};
-    const data = itemData.data;
-    if (itemData.type === "weapon")
+    const itemdata = item.data;
+
+    if (item.type === "weapon")
     {
-      this._prepareWeapon(data);
+      this._prepareWeapon(itemdata);
     }
+
+
+    itemdata.isspellbase = (item.type === "mutation" || item.type === "spell");
+
+    if (item.type === "mutation")
+    {
+      itemdata.ispassive = (itemdata.mutationuse === "passive");
+    }
+
   }
 
 
@@ -83,7 +93,7 @@ export class totalccItem extends Item {
       return;
     }
 
-    let roll = new Roll('1d@actiondice.value', actorData);
+    let roll = new Roll('1d@attributes.actiondice.value', actorData);
     let label = `Rolling ${item.name}`;
     roll.roll().toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),

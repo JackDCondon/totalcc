@@ -2,6 +2,66 @@
     <header class="sheet-header">
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
         <div class="header-fields">
+
+
+            <div class="ghettoTable">
+
+                <div class="row">
+                <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+                </div>
+
+                <div class="row">
+                    <div class = "gridwrapper">
+
+                        {{#ifeq item.type "item" }}
+                        {{#ifeq item.data.quantity.canstack "1" }}
+                        <div class="quantity col">
+                            <label for="data.quantity.value">Amount</label>
+                            <input type="text" id="data.quantity.value" name="data.quantity.value"
+                                value="{{data.quantity.value}}" maxlength="40"/>
+                        </div>
+
+                        <div class="quantity col">
+                            <label for="data.quantity.max">Max</label>
+                            <input type="text" id="data.quantity.max" name="data.quantity.max"
+                                value="{{data.quantity.max}}" maxlength="40"/>
+                        </div>
+
+                        {{/ifeq}}
+                        {{/ifeq}}
+
+                        {{#ifeq item.data.charges.usescharges "1" }}
+                        <div class="charges col">
+                            <label for="data.charges.value">Charges</label>
+                            <input type="text" id="data.charges.value" name="data.charges.value"
+                                value="{{data.charges.value}}" maxlength="40"/>
+                        </div>
+
+                        <div class="charges col">
+                            <label for="data.charges.max">Max</label>
+                            <input type="text" id="data.charges.max" name="data.charges.max"
+                                value="{{data.charges.max}}" maxlength="40"/>
+                        </div>
+                        {{/ifeq}}
+
+                        {{#ifeq item.type "weapon" }}
+
+                        {{/ifeq}}
+
+                        
+
+                        <div class="xp col">
+                            <label for="data.xp.value">Experience</label>
+                            <input type="text" id="data.xp.value" name="data.xp.value"
+                                value="{{data.xp.value}}" maxlength="40"/>
+                        </div>
+
+                    </div>
+                   
+                </div>
+            </div><!-- end ghetto table -->
+
+            <!--
             <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
             <div class="grid grid-2col">
               <div class="resource">
@@ -14,6 +74,10 @@
               </div>
             </div>
         </div>
+
+        -->
+
+        
     </header>
 
     {{!-- Sheet Tab Navigation --}}
@@ -33,10 +97,7 @@
         {{!-- Attributes Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="attributes">
             {{!-- As you add new fields, add them in here! --}}
-            <div class="resource">
-                <label class="resource-label">Max Stack</label>
-                  <input type="text" name="data.quantity.max" value="{{data.quantity.max}}" data-dtype="Number"/>
-            </div>
+
             <div class="resource">
                 <label class="resource-label">Can Stack</label>
                 <input type="checkbox" name="data.quantity.canstack" id="data.quantity.canstack" data-dtype="Boolean" {{checked data.quantity.canstack}}/>
@@ -45,14 +106,7 @@
                 <label class="resource-label">Uses Charges</label>
                 <input type="checkbox" name="data.charges.usescharges" id="data.charges.usescharges" data-dtype="Boolean" {{checked data.charges.usescharges}}/>
             </div>
-            <div class="resource">
-                <label class="resource-label">Current Charges</label>
-                  <input type="text" name="data.charges.value" value="{{data.charges.value}}" data-dtype="Number"/>
-            </div>
-            <div class="resource">
-                <label class="resource-label">Max Charges</label>
-                  <input type="text" name="data.charges.max" value="{{data.charges.max}}" data-dtype="Number"/>
-            </div>
+            
         </div>
     </section>
 </form>

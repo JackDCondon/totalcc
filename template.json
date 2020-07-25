@@ -194,6 +194,7 @@
       "templates": [ "common", "rollontable", "spellbase" ],
       "ispassive" : 1,
       "mutationtype" : "Physical",
+      "mutationuse" : "Passive",
       "usetable" : "mutationresults"
     },
     "weapon": {
@@ -202,7 +203,7 @@
         "range" : "Melee",
         "damage" : "1d6",
         "type" : "Slashing",
-        "attack" : 0
+        "attack" : ""
       },
       "equiptitemgroup" : "primaryhand"
     },

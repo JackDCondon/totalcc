@@ -55,6 +55,26 @@ DCC.abilitiesmodifiers = {
   "22":5
 };
 
+/**
+ * The set of Ability Score Modifiers used within the system
+ * @type {Object}
+ */
+DCC.mutationtype = {
+  "physical" : "Physical",
+  "mental" : "Mental"
+};
+
+
+/**
+ * The set of Ability Score Modifiers used within the system
+ * @type {Object}
+ */
+DCC.mutationuse = {
+  "passive" : "Passive",
+  "active" : "Active"
+};
+
+
 
 /**
  * The set of Ability Score Modifiers used within the system

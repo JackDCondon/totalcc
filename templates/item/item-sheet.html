@@ -2,8 +2,191 @@
     <header class="sheet-header">
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
         <div class="header-fields">
+
+
+            <div class="ghettoTable">
+
+                <div class="row">
+                <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+                </div>
+
+                <div class="row">
+                    <div class = "gridwrapper">
+
+                        {{#ifeq item.type "item" }}
+                        {{#ifeq item.data.quantity.canstack "1" }}
+                        <div class="quantity col">
+                            <label for="data.quantity.value">Amount</label>
+                            <input type="text" id="data.quantity.value" name="data.quantity.value"
+                                value="{{data.quantity.value}}" maxlength="40" data-dtype="Number"/>
+                        </div>
+
+                        <div class="quantity col">
+                            <label for="data.quantity.max">Max</label>
+                            <input type="text" id="data.quantity.max" name="data.quantity.max"
+                                value="{{data.quantity.max}}" maxlength="40" data-dtype="Number"/>
+                        </div>
+
+                        {{/ifeq}}
+                        {{/ifeq}}
+
+                        {{#ifeq item.type "weapon" }}
+                        {{#each data.weaponstats as |stat id|}}
+                        <div class="id col">
+                            <label for="data.weaponstats.{{id}}">{{id}}</label>
+                            <input type="text" id="data.weaponstats.{{id}}" name="data.weaponstats.{{id}}"
+                                value="{{stat}}" maxlength="40"/>
+                        </div>
+                        {{/each}}
+                        {{/ifeq}}
+
+                        {{#ifeq item.type "armor" }}
+
+                        <div class="acbonus col">
+                            <label for="data.acbonus}}">AC</label>
+                            <input type="text" id="data.acbonus" name="data.acbonus"
+                                value="{{data.acbonus}}" maxlength="40" data-dtype="Number"/>
+                        </div>
+
+                        <div class="penalty col">
+                            <label for="data.penalty">Penalty</label>
+                            <input type="text" id="data.penalty" name="data.penalty"
+                                value="{{data.penalty}}" maxlength="40" data-dtype="Number"/>
+                        </div>
+
+                        <div class="fumble col">
+                            <label for="data.fumble">Fumble</label>
+                            <input type="text" id="data.fumble" name="data.fumble"
+                                value="{{data.fumble}}" maxlength="40"/>
+                        </div>
+
+                        <div class="equiptitemgroup col">
+                            <label for="data.equiptitemgroup">Type</label>
+                            <select id="data.equiptitemgroup" name="data.equiptitemgroup">
+                                {{#select data.equiptitemgroup}}
+                                    {{#each config.armorgroup as |label key|}}
+                                        <option value="{{key}}">{{label}}</option>
+                                    {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        {{/ifeq}}
+
+                        {{#ifeq item.type "skill" }}
+
+                        <div class="bonus col">
+                            <label for="data.bonus">Bonus</label>
+                            <input type="text" id="data.bonus" name="data.bonus"
+                                value="{{data.bonus}}" maxlength="40">
+                        </div>
+
+                        <div class="equiptitemgroup col">
+                            <label for="data.equiptitemgroup">Type</label>
+                            <select id="data.abilitiesmodifyer" name="data.abilitiesmodifyer">
+                                {{#select data.abilitiesmodifyer}}
+                                    {{#each config.abilities as |label abilitiy|}}
+                                        <option value="{{abilitiy}}">{{label}}</option>
+                                    {{/each}}
+                                    <option value="">None</option>
+                                {{/select}}
+                            </select>
+                        </div>
+
+                        {{/ifeq}}
+
+                        {{#ifeq item.type "mutation" }}
+
+                        <div class="mutationtype col">
+                            <label for="data.mutationtype">Type</label>
+                            <select id="data.mutationtype" name="data.mutationtype">
+                                {{#select data.mutationtype}}
+                                    {{#each config.mutationtype as |label abilitiy|}}
+                                        <option value="{{abilitiy}}">{{label}}</option>
+                                    {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+
+                        <div class="mutationuse col">
+                            <label for="data.mutationuse">Use</label>
+                            <select id="data.mutationuse" name="data.mutationuse">
+                                {{#select data.mutationuse}}
+                                    {{#each config.mutationuse as |label abilitiy|}}
+                                        <option value="{{abilitiy}}">{{label}}</option>
+                                    {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+
+
+                        {{/ifeq}}
+
+
+                        {{#ifeq item.data.isspellbase 1}}
+
+                        <div class="save col">
+                            <label for="data.save">Save</label>
+                            <input type="text" id="data.save" name="data.save"
+                                value="{{data.save}}" maxlength="40"/>
+                        </div>
+
+                        <div class="range col">
+                            <label for="data.range">Range</label>
+                            <input type="text" id="data.range" name="data.range"
+                                value="{{data.range}}" maxlength="40"/>
+                        </div>
+
+                        <div class="duration col">
+                            <label for="data.duration">Duration</label>
+                            <input type="text" id="data.duration" name="data.duration"
+                                value="{{data.duration}}" maxlength="60"/>
+                        </div>
+
+                        {{/ifeq}}
+
+
+                    
+
+
+
+
+
+                        {{#ifeq item.data.charges.usescharges "1" }}
+                        <div class="charges col">
+                            <label for="data.charges.value">Charges</label>
+                            <input type="text" id="data.charges.value" name="data.charges.value"
+                                value="{{data.charges.value}}" maxlength="40"/>
+                        </div>
+
+                        <div class="charges col">
+                            <label for="data.charges.max">Max</label>
+                            <input type="text" id="data.charges.max" name="data.charges.max"
+                                value="{{data.charges.max}}" maxlength="40"/>
+                        </div>
+                        {{/ifeq}}
+
+                    </div>
+                   
+                </div>
+            </div><!-- end ghetto table -->
+
+            <!--
             <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+            <div class="grid grid-2col">
+              <div class="resource">
+                <label class="resource-label">Quantity</label>
+                  <input type="text" name="data.quantity.value" value="{{data.quantity.value}}" data-dtype="Number"/>
+              </div>
+              <div class="resource">
+                <label class="resource-label">Weight</label>
+                  <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
+              </div>
+            </div>
         </div>
+
+        -->
+
+        
     </header>
 
     {{!-- Sheet Tab Navigation --}}
@@ -23,6 +206,27 @@
         {{!-- Attributes Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="attributes">
             {{!-- As you add new fields, add them in here! --}}
+
+            {{#ifeq item.type "item" }}
+            <div class="resource">
+                <label class="resource-label">Can Stack</label>
+                <input type="checkbox" name="data.quantity.canstack" id="data.quantity.canstack" data-dtype="Boolean" {{checked data.quantity.canstack}}/>
+            </div>
+            {{/ifeq}}
+
+            {{#ifeq item.type "skill" }}
+            <div class="resource">
+                <label class="resource-label">Additional Mod Script</label>
+                  <input type="text" name="data.additionalmod" value="{{data.additionalmod}}" data-dtype="String"/>
+            </div>
+            {{/ifeq}}
+
+
+            <div class="resource">
+                <label class="resource-label">Uses Charges</label>
+                <input type="checkbox" name="data.charges.usescharges" id="data.charges.usescharges" data-dtype="Boolean" {{checked data.charges.usescharges}}/>
+            </div>
+            
         </div>
     </section>
 </form>

@@ -20,7 +20,7 @@ export class totalccItemSheet extends ItemSheet {
   get template() {
     const path = "systems/totalcc/templates/item";
     // Return a single sheet for all item types.
-    // return `${path}/item-sheet.html`;
+     return `${path}/item-sheet.html`;
 
     // Alternatively, you could use the following return statement to do a
     // unique item sheet by type, like `weapon-sheet.html`.
@@ -32,9 +32,21 @@ export class totalccItemSheet extends ItemSheet {
   /** @override */
   getData() {
     const data = super.getData();
+    const item = data.item;
+    const itemData = item.data;
 
 
     data.config = DCC;
+
+
+    itemData.isspellbase = (item.type === "mutation" || item.type === "spell");
+
+    if (item.type === "mutation")
+    {
+      itemData.ispassive = (itemData.mutationuse === "passive");
+    }
+
+
     return data;
 
 
