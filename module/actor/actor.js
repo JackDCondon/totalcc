@@ -149,7 +149,16 @@ export class totalccActor extends Actor {
       let roll = new Roll(formula, {'critical': 20});
       await this.rolldice(roll);
 
-      AddedData.hittext = `If you hit, roll <b>${DamageFormula}</b>`;
+      if (!this.isPC)
+      {
+        AddedData.hittext = `And scores <b>[[${DamageFormula}]]</b> ${WeaponData.weaponstats.type} Damage`;
+      }
+      else
+      {
+        AddedData.hittext = `If you hit, roll <b>${DamageFormula}</b> ${WeaponData.weaponstats.type} Damage.`;
+      }
+
+
       
 
       /** Handle Critical Hits **/

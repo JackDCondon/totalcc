@@ -14,12 +14,9 @@
 
         {{#if roll}}
         <div class="chat-details">
-            <div class="roll-result">Rolls {{roll.formula}}</div>
+            <div class="roll-result"><b>Rolls [[ {{{roll.formula}}} ]]</b></div>
         </div>
 
-        <div class="chat-details">
-            <div class="roll-result"><div>{{roll.result}} = <b>{{roll.total}}</div></b></div>
-        </div>
         {{/if}}
 
         {{#each additionalinfo as |lable id|}}

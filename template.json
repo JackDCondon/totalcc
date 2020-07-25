@@ -208,7 +208,7 @@
         "range" : "Melee",
         "damage" : "1d6",
         "type" : "Slashing",
-        "attack" : ""
+        "attack" : "0"
       },
       "equiptitemgroup" : "primaryhand"
     },
