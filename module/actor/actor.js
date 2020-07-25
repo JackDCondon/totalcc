@@ -16,6 +16,8 @@ export class totalccActor extends Actor {
     const Chardata = actorData.data;
     const flags = actorData.flags;
 
+    Chardata.isnpc = (actorData.type === 'npc');
+
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
     if (actorData.type === 'character') this._prepareCharacterData(actorData);
@@ -27,23 +29,76 @@ export class totalccActor extends Actor {
   _prepareCharacterData(actorData) {
     const data = actorData.data;
 
-    // Make modifications to data here. For example:
-
-    // Loop through ability scores, and add their modifiers to our sheet output.
-   // for (let [key, ability] of Object.entries(data.abilities)) {
-      // Calculate the modifier using d20 rules.
-   //   ability.mod = Math.floor((ability.value - 10) / 2);
-   // }
-
     // Ability modifiers
-    for (let [id, abl] of Object.entries(data.abilities)) {
+    for (let [id, abl] of Object.entries(data.abilities)) 
+    {
       abl.mod = DCC.abilitiesmodifiers[abl.value] || 0;
     }
+
+    data.attributes.ac.value = this.CalculateAC();
 
   }
 
 
 
+     /**
+     * Get AC from Armor
+     */
+    CalculateAC() {
+      let acout = 10 + this.data.data.abilities.agility.mod;
+      this.data.items.forEach(function(item) 
+      {
+        if (item.type === "armor" && item.data.iswearing)
+        {
+          acout+=item.data.acbonus;
+        }
+
+      });
+      return acout + this.data.data.attributes.ac.mod;
+    }
+
+
+      /**
+     * Get Armor Penetly from armor
+     */
+    CalculateArmorPenelty() {
+      let AP = 0;
+      this.data.items.forEach(function(item) 
+      {
+        if (item.type === "armor" && item.data.iswearing)
+        {
+          AP+=item.data.penalty;
+        }
+
+      });
+      return AP;
+    }
+
+
+
+        /**
+     * Get Fumble Dice
+     */
+    GetFumbleDice() {
+      let fumbleout = "1d4";
+      this.data.items.forEach(function(item) 
+      {
+
+        if (item.type === "armor" && item.data.iswearing)
+        {
+          const FumbleDice = item.data.fumble;
+          const OldFumbleMax = Roll.maximize(fumbleout)._total;
+          let MaxNum =  Roll.maximize(FumbleDice)._total;
+          if (MaxNum > OldFumbleMax)
+          {
+            fumbleout = item.data.fumble;
+          }
+        }
+
+      });
+      this.data.data.attributes.fumble.value = fumbleout;
+      return fumbleout;
+    }
 
 
       /**
@@ -59,6 +114,8 @@ export class totalccActor extends Actor {
       let LuckMod = 0;
 
       let AbilityMod = 0;
+      let formula = `1d${CharData.attributes.actiondice.value}`;
+
       let DamageFormula = `${WeaponData.weaponstats.damage}`;
       if (this.data.type === "character")
       {
@@ -66,23 +123,25 @@ export class totalccActor extends Actor {
 
         if (WeaponData.ismelee)
         {
+          if (CharData.attributes.attack.value !== "")
+          {
+            formula += ` + ${CharData.attributes.attack.value}`;
+          }
           AbilityMod = CharData.abilities.strength.mod;
           DamageFormula = `${WeaponData.weaponstats.damage} + ${AbilityMod}`
         }
         else
         {
+          if (CharData.attributes.ranged.value !== "")
+          {
+            formula += ` + ${CharData.attributes.ranged.value}`;
+          }
           AbilityMod = CharData.abilities.agility.mod;
         }
-    }
-
-
-      let formula = `1d${CharData.attributes.actiondice.value} + ${AbilityMod} + ${WeaponData.weaponstats.attack}`
-
-      //ADD ATTACK MOD
-      if (CharData.attributes.attack.value !== "")
-      {
-        formula += ` + ${CharData.attributes.attack.value}`;
       }
+
+      formula += ` + ${AbilityMod} + ${WeaponData.weaponstats.attack}`
+
 
       /* Roll the Attack */
       let roll = new Roll(formula, {'critical': 20});
@@ -106,7 +165,7 @@ export class totalccActor extends Actor {
 
       /** Handle Fumbles **/
       let fumble = "";
-      let fumbleDie = CharData.attributes.fumble.value;
+      let fumbleDie = this.GetFumbleDice();
       
       if (Number(roll.dice[0].results[0]) === 1) {
           const pack = game.packs.get('totalcc.fumbles');
@@ -164,7 +223,11 @@ export class totalccActor extends Actor {
       let AbilityMod;
       if (SkillData.abilitiesmodifyer !== "" || SkillData.abilitiesmodifyer !== "None" || SkillData.abilitiesmodifyer !== "none")
       {
-      AbilityMod = ` + @CharData.abilities.${SkillData.abilitiesmodifyer}.mod`;
+        AbilityMod = ` + @CharData.abilities.${SkillData.abilitiesmodifyer}.mod`;
+        if (SkillData.abilitiesmodifyer == "agility")
+        {
+          AbilityMod += ` - ` + this.CalculateArmorPenelty();
+        }
       }
 
       let formula = `1d${CharData.attributes.actiondice.value} ${AbilityMod} + ${SkillData.bonus}`;

@@ -237,15 +237,26 @@
   margin: 10px 0 0 6px; }
 
 .totalcc .ac label {
-  margin: 31px auto 0 auto;
+  margin: -14px auto auto auto;
   font-size: 1.1rem;
   line-height: 1.6rem; }
 
 .totalcc .ac .ac-value {
   width: 35px;
-  margin: 21px auto 0 auto;
+  margin: 15px auto 0 13px;
   font-size: 1.6rem;
   height: 25px; }
+
+
+  .totalcc .ac .max {
+    width: 25px;
+    margin: 19.0px auto 0 41px;
+    height: 17px; }
+  
+  .totalcc .ac .max-label {
+    margin: 2px auto 0 43px;
+    font-size: .6rem;
+    line-height: .8rem; }
 
 /* ----------------------------------------- */
 /*  Chat Rolls                               */
@@ -585,7 +596,7 @@
   border-radius: 5px;
   margin: 6px;
   padding: 4px;
-  max-height: 230px;
+  max-height: 185px;
 }
 
 .totalcc .ghettoTable .row {

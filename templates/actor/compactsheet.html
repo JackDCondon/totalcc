@@ -139,17 +139,6 @@
                             data-dtype="String"/>
                         </div>
                     </div>
- 
-
-                    <div class="row separate">
-                        <div class="col"><label class="attack-label box-title" for="data.attributes.fumble.value">Fumble</label></div>
-                            <div class="col">
-                                <input class="attack" type="text" id="data.attributes.fumble.value"
-                                name="data.attributes.fumble.value"
-                                value="{{data.attributes.fumble.value}}"
-                                data-dtype="String"/>
-                            </div>
-                    </div>
 
 
                     <div class="row separate-last">
@@ -203,9 +192,25 @@
 
                     {{!-- AC and HP --}}
                     <div class="ac flexcol">
-                        <input class="ac-value" type="text" id="data.attributes.ac.value"
-                               name="data.attributes.ac.value"
-                               value="{{data.attributes.ac.value}}" data-dtype="Number"/>
+
+                        {{#if data.isnpc}}
+
+                        <input class="ac-value" type="text" name="data.attributes.ac.value"
+                        value="{{data.attributes.ac.value}}"
+                        data-dtype="Number"/>
+
+                        {{else}}
+
+                        <h4 class = "ac-value">{{data.attributes.ac.value}}</h4>
+
+                        <input class="max" type="text" name="data.attributes.ac.mod"
+                        value="{{data.attributes.ac.mod}}"
+                        data-dtype="Number"/>
+
+                        <label class="max-label" for="data.attributes.ac.mod">Mod</label>
+
+                        {{/if}}
+
                         <label for="data.attributes.ac.value">AC</label>
                     </div>
                     <div class="hp flexcol">

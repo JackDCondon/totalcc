@@ -44,7 +44,8 @@
             "value" : "1d4"
           },
           "ac" : {
-            "value" : 10
+            "value" : 10,
+            "mod" : 0
           },
           "alignment" : {
             "value" : "Clan Of Cog"
@@ -199,8 +200,8 @@
     },
     "armor": {
       "templates": [ "common" , "equiptable"],
-      "acbonus" : 10,
-      "penalty" : 2,
+      "acbonus" : 0,
+      "penalty" : 0,
       "fumble" : "1d4"
     },
     "skill": {
