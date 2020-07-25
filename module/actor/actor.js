@@ -494,9 +494,19 @@ export class totalccActor extends Actor {
     }
   }
 
+
+  formatRoll (roll, formula) {
+    const rollData = escape(JSON.stringify(roll))
+
+    return `<a class="inline-roll inline-result" data-roll="${rollData}" title="${formula}"><i class="fas fa-dice-d20"></i> ${roll.total}</a>`
+  }
+
+
+
   async GraphicCharRoll(item, roll, additionalinfo)
   {
 
+    const RollHTML = this.formatRoll(roll, roll.formula);
 
       // Basic template rendering data
       //const token = this.actor.token;
@@ -506,6 +516,7 @@ export class totalccActor extends Actor {
         item: item,
         data: this.data,
         roll : roll,
+        rollhtml : RollHTML,
         additionalinfo : additionalinfo
       };
   
