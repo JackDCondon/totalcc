@@ -72,6 +72,53 @@ export class totalccItemSheet extends ItemSheet {
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
 
+
+    // Rollable Item.
+    html.find('.cm').click(this._onRollArtifact.bind(this));
+
+
     // Roll handlers, click handlers, etc. would go here.
   }
+
+
+
+  async _onRollArtifact(event) 
+  {
+    event.preventDefault();
+    if (this.item)
+    {
+      this.item.rollArtifact();
+    }
+  }
+
+
+
+
+
+
+  DiceRollDialouge(subject) {
+    return new Promise((resolve, reject) => {
+      new Dialog({
+        title: "Dice Roll Mod",
+        content: `Modify Roll?`,
+        buttons: {
+          ok: {
+            icon: '<i class="fas fa-check"></i>',
+            label: "Roll",
+            callback: () => resolve(true)
+          },
+          cancel: {
+            icon: '<i class="fas fa-times"></i>',
+            label: "Cancel",
+            callback: () => resolve(false)
+          },
+        },
+        default: "ok",
+        close: () => resolve(false),
+      }, {classes: ["totalcc", "dialog"]}).render(true);
+    });
+  }
+
+
+
 }

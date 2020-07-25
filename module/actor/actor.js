@@ -206,9 +206,6 @@ export class totalccActor extends Actor {
   }
 
 
-
-
-
   GetItemActionDice(ItemData) {
     if (ItemData.actiondice && ItemData.actiondice.actiondiceoverride)
     {
@@ -258,6 +255,11 @@ export class totalccActor extends Actor {
       }
 
       let formula = this.GetItemActionDice(SkillData);
+
+      if (options.mod)
+      {
+        formula += options.mod;
+      }
 
 
        
@@ -438,6 +440,50 @@ export class totalccActor extends Actor {
       }
     }
   }
+
+
+
+  async rollArtifactOnItem(ItemID, options = {})
+   {
+    const Item = this.getOwnedItem(ItemID);
+    const speaker = {alias: this.name, _id: this._id};
+    const CharData = this.data.data;
+    const ItemData = Item.data.data;
+
+
+    const ArtifactSkill = this.data.items.find(entity => entity.name.startsWith("Artifact Check"));
+    if (ArtifactSkill)
+    {
+    this.rollSkill(ArtifactSkill._id, { "mod" : ` - ${ItemData.artifact.cm}`});
+    }
+  }
+
+
+
+  DiceRollDialouge(subject) {
+    return new Promise((resolve, reject) => {
+      new Dialog({
+        title: "Dice Roll Mod",
+        content: `Modify Roll?`,
+        buttons: {
+          ok: {
+            icon: '<i class="fas fa-check"></i>',
+            label: "Roll",
+            callback: () => resolve(true)
+          },
+          cancel: {
+            icon: '<i class="fas fa-times"></i>',
+            label: "Cancel",
+            callback: () => resolve(false)
+          },
+        },
+        default: "ok",
+        close: () => resolve(false),
+      }, {classes: ["totalcc", "dialog"]}).render(true);
+    });
+  }
+
+
 
 
 }

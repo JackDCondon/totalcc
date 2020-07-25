@@ -51,6 +51,10 @@ export class totalccItem extends Item {
     const actorData = this.actor ? this.actor.data.data : {};
     const itemData = item.data;
 
+
+
+
+
     if (item.data.charges.usescharges)
     {
       if (item.data.charges.value <= 0)
@@ -66,6 +70,9 @@ export class totalccItem extends Item {
         //update({ "data.quantity.value": parseInt(event.target.value) });
       }
     }
+
+
+
 
     if (item.type === "weapon")
     {
@@ -96,6 +103,26 @@ export class totalccItem extends Item {
 
     this.actor.rollItem(item._id);
 
+
+  }
+
+
+    /**
+   * Handle clickable rolls.
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  async rollArtifact() 
+  {
+    // Basic template rendering data
+    const token = this.actor.token;
+    const item = this.data;
+    const actorData = this.actor ? this.actor.data.data : {};
+    const itemData = item.data;
+
+    if (!actorData) return;
+
+    this.actor.rollArtifactOnItem(item._id);
 
   }
 

@@ -332,6 +332,12 @@ export class totalccActorSheet extends ActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
 
+
+    //if (await this.actor.DiceRollDialouge(item)) {
+      //const elem = event.currentTarget.closest("." + item);
+
+    //}
+
     const itemId = event.target.closest(".item").dataset.itemId;
     if (!itemId)
       return;
