@@ -22,6 +22,7 @@ export class totalccItem extends Item {
     }
 
 
+    itemdata.canbeartifact = (item.type === "item" || item.type === "armor" || item.type === "weapon")
     itemdata.isspellbase = (item.type === "mutation" || item.type === "spell");
 
     if (item.type === "mutation")

@@ -171,7 +171,8 @@
       {
         "artifact" : {
           "tl" : 0,
-          "cm" : 0
+          "cm" : 0,
+          "isartifact" : 0
         }
       }
     },

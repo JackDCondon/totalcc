@@ -13,6 +13,28 @@
                 <div class="row">
                     <div class = "gridwrapper">
 
+
+
+
+                        {{#ifeq item.data.canbeartifact 1 }}
+                        {{#ifeq item.data.artifact.isartifact 1 }}
+
+                        <div class="techlevel col">
+                            <label for="data.artifact.tl">TL</label>
+                            <input type="text" id="data.artifact.tl" name="data.artifact.tl"
+                                value="{{data.artifact.tl}}" maxlength="40" data-dtype="Number"/>
+                        </div>
+
+                        <div class="complexitymod col">
+                            <label for="data.artifact.">CM</label>
+                            <input type="text" id="data.artifact.cm" name="data.artifact.cm"
+                                value="{{data.artifact.cm}}" maxlength="40" data-dtype="Number"/>
+                        </div>
+
+
+                        {{/ifeq}}
+                        {{/ifeq}}
+
                         {{#ifeq item.type "item" }}
                         {{#ifeq item.data.quantity.canstack "1" }}
                         <div class="quantity col">
@@ -218,6 +240,14 @@
             <div class="resource">
                 <label class="resource-label">Additional Mod Script</label>
                   <input type="text" name="data.additionalmod" value="{{data.additionalmod}}" data-dtype="String"/>
+            </div>
+            {{/ifeq}}
+
+            
+            {{#ifeq item.data.canbeartifact 1 }}
+            <div class="resource">
+                <label class="resource-label">Is Artifact</label>
+                <input type="checkbox" name="data.artifact.isartifact" id="data.artifact.isartifact" data-dtype="Boolean" {{checked data.artifact.isartifact}}/>
             </div>
             {{/ifeq}}
 
