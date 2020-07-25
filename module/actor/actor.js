@@ -143,12 +143,14 @@ export class totalccActor extends Actor {
       formula += ` + ${AbilityMod} + ${WeaponData.weaponstats.attack}`
 
 
+      let AddedData = {};
+
       /* Roll the Attack */
       let roll = new Roll(formula, {'critical': 20});
       await this.rolldice(roll);
-      const rollHTML = this._formatRoll(roll, formula);
 
-      let AddedData = {};
+      AddedData.hittext = `If you hit, roll <b>${DamageFormula}</b>`;
+      
 
       /** Handle Critical Hits **/
       let crit = "";
@@ -188,22 +190,7 @@ export class totalccActor extends Actor {
 
   }
 
-  /**
-   * Format a roll for display in-line
-   * @param {Object<Roll>} roll   The roll to format
-   * @param {string} formula      Formula to show when hovering
-   * @return {string}             Formatted HTML containing roll
-   */
-  _formatRoll(roll, formula) {
-      const rollData = escape(JSON.stringify(roll));
 
-      // Check for Crit/Fumble
-      let critFailClass = "";
-      if (Number(roll.dice[0].results[0]) === 20) critFailClass = "critical ";
-      else if (Number(roll.dice[0].results[0]) === 1) critFailClass = "fumble ";
-
-      return `<a class="${critFailClass}inline-roll inline-result" data-roll="${rollData}" title="${formula}"><i class="fas fa-dice-d20"></i> ${roll.total}</a>`;
-  }
 
 
   GetItemActionDice(ItemData) {
