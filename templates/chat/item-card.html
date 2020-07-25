@@ -1,0 +1,34 @@
+<section class="totalcc chat-message">
+    <div class="totalcc chat-block">
+        <div class="flexrow chat-header">
+            <div class="chat-title"><h2>Uses {{item.name}}</h2></div>
+            <div class="chat-img" style="background-image:url('{{item.img}}')"></div>
+        </div>
+
+
+        {{#if item.data.data.charges.usescharges}}
+        <div class="chat-details">
+            <div class="roll-result"><div>Charges left: {{item.data.data.charges.value}} {{#if item.data.data.charges.max}} / {{item.data.data.charges.max}} {{/if}}</div>
+        </div>
+        {{/if}}
+
+        {{#if roll}}
+        <div class="chat-details">
+            <div class="roll-result">Rolls {{roll.formula}}</div>
+        </div>
+
+        <div class="chat-details">
+            <div class="roll-result"><div>{{roll.result}} = <b>{{roll.total}}</div></b></div>
+        </div>
+        {{/if}}
+
+        {{#each additionalinfo as |lable id|}}
+        <div class="chat-details">
+            <div class="roll-result"><div>{{{lable}}}</div></div>
+        </div>
+        {{/each}}
+
+
+
+    </div>
+</section>

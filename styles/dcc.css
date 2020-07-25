@@ -703,3 +703,117 @@
   grid-gap: 10px;
   grid-auto-rows: 40px;
 }
+
+/* ----------------------------------------- */
+/* Chat Block                                */
+/* ----------------------------------------- */
+
+
+
+.totalcc.chat-block {
+  margin: 0;
+}
+.totalcc.chat-block .chat-header {
+  height: 46px;
+  margin: 4px 0;
+  background: url("/systems/totalcc/styles/images/back.png");
+  border: 1px solid black;
+  border-radius: 3px;
+  color: white;
+  padding: 2px;
+  box-shadow: 0 0 2px #fff inset;
+}
+
+.totalcc.chat-block .chat-header .chat-title {
+  margin: 4px 0;
+}
+.totalcc.chat-block .chat-header .chat-title h2 {
+  border: none;
+  line-height: 34px;
+  margin: 0;
+  text-indent: 10px;
+  font-size: 16px;
+}
+.totalcc.chat-block .chat-header .chat-img {
+  flex: 0 0 42px;
+  background-size: cover;
+}
+.totalcc.chat-block .chat-details {
+  padding: 4px;
+  font-size: 13px;
+}
+.totalcc.chat-block .roll-result {
+  font-size: 13px;
+  text-align: center;
+}
+.totalcc.chat-block .roll-result.roll-success {
+  color: #18520b;
+}
+.totalcc.chat-block .roll-result.roll-fail {
+  color: #aa0200;
+}
+
+.totalcc.chat-card {
+  font-style: normal;
+  font-size: 12px;
+}
+.totalcc .chat-card .card-header {
+  padding: 3px 0;
+  border-top: 2px groove #fff;
+  border-bottom: 2px groove #fff;
+}
+.totalcc.chat-card .card-header img {
+  flex: 0 0 36px;
+  margin-right: 5px;
+}
+.totalcc.chat-card .card-header h3 {
+  flex: 1;
+  margin: 0;
+  line-height: 36px;
+  color: #4b4a44;
+}
+.totalcc.chat-card .card-header h3:hover {
+  color: #111;
+}
+.totalcc.chat-card .card-content {
+  margin: 5px 0;
+}
+.totalcc.chat-card .card-content h3 {
+  font-size: 12px;
+  margin: 0;
+  font-weight: bold;
+}
+.totalcc.chat-card .card-content > * {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+.totalcc.chat-card .card-buttons {
+  margin: 5px 0;
+}
+.totalcc.chat-card .card-buttons span {
+  display: block;
+  line-height: 28px;
+  text-align: center;
+  border: 1px solid #7a7971;
+}
+.totalcc.chat-card .card-buttons button {
+  font-size: 12px;
+  height: 24px;
+  line-height: 20px;
+  margin: 2px 0;
+}
+.totalcc.chat-card .card-footer {
+  padding: 3px 0 0;
+  border-top: 2px groove #fff;
+}
+.totalcc.chat-card .card-footer span {
+  border-right: 2px groove #fff;
+  padding: 0 5px 0 0;
+  font-size: 10px;
+}
+.totalcc.chat-card .card-footer span:last-child {
+  border-right: none;
+  padding-right: 0;
+}

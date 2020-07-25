@@ -9,10 +9,11 @@
                 <input name="name" type="text" value="{{actor.name}}"
                        placeholder="Character Name"/>
             </h1>
-            {{#unless data.isNPC }}
+
             <div class="ghettoTable">
                 <div class="row">
 
+                    {{#unless data.isNPC }}
                     <div class="xp col">
                         <label for="data.xp.value">Experience</label>
                         <input type="text" id="data.xp.value" name="data.xp.value"
@@ -26,12 +27,15 @@
                             value="{{data.level.value}}" maxlength="40"/>
                     </div>
 
+                    {{/unless}}
+
                     <div class="actiondice col">
                         <label for="data.attributes.actiondice.value">Dice</label>
                         <input type="text" id="data.attributes.actiondice.value" name="data.attributes.actiondice.value"
                             value="{{data.attributes.actiondice.value}}" maxlength="40"/>
                     </div>
 
+                    {{#unless data.isNPC }}
                     <div class="title col">
                         <label for="data.occupation.value">Title</label>
                         <input type="text" id="data.title.value" name="data.title.value"
@@ -43,6 +47,8 @@
                         <input type="text" id="data.occupation.value" name="data.occupation.value"
                             value="{{data.occupation.value}}" maxlength="40"/>
                     </div>
+
+                    {{/unless}}
 
                     <div class="alignment col">
                         <label for="data.alignment">Alignment</label>
@@ -56,7 +62,7 @@
                     </div>
                 </div>
             </div><!-- end ghetto table -->
-            {{/unless}}
+
 
         </div>
     </header>

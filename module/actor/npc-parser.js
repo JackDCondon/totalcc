@@ -5,7 +5,7 @@
 export function parseNPC(npcString) {
     let npc = {};
     npcString = npcString.replace(/[\n\r]+/g, ' ').replace(/\s{2,}/g, ' ').replace(/^\s+|\s+$/, '');
-    npc.name = npcString.replace(/(.*):.*/, "$1").replace(/ ?\(\d+\)/, "");
+    npc.name =  npcString.replace(/(.*):.*/, '$1').replace(/ ?\(\d+\)/, '')
     npc["data.attributes.init.value"] = npcString.replace(/.*Init ?(.+?);.*/, "$1");
     npc.attacks = npcString.replace(/.*Atk ?(.+?);.*/, "$1");
     if (npcString.includes("Dmg ")) npc.damage = npcString.replace(/.*Dmg ?(.+?);.*/, "$1");
@@ -15,9 +15,9 @@ export function parseNPC(npcString) {
     if (npcString.includes("HD ")) npc["data.attributes.hd.value"] = npcString.replace(/.*HD ?(.+?);.*/, "$1");
     npc["data.attributes.speed.value"] = npcString.replace(/.*MV ?(.+?);.*/, "$1");
     npc["data.attributes.actionDice.value"] = npcString.replace(/.*Act ?(.+?);.*/, "$1");
-    if (npcString.includes("SP ")) npc["data.attributes.special.value"] = npcString.replace(/.*SP ?(.+?);.*/, "$1");
+    if (npcString.includes("SP ")) npc["data.attributes.biography.value"] = npcString.replace(/.*SP ?(.+?);.*/, "$1");
     npc["data.attributes.saves.fort.value"] = npcString.replace(/.*Fort ?(.+?),.*/, "$1");
-    npc["data.attributes.saves.reflex.value"] = npcString.replace(/.*Ref ?(.+?),.*/, "$1");
+    npc["data.attributes.saves.ref.value"] = npcString.replace(/.*Ref ?(.+?),.*/, "$1");
     npc["data.attributes.saves.will.value"] = npcString.replace(/.*Will ?(.+?);.*/, "$1");
 
     /* Speed */

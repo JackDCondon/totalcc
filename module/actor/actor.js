@@ -145,14 +145,17 @@ export class totalccActor extends Actor {
 
       /* Roll the Attack */
       let roll = new Roll(formula, {'critical': 20});
-      roll.roll();
+      await this.rolldice(roll);
       const rollHTML = this._formatRoll(roll, formula);
 
-
+      let AddedData = {};
 
       /** Handle Critical Hits **/
       let crit = "";
-      if (Number(roll.dice[0].results[0]) === CharData.attributes.actiondice.value) {
+      //let critnum = new Roll(this.GetItemActionDice(WeaponData)).maximize().total;
+      let critdie = Roll.maximize(this.GetItemActionDice(WeaponData)).total;
+
+      if (Number(roll.dice[0].results[0]) === critdie) {
           const critTableFilter = `Crit Table ${CharData.attributes.crittable.value}`;
           const pack = game.packs.get('totalcc.criticalhits');
           await pack.getIndex(); //Load the compendium index
@@ -160,7 +163,8 @@ export class totalccActor extends Actor {
           const table = await pack.getEntity(entry._id);
           const roll = new Roll(`${CharData.attributes.critdice.value} + ${LuckMod}`);
           const critResult = await table.draw({'roll': roll, 'displayChat': false});
-          crit = ` <br><br><span style="color:green; font-weight: bolder">Critical Hit!</span> ${critResult.results[0].text}</span>`;
+          crit = `<span style="color:green; font-weight: bolder">Critical Hit!</span> ${critResult.results[0].text}</span>`;
+          AddedData.Crit = crit;
       }
 
       /** Handle Fumbles **/
@@ -174,18 +178,14 @@ export class totalccActor extends Actor {
           const table = await pack.getEntity(entry._id);
           const roll = new Roll(`${fumbleDie} - ${LuckMod}`);
           const fumbleResult = await table.draw({'roll': roll, 'displayChat': false});
-          fumble = ` <br><br><span style="color:red; font-weight: bolder">Fumble!</span> ${fumbleResult.results[0].text}</span>`;
+          fumble = `<span style="color:red; font-weight: bolder">Fumble!</span> ${fumbleResult.results[0].text}</span>`;
+          AddedData.Fumble = fumble;
       }
 
-      /* Emote attack results */
-      const messageData = {
-          user: game.user._id,
-          speaker: speaker,
-          type: CONST.CHAT_MESSAGE_TYPES.EMOTE,
-          content: `Attacks with their ${game.i18n.localize(weapon.name)} and hits AC ${rollHTML} for [[${DamageFormula}]] points of ${WeaponData.weaponstats.type} damage!${crit}${fumble}`,
-          sound: CONFIG.sounds.dice
-      };
-      CONFIG.ChatMessage.entityClass.create(messageData);
+
+      this.GraphicCharRoll(weapon, roll, AddedData);
+
+
   }
 
   /**
@@ -224,11 +224,10 @@ export class totalccActor extends Actor {
     let formula = this.GetItemActionDice(ItemData);
 
     let roll = new Roll(formula);
-    let label = `Rolling ${Item.name}`;
-    roll.roll().toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      flavor: label
-    });
+
+    this.rolldice(roll);
+
+    this.GraphicCharRoll(Item, roll);
 
   }
   
@@ -356,23 +355,25 @@ export class totalccActor extends Actor {
         table = game.tables.find(entity => entity.name.startsWith(ItemData.name));
       }
 
+      if (!roll._rolled)
+      {
+        await this.rolldice(roll);
+      }
+
       if (!table)
       {
-        roll.roll().toMessage({
-          speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-          flavor: label
-        });
+        this.GraphicCharRoll(ItemData, roll);
         return;
       }
 
-      if (!roll._rolled)
-      {
-        roll.roll();
-      }
-      const tableresult = await table.draw({'roll': roll, 'displayChat': true});
+
+      const tableresult = await table.draw({'roll': roll, 'displayChat': false});
+      let RollCopy = {
+        TableCopy : tableresult.results[0].text
+      };
+      this.GraphicCharRoll(ItemData, roll, RollCopy);
 
     }
-
 
   /**
    * Roll a Saving Throw
@@ -406,6 +407,7 @@ export class totalccActor extends Actor {
     if ((abilityId === 'luck') && (options.event.currentTarget.className !== 'ability-modifiers')) {
       roll = new Roll('1d20')
     }
+
 
     // Convert the roll to a chat message
     roll.toMessage({
@@ -481,6 +483,85 @@ export class totalccActor extends Actor {
         close: () => resolve(false),
       }, {classes: ["totalcc", "dialog"]}).render(true);
     });
+  }
+
+
+
+  async rolldice(roll)
+  {
+    if (game.dice3d) {
+      await game.dice3d.showForRoll(roll, game.user, false);  
+    }
+     else
+     {
+      roll.roll();
+    }
+  }
+
+  async GraphicCharRoll(item, roll, additionalinfo)
+  {
+
+
+      // Basic template rendering data
+      //const token = this.actor.token;
+      const templateData = {
+        actor: this.actor,
+        //tokenId: token ? `${token.scene._id}.${token.id}` : null,
+        item: item,
+        data: this.data,
+        roll : roll,
+        additionalinfo : additionalinfo
+      };
+  
+      // Render the chat card template
+      const template = `systems/totalcc/templates/chat/item-card.html`;
+     const html = await renderTemplate(template, templateData);
+  
+      // Basic chat message data
+      const chatData = {
+        user: game.user._id,
+        type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+        content: html,
+        speaker: {
+          actor: this._id,
+          token: this.token,
+          alias: this.name,
+        }
+      };
+  
+      // Toggle default roll mode
+      //let rollMode = game.settings.get("core", "rollMode");
+     // if (["gmroll", "blindroll"].includes(rollMode))
+      //  chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
+     // if (rollMode === "blindroll") chatData["blind"] = true;
+  
+      // Create the chat message
+      return ChatMessage.create(chatData);
+  }
+
+  getChatData(htmlOptions) {
+    const data = duplicate(this.data.data);
+
+    // Rich text description
+    //data.description = TextEditor.enrichHTML(data.description, htmlOptions);
+
+    // Item properties
+   // const props = [];
+   // const labels = this.labels;
+
+   // if (this.data.type == "weapon") {
+   //   props.push(data.qualities);
+   // }
+   // if (this.data.type == "spell") {
+   //   props.push(`${data.class} ${data.lvl}`, data.range, data.duration);
+   // }
+   // if (data.hasOwnProperty("equipped")) {
+    //  props.push(data.equipped ? "Equipped" : "Not Equipped");
+   // }
+
+    // Filter properties and return
+   // data.properties = props.filter((p) => !!p);
+    return data;
   }
 
 
