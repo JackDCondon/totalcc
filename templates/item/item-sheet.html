@@ -69,7 +69,21 @@
                             <input type="text" id="data.weaponstats.{{id}}" name="data.weaponstats.{{id}}"
                                 value="{{stat}}" maxlength="40"/>
                         </div>
+
+
                         {{/each}}
+
+                        <div class="equiptitemgroup col">
+                            <label for="data.equiptitemgroup">Type</label>
+                            <select id="data.equiptitemgroup" name="data.equiptitemgroup">
+                                {{#select data.equiptitemgroup}}
+                                    {{#each config.weapongroups as |label key|}}
+                                        <option value="{{key}}">{{label}}</option>
+                                    {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+
                         {{/ifeq}}
 
                         {{#ifeq item.type "armor" }}
