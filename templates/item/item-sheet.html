@@ -16,6 +16,16 @@
 
 
 
+                        {{#if item.data.actiondice.actiondiceoverride}}
+
+                        <div class="actiondice col">
+                            <label for="data.actiondice.value">Dice</label>
+                            <input type="text" id="data.actiondice.value" name="data.actiondice.value"
+                                value="{{data.actiondice.value}}" maxlength="40"/>
+                        </div>
+
+                        {{/if}}
+
                         {{#ifeq item.data.canbeartifact 1 }}
                         {{#ifeq item.data.artifact.isartifact 1 }}
 
@@ -255,6 +265,11 @@
             <div class="resource">
                 <label class="resource-label">Uses Charges</label>
                 <input type="checkbox" name="data.charges.usescharges" id="data.charges.usescharges" data-dtype="Boolean" {{checked data.charges.usescharges}}/>
+            </div>
+
+            <div class="resource">
+                <label class="resource-label">Override Action Dice</label>
+                <input type="checkbox" name="data.actiondice.actiondiceoverride" id="data.actiondice.actiondiceoverride" data-dtype="Boolean" {{checked data.actiondice.actiondiceoverride}}/>
             </div>
             
         </div>

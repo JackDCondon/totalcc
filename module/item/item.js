@@ -94,12 +94,9 @@ export class totalccItem extends Item {
       return;
     }
 
-    let roll = new Roll('1d@attributes.actiondice.value', actorData);
-    let label = `Rolling ${item.name}`;
-    roll.roll().toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      flavor: label
-    });
+    this.actor.rollItem(item._id);
+
+
   }
 
 

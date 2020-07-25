@@ -114,7 +114,7 @@ export class totalccActor extends Actor {
       let LuckMod = 0;
 
       let AbilityMod = 0;
-      let formula = `1d${CharData.attributes.actiondice.value}`;
+      let formula = this.GetItemActionDice(WeaponData);
 
       let DamageFormula = `${WeaponData.weaponstats.damage}`;
       if (this.data.type === "character")
@@ -207,6 +207,33 @@ export class totalccActor extends Actor {
 
 
 
+
+
+  GetItemActionDice(ItemData) {
+    if (ItemData.actiondice && ItemData.actiondice.actiondiceoverride)
+    {
+      return ItemData.actiondice.value;
+    }
+    return this.data.data.attributes.actiondice.value;
+  }
+
+
+  async rollItem(ItemID, options = {}) {
+    const Item = this.getOwnedItem(ItemID);
+    const speaker = {alias: this.name, _id: this._id};
+    const CharData = this.data.data;
+    const ItemData = Item.data.data;
+
+    let formula = this.GetItemActionDice(ItemData);
+
+    let roll = new Roll(formula);
+    let label = `Rolling ${Item.name}`;
+    roll.roll().toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor: label
+    });
+
+  }
   
       /**
      * Roll a SKILL
@@ -230,7 +257,11 @@ export class totalccActor extends Actor {
         }
       }
 
-      let formula = `1d${CharData.attributes.actiondice.value} ${AbilityMod} + ${SkillData.bonus}`;
+      let formula = this.GetItemActionDice(SkillData);
+
+
+       
+      formula += `${AbilityMod} + ${SkillData.bonus}`;
 
       if (SkillData.additionalmod != "")
       {
@@ -255,7 +286,7 @@ export class totalccActor extends Actor {
       const CharData = this.data.data;
       const MutationData = Mutation.data.data;
 
-      let formula = `1d${CharData.attributes.actiondice.value}`
+      let formula = this.GetItemActionDice(MutationData);
       if (this.data.type === "character")
       {
         formula += ` + ${CharData.level.value}`;
@@ -279,7 +310,7 @@ export class totalccActor extends Actor {
       const CharData = this.data.data;
       const SpellData = Spell.data.data;
 
-      let formula = `1d${CharData.attributes.actiondice.value}`
+      let formula = this.GetItemActionDice(SpellData);
       if (this.data.type === "character")
       {
         formula += ` + ${CharData.level.value}`;
