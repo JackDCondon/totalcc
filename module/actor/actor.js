@@ -341,6 +341,74 @@ export class totalccActor extends Actor {
     }
 
 
+  /**
+   * Roll a Saving Throw
+   * @param {String} saveId       The save ID (e.g. "str")
+   */
+  rollSavingThrow (saveId) {
+    const save = this.data.data.attributes.saves[saveId];
+    save.label = CONFIG.DCC.saves[saveId];
+    const roll = new Roll('1d20+@saveMod', { saveMod: save.value })
+
+    // Convert the roll to a chat message
+    roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      flavor: `${game.i18n.localize(save.label)} Save`
+    })
+  }
+
+
+    /**
+   * Roll an Ability Check
+   * @param {String} abilityId    The ability ID (e.g. "str")
+   * @param {Object} options      Options which configure how ability checks are rolled
+   */
+  rollAbilityCheck (abilityId, options = {}) {
+    const ability = this.data.data.abilities[abilityId]
+    ability.label = CONFIG.DCC.abilities[abilityId]
+
+    let roll = new Roll('1d20+@abilMod', { abilMod: ability.mod, critical: 20 })
+
+    // Override the Roll for Luck Checks unless they explicitly click on the modifier
+    if ((abilityId === 'luck') && (options.event.currentTarget.className !== 'ability-modifiers')) {
+      roll = new Roll('1d20')
+    }
+
+    // Convert the roll to a chat message
+    roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      flavor: `${game.i18n.localize(ability.label)} Check`
+    })
+  }
+
+  /**
+   * Roll Initiative
+   */
+  rollInitiative () {
+    const init = this.data.data.attributes.init.value
+    const roll = new Roll('1d20+@init', { init })
+
+    // Convert the roll to a chat message
+    roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      flavor: "Init"
+    })
+
+    // Set initiative value in the combat tracker if there is an active combat
+    if (this.token && game.combat) {
+      const tokenId = this.token.id
+
+      // Create or update combatant
+      let combatant = game.combat.getCombatantByToken(tokenId)
+      if (!combatant) {
+        combatant = game.combat.createCombatant({ tokenId, hasRolled: true, initiative: roll.total })
+      } else {
+        game.combat.setInitiative(combatant._id, roll.total)
+      }
+    }
+  }
+
+
 }
 
 

@@ -196,13 +196,15 @@
         "damage" : "1d6",
         "type" : "Slashing",
         "attack" : 0
-      }
+      },
+      "equiptitemgroup" : "primaryhand"
     },
     "armor": {
       "templates": [ "common" , "equiptable"],
       "acbonus" : 0,
       "penalty" : 0,
-      "fumble" : "1d4"
+      "fumble" : "1d4",
+      "equiptitemgroup" : "body"
     },
     "skill": {
       "templates": [ "common", "rollontable" ],

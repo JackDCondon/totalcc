@@ -195,7 +195,7 @@ export class totalccActorSheet extends ActorSheet {
     const OwningActor = this.actor;
 
 
-    if (event.target.checked && item.data.equiptitemgroup != "")
+    if (event.target.checked && item.data.data.equiptitemgroup != "")
     {
       this.actor.data.items.forEach(function(entry) 
       {
@@ -239,8 +239,19 @@ export class totalccActorSheet extends ActorSheet {
       li.slideUp(200, () => this.render(false));
     });
 
-    // Rollable abilities.
+    // Rollable Item.
     html.find('.item .rollable').click(this._onRollItem.bind(this));
+
+
+    // Ability Checks
+    html.find('.ability-name').click(this._onRollAbilityTest.bind(this))
+    html.find('.ability-modifiers').click(this._onRollAbilityTest.bind(this))
+
+    // Initiative
+    html.find('.init-label').click(this._onRollInitiative.bind(this))
+
+    // Saving Throws
+    html.find('.save-name').click(this._onRollSavingThrow.bind(this))
 
     html
     .find(".quantity input")
@@ -327,10 +338,42 @@ export class totalccActorSheet extends ActorSheet {
   }
 
 
+  /**
+   * Handle rolling a saving throw
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  _onRollSavingThrow (event) {
+    event.preventDefault()
+    const save = event.currentTarget.parentElement.dataset.save
+    this.actor.rollSavingThrow(save, { event: event })
+  }
 
 
+  /**
+   * Handle rolling an Ability check
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  _onRollAbilityTest (event) {
+    event.preventDefault()
+    const options = {}
+    if (event.currentTarget.className === 'ability-modifiers') {
+      options.modClick = true
+    }
+    const ability = event.currentTarget.parentElement.dataset.ability
+    this.actor.rollAbilityCheck(ability, { event: event })
+  }
 
-
+  /**
+   * Handle rolling Initiative
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  _onRollInitiative (event) {
+    event.preventDefault()
+    this.actor.rollInitiative({ event: event })
+  }
 
 
 

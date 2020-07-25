@@ -8,6 +8,8 @@ import {DCC} from './config.js';
 
 Hooks.once('init', async function() {
 
+  CONFIG.DCC = DCC;
+
   game.totalcc = {
     totalccActor,
     totalccItem,

@@ -95,9 +95,9 @@ DCC.alignments = {
  * @type {Object}
  */
 DCC.saves = {
-  'ref': "DCC.SavesReflex",
-  'frt': "DCC.SavesFortitude",
-  'wil': "DCC.SavesWill",
+  'ref': "Reflex",
+  'fort': "Fort",
+  'will': "Will",
 };
 
 /* -------------------------------------------- */
