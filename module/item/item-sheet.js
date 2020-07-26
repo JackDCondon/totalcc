@@ -96,28 +96,7 @@ export class totalccItemSheet extends ItemSheet {
 
 
 
-  DiceRollDialouge(subject) {
-    return new Promise((resolve, reject) => {
-      new Dialog({
-        title: "Dice Roll Mod",
-        content: `Modify Roll?`,
-        buttons: {
-          ok: {
-            icon: '<i class="fas fa-check"></i>',
-            label: "Roll",
-            callback: () => resolve(true)
-          },
-          cancel: {
-            icon: '<i class="fas fa-times"></i>',
-            label: "Cancel",
-            callback: () => resolve(false)
-          },
-        },
-        default: "ok",
-        close: () => resolve(false),
-      }, {classes: ["totalcc", "dialog"]}).render(true);
-    });
-  }
+
 
 
 

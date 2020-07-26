@@ -14,10 +14,20 @@
 
         {{#if roll}}
         <div class="chat-details">
-            <div class="roll-result"><b>Rolls  {{{rollhtml}}} </b></div>
+            <div class="roll-result"><b>{{roll.formula}} = {{{rollhtml}}} </b></div>
         </div>
 
         {{/if}}
+
+
+        {{#if item.data.data.activation.useactivationtext}}
+        <div class="chat-details">
+            <div class="roll-result">{{{item.data.data.activation.activationtext}}}</div>
+        </div>
+        {{/if}}
+        
+
+
 
         {{#each additionalinfo as |lable id|}}
         <div class="chat-details">

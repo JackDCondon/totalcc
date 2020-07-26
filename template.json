@@ -150,6 +150,10 @@
           "value" : 1,
           "max" : 0
         },
+        "activation" : {
+          "usespecialtext" : 0,
+          "specialtext" : ""
+        },
         "actiondice" : {
           "actiondiceoverride" : 0,
           "value" : "1d20"

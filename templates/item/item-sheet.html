@@ -239,10 +239,21 @@
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="description">Description</a>
         <a class="item" data-tab="attributes">Attributes</a>
+        {{#if data.activation.useactivationtext}}
+        <a class="item" data-tab="activationtext">Actervation Text</a>
+        {{/if}}
     </nav>
 
     {{!-- Sheet Body --}}
     <section class="sheet-body">
+
+
+        {{!-- Actervation Text Tab --}}
+        <div class="tab" data-group="primary" data-tab="activationtext">
+            {{editor content=data.activation.activationtext target="data.activation.activationtext" button=true owner=owner editable=editable}}
+        </div>
+
+
 
         {{!-- Description Tab --}}
         <div class="tab" data-group="primary" data-tab="description">
@@ -279,6 +290,11 @@
             <div class="resource">
                 <label class="resource-label">Uses Charges</label>
                 <input type="checkbox" name="data.charges.usescharges" id="data.charges.usescharges" data-dtype="Boolean" {{checked data.charges.usescharges}}/>
+            </div>
+
+            <div class="resource">
+                <label class="resource-label">Use Actervation Text</label>
+                <input type="checkbox" name="data.activation.useactivationtext" id="data.activation.useactivationtext" data-dtype="Boolean" {{checked data.activation.useactivationtext}}/>
             </div>
 
             <div class="resource">
