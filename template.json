@@ -151,8 +151,8 @@
           "max" : 0
         },
         "activation" : {
-          "usespecialtext" : 0,
-          "specialtext" : ""
+          "useactivationtext" : 0,
+          "activationtext" : ""
         },
         "actiondice" : {
           "actiondiceoverride" : 0,
@@ -162,6 +162,14 @@
       "rollontable" :
       {
         "usetable" : ""
+      },
+      "multifunctional" :
+      {
+        "multifunctional" : {
+         "ismultifunctional" : 0,
+         "weapons" : [],
+         "items" : [] 
+        }
       },
       "equiptable" :
       {
@@ -185,11 +193,12 @@
       }
     },
     "item": {
-      "templates": [ "common", "artifact" ],
+      "templates": [ "common", "artifact", "multifunctional" ],
       "quantity": {
         "canstack" : 0,
         "value":1,
-        "max":0
+        "max":0,
+        "cost" : 1
       },
       "weight": 0
     },
@@ -207,24 +216,25 @@
       "usetable" : "mutationresults"
     },
     "weapon": {
-      "templates": [ "common", "equiptable", "artifact"],
+      "templates": [ "common", "equiptable", "artifact", "multifunctional"],
       "weaponstats" : {
         "range" : "Melee",
         "damage" : "1d6",
         "type" : "Slashing",
         "attack" : "0"
       },
+      "dontrolldamage" : 0,
       "equiptitemgroup" : "primaryhand"
     },
     "armor": {
-      "templates": [ "common" , "equiptable", "artifact"],
+      "templates": [ "common" , "equiptable", "artifact", "multifunctional"],
       "acbonus" : 0,
       "penalty" : 0,
       "fumble" : "1d4",
       "equiptitemgroup" : "body"
     },
     "skill": {
-      "templates": [ "common", "rollontable" ],
+      "templates": [ "common", "rollontable"],
       "abilitiesmodifyer" : "strength",
       "bonus" : "0",
       "additionalmod" : "",

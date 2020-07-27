@@ -10,8 +10,8 @@ export class totalccItemSheet extends ItemSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["totalcc", "sheet", "item"],
-      width: 520,
-      height: 480,
+      width: 800,
+      height: 500,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
     });
   }
@@ -37,6 +37,7 @@ export class totalccItemSheet extends ItemSheet {
 
 
     data.config = DCC;
+
 
 
     itemData.isspellbase = (item.type === "mutation" || item.type === "spell");

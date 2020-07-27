@@ -201,13 +201,20 @@
                         <div class="charges col">
                             <label for="data.charges.value">Charges</label>
                             <input type="text" id="data.charges.value" name="data.charges.value"
-                                value="{{data.charges.value}}" maxlength="40"/>
+                                value="{{data.charges.value}}" maxlength="40" data-dtype="Number"/>
                         </div>
 
                         <div class="charges col">
                             <label for="data.charges.max">Max</label>
                             <input type="text" id="data.charges.max" name="data.charges.max"
-                                value="{{data.charges.max}}" maxlength="40"/>
+                                value="{{data.charges.max}}" maxlength="40" data-dtype="Number"/>
+                        </div>
+
+                        
+                        <div class="charges col">
+                            <label for="data.charges.cost">Cost</label>
+                            <input type="text" id="data.charges.cost" name="data.charges.cost"
+                                value="{{data.charges.cost}}" maxlength="40" data-dtype="Number"/>
                         </div>
                         {{/ifeq}}
 
@@ -242,6 +249,9 @@
         {{#if data.activation.useactivationtext}}
         <a class="item" data-tab="activationtext">Actervation Text</a>
         {{/if}}
+        {{#if data.multifunctional.ismultifunctional}}
+        <a class="item" data-tab="multifunction">MultiFunctions</a>
+        {{/if}}
     </nav>
 
     {{!-- Sheet Body --}}
@@ -271,6 +281,14 @@
             </div>
             {{/ifeq}}
 
+
+            {{#ifeq item.type "weapon" }}
+            <div class="resource">
+                <label class="resource-label">Dont Roll Damage</label>
+                <input type="checkbox" name="data.dontrolldamage" id="data.dontrolldamage" data-dtype="Boolean" {{checked data.dontrolldamage}}/>
+            </div>
+            {{/ifeq}}
+
             {{#ifeq item.type "skill" }}
             <div class="resource">
                 <label class="resource-label">Additional Mod Script</label>
@@ -285,6 +303,14 @@
                 <input type="checkbox" name="data.artifact.isartifact" id="data.artifact.isartifact" data-dtype="Boolean" {{checked data.artifact.isartifact}}/>
             </div>
             {{/ifeq}}
+
+
+            {{#if data.multifunctional}}
+            <div class="resource">
+                <label class="resource-label">Is Mutlifunctional</label>
+                <input type="checkbox" name="data.multifunctional.ismultifunctional" id="data.multifunctional.ismultifunctional" data-dtype="Boolean" {{checked data.multifunctional.ismultifunctional}}/>
+            </div>
+            {{/if}}
 
 
             <div class="resource">
@@ -303,5 +329,51 @@
             </div>
             
         </div>
+
+
+
+
+
+
+
+        {{!-- Multifunction Text Tab --}}
+        <div class="tab" data-group="primary" data-tab="multifunction">
+
+                <h2>Attacks</h2>
+                <ol class="items-list">
+                  <li class="item flexrow item-header">
+                    <div class="item-image"></div>
+                    <div class="item-name">Name</div>
+                    <div class="item-range">Range</div>
+                    <div class="item-attack">Attack</div>
+                    <div class="item-damage">Damage</div>
+                    <div class="item-damagetype">Type</div>
+                    <div class="item-charges">Charges</div>
+                    <div class="item-controls">
+                      <a class="item-control item-create" title="Create item" data-type="weapon"><i class="fas fa-plus"></i></a>
+                    </div>
+                  </li>
+              {{#each data.multifunctional.weapons as |item id|}}
+                  <li class="item flexrow" data-item-id="{{item._id}}">
+                      <div class="item-image rollable"><img src="/icons/svg/d20-black.svg" title="Roll Icon" width="24" height="24"/></div>
+                      <h4 class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</h4>
+                      <h4 class="item-range">{{item.data.weaponstats.range}}</h4>
+                      <h4 class="item-attack">{{item.data.weaponstats.attack}}</h4>
+                      <h4 class="item-damage">{{item.data.weaponstats.damage}}</h4>
+                      <h4 class="item-damagetype">{{item.data.weaponstats.type}}</h4>
+        
+                      {{> systems/totalcc/templates/actor/partials/chargescomp.html item=item}}
+        
+                      <div class="item-controls">
+                          <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                      </div>
+                  </li>
+              {{/each}}
+              </ol>
+
+        </div>
+
+
+
     </section>
 </form>

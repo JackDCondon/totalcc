@@ -21,6 +21,12 @@ export class totalccItem extends Item {
       this._prepareWeapon(itemdata);
     }
 
+    if (!itemdata.charges.cost)
+    {
+      itemdata.charges.cost = 1;
+    }
+
+
 
     itemdata.canbeartifact = (item.type === "item" || item.type === "armor" || item.type === "weapon")
     itemdata.isspellbase = (item.type === "mutation" || item.type === "spell");
@@ -57,14 +63,14 @@ export class totalccItem extends Item {
 
     if (item.data.charges.usescharges)
     {
-      if (item.data.charges.value <= 0)
+      if ((item.data.charges.value - itemData.charges.cost) < 0)
       {
         //NO CHARGES
-        return ui.notifications.warn(`${this.actor.name} does not have an enough charges for item ${item.name}`);
+        return ui.notifications.warn(`${this.actor.name} does not have an enough charges [${itemData.charges.cost}] for item ${item.name}`);
       }
       else
       {
-        item.data.charges.value--;
+        item.data.charges.value-=itemData.charges.cost;
         //item.update();
         this.update(item);
         //update({ "data.quantity.value": parseInt(event.target.value) });
