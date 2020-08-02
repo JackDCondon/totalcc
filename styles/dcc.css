@@ -37,13 +37,16 @@
 .totalcc .editor-content {
   height: 100%; }
 
+  .totalcc .editornew {
+  height: 200px; }
+
 /* ----------------------------------------- */
 /*  Sheet Header                             */
 /* ----------------------------------------- */
 .totalcc .sheet-header {
-  overflow: hidden;
+  overflow: visible;
   justify-content: flex-start;
-  margin-bottom: 10px; }
+  margin-bottom: 15px; }
 
 .totalcc .sheet-header .profile-img {
   flex: 0 0 100px;

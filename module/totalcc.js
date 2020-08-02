@@ -80,16 +80,35 @@ Hooks.once("ready", async function() {
  * @returns {Promise}
  */
 async function createtotalccMacro(data, slot) {
-  if (data.type !== "Item") return;
+
+  let item;
+  let command;
+  let macroName;
+
+  if (data.type === "Item") 
+  {
+    item = data.data;
+    command = `game.totalcc.rollItemMacro("${item.name}");`;
+    macroName = item.name;
+  }
+  
+  if (data.type === "MFItem")
+  {
+    item = data.data.itemdata;
+    command = `game.totalcc.rollItemMacro("${item.name}", "${data.data.mfid}");`;
+    macroName = `${item.name}: ${data.data.mfid}`;
+  }
+  
+  
   if (!("data" in data)) return ui.notifications.warn("You can only create macro buttons for owned Items");
-  const item = data.data;
+
 
   // Create the macro command
-  const command = `game.totalcc.rollItemMacro("${item.name}");`;
+
   let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
   if (!macro) {
     macro = await Macro.create({
-      name: item.name,
+      name: macroName,
       type: "script",
       img: item.img,
       command: command,
@@ -106,7 +125,7 @@ async function createtotalccMacro(data, slot) {
  * @param {string} itemName
  * @return {Promise}
  */
-function rollItemMacro(itemName) {
+function rollItemMacro(itemName, MFItemName = "") {
   const speaker = ChatMessage.getSpeaker();
   let actor;
   if (speaker.token) actor = game.actors.tokens[speaker.token];
@@ -114,6 +133,18 @@ function rollItemMacro(itemName) {
   const item = actor ? actor.items.find(i => i.name === itemName) : null;
   if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
 
+
+  let options = {};
+  if (MFItemName != "")
+  {
+    const mfItem = item.data.data.multifunctional.weapons.find(i => i.name === MFItemName);
+    if (mfItem)
+    {
+      options.mfID = mfItem._id;
+    }
+
+  }
+
   // Trigger the item roll
-  return item.roll();
+  return item.roll(options);
 }

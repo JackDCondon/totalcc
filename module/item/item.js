@@ -1,4 +1,6 @@
 import {DCC} from '../config.js';
+import {MultiuseWep} from '../item/multiuse.js';
+
 
 /**
  * Extend the basic Item with some very simple modifications.
@@ -50,12 +52,28 @@ export class totalccItem extends Item {
    * @param {Event} event   The originating click event
    * @private
    */
-  async roll() {
+  async roll(options = {}) {
     // Basic template rendering data
-    const token = this.actor.token;
+    const token = this.actor.token ? this.actor.token : {};
     const item = this.data;
     const actorData = this.actor ? this.actor.data.data : {};
     const itemData = item.data;
+
+    const chargesleft = item.data.charges.value;
+    let chargescost = item.data.charges.cost;
+    let mfwep;
+    let ItemType = item.type;
+
+
+    if (options.mfID)
+    {
+      mfwep = this.HasMultifuncWep(options.mfID);
+      if (mfwep)
+      {
+        chargescost = mfwep.data.charges.cost;
+        ItemType = mfwep.type;
+      }
+    }
 
 
 
@@ -63,16 +81,24 @@ export class totalccItem extends Item {
 
     if (item.data.charges.usescharges)
     {
-      if ((item.data.charges.value - itemData.charges.cost) < 0)
+      if ((chargesleft - chargescost) < 0)
       {
         //NO CHARGES
         return ui.notifications.warn(`${this.actor.name} does not have an enough charges [${itemData.charges.cost}] for item ${item.name}`);
       }
       else
       {
-        item.data.charges.value-=itemData.charges.cost;
+        item.data.charges.value-=chargescost;
         //item.update();
         this.update(item);
+        if (this.sheet.render)
+        {
+          this.sheet.render();
+          if (this.actor.sheet.render)
+          {
+            this.actor.sheet.render();
+          }
+        }
         //update({ "data.quantity.value": parseInt(event.target.value) });
       }
     }
@@ -80,28 +106,28 @@ export class totalccItem extends Item {
 
 
 
-    if (item.type === "weapon")
+    if (ItemType === "weapon")
     {
-      this.actor.rollWeaponAttack(item._id);
+      this.actor.rollWeaponAttack(item._id, options);
       return;
 
     }
 
-    if (item.type === "skill")
+    if (ItemType === "skill")
     {
       this.actor.rollSkill(item._id);
       return;
 
     }
 
-    if (item.type === "mutation")
+    if (ItemType === "mutation")
     {
       this.actor.rollMutation(item._id);
       return;
 
     }
 
-    if (item.type === "spell")
+    if (ItemType === "spell")
     {
       this.actor.rollSpell(item._id);
       return;
@@ -121,7 +147,7 @@ export class totalccItem extends Item {
   async rollArtifact() 
   {
     // Basic template rendering data
-    const token = this.actor.token;
+    //const token = this.actor.token;
     const item = this.data;
     const actorData = this.actor ? this.actor.data.data : {};
     const itemData = item.data;
@@ -129,6 +155,116 @@ export class totalccItem extends Item {
     if (!actorData) return;
 
     this.actor.rollArtifactOnItem(item._id);
+  }
+
+
+      /**
+   * Handle clickable rolls.
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  async CreateMultifuncWep() 
+  {
+    // Basic template rendering data
+    //const token = this.actor.token;
+    const item = this.data;
+    const actorData = this.actor ? this.actor.data.data : {};
+    const itemData = item.data;
+    const WepArray = itemData.multifunctional.weapons;
+
+
+    let Item = CONFIG.Item.entityClass;
+    let NewMFWep = new MultiuseWep();
+
+        // Get the type of item to create.
+        const type = "weapon";
+        // Grab any data associated with this control.
+        const data = {};
+        // Initialize a default name.
+        const name = `New Function`;
+
+        const id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        // Prepare the item object.
+        const newitemData = {
+          name: name,
+          type: type,
+          _id: id
+        };
+
+
+
+
+    //const NewWepItem = await Item.create(newitemData, {temporary: true, renderSheet: true});
+    //NewWepItem.sheet.render();
+    //let classwep = new Item(newitemData);
+    //NewWepItem.data.mfID = id;
+
+
+    //NewWepItem._id = id;
+    //new
+    WepArray.push(NewMFWep);
+
+
+    //this.update({ 'data' : item });
+
+    let updateData = duplicate(this.data);
+    this.update(updateData);
+  }
+
+
+
+
+  HasMultifuncWep(MultiFunID) 
+  {
+    const item = this.data;
+    const actorData = this.actor ? this.actor.data.data : {};
+    const itemData = item.data;
+    const WepArray = itemData.multifunctional.weapons;
+
+    const FoundItem = WepArray.filter(elem => elem._id === MultiFunID)[0];
+    return FoundItem;
+
+  }
+
+
+  FindMultiFuncWepKey(MultiFunID) 
+  {
+    const item = this.data;
+    const actorData = this.actor ? this.actor.data.data : {};
+    const itemData = item.data;
+    const WepArray = itemData.multifunctional.weapons;
+
+    const FoundID = WepArray.findIndex((elem => elem._id === MultiFunID));
+    return FoundID;
+
+  }
+
+
+  async RemoveMultifuncWep(MultiFunID) 
+  {
+    // Basic template rendering data
+    //const token = this.actor.token;
+    const item = this.data;
+    const actorData = this.actor ? this.actor.data.data : {};
+    const itemData = item.data;
+    const WepArray = itemData.multifunctional.weapons;
+
+    if (!this.HasMultifuncWep(MultiFunID))
+    {
+      return;
+    }
+
+    const FoundID = WepArray.findIndex((elem => elem._id === MultiFunID));
+
+    if (FoundID < 0)
+    {
+      return;
+    }
+    WepArray.splice(FoundID, 1);
+
+    let updateData = duplicate(this.data);
+    this.update(updateData);
+
 
   }
 

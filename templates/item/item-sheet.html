@@ -350,22 +350,23 @@
                     <div class="item-damagetype">Type</div>
                     <div class="item-charges">Charges</div>
                     <div class="item-controls">
-                      <a class="item-control item-create" title="Create item" data-type="weapon"><i class="fas fa-plus"></i></a>
+                      <a class="item-control multiusewep-create" title="Create item" data-type="weapon"><i class="fas fa-plus"></i></a>
                     </div>
                   </li>
               {{#each data.multifunctional.weapons as |item id|}}
                   <li class="item flexrow" data-item-id="{{item._id}}">
-                      <div class="item-image rollable"><img src="/icons/svg/d20-black.svg" title="Roll Icon" width="24" height="24"/></div>
+                      <div class="item-image rollmfwep rollable"><img src="/icons/svg/d20-black.svg" title="Roll Icon" width="24" height="24"/></div>
                       <h4 class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</h4>
                       <h4 class="item-range">{{item.data.weaponstats.range}}</h4>
                       <h4 class="item-attack">{{item.data.weaponstats.attack}}</h4>
                       <h4 class="item-damage">{{item.data.weaponstats.damage}}</h4>
                       <h4 class="item-damagetype">{{item.data.weaponstats.type}}</h4>
         
-                      {{> systems/totalcc/templates/actor/partials/chargescomp.html item=item}}
+                      <h4 class="item-damagetype">{{item.data.charges.cost}}</h4>
         
                       <div class="item-controls">
-                          <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        <a class="item-control multiusewep-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                          <a class="item-control multiusewep-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                       </div>
                   </li>
               {{/each}}

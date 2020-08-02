@@ -110,25 +110,47 @@ export class totalccActor extends Actor {
       const weapon = this.getOwnedItem(weaponId);
       const speaker = {alias: this.name, _id: this._id};
       const CharData = this.data.data;
-      const WeaponData = weapon.data.data;
+      let WeaponData = weapon.data.data;
+      let WeaponStats = WeaponData.weaponstats;
       let LuckMod = 0;
 
       let AbilityMod = 0;
-      let formula = this.GetItemActionDice(WeaponData);
+      let mfwep;
 
-      let DamageFormula = `${WeaponData.weaponstats.damage}`;
+      let AddedData = {};
+
+
+      if (options.mfID)
+      {
+        mfwep = weapon.HasMultifuncWep(options.mfID);
+        if (mfwep)
+        {
+          WeaponStats = mfwep.data.weaponstats;
+          WeaponData = mfwep.data;
+          AddedData.UsesFunction = `Used ${mfwep.name}`;
+        }
+      }
+
+      if (WeaponData.activation.useactivationtext)
+      {
+      AddedData.SpecialText = WeaponData.activation.activationtext;
+      }
+
+      let formula = this.GetItemActionDice(WeaponData); //TODO 
+
+      let DamageFormula = `${WeaponStats.damage}`;
       if (this.data.type === "character")
       {
         LuckMod = CharData.abilities.luck.mod;
 
-        if (WeaponData.ismelee)
+        if (WeaponData.ismelee) //TODO
         {
           if (CharData.attributes.attack.value !== "")
           {
             formula += ` + ${CharData.attributes.attack.value}`;
           }
           AbilityMod = CharData.abilities.strength.mod;
-          DamageFormula = `${WeaponData.weaponstats.damage} + ${AbilityMod}`
+          DamageFormula = `${WeaponStats.damage} + ${AbilityMod}`
         }
         else
         {
@@ -140,10 +162,10 @@ export class totalccActor extends Actor {
         }
       }
 
-      formula += ` + ${AbilityMod} + ${WeaponData.weaponstats.attack}`
+      formula += ` + ${AbilityMod} + ${WeaponStats.attack}`
 
 
-      let AddedData = {};
+
 
       /* Roll the Attack */
       let roll = new Roll(formula, {'critical': 20});
@@ -153,11 +175,11 @@ export class totalccActor extends Actor {
       {
         if (!this.isPC)
         {
-          AddedData.hittext = `And scores <b>[[${DamageFormula}]]</b> ${WeaponData.weaponstats.type} Damage`;
+          AddedData.hittext = `And scores <b>[[${DamageFormula}]]</b> ${WeaponStats.type} Damage`;
         }
         else
         {
-          AddedData.hittext = `If you hit, roll <b>${DamageFormula}</b> ${WeaponData.weaponstats.type} Damage.`;
+          AddedData.hittext = `If you hit, roll <b>${DamageFormula}</b> ${WeaponStats.type} Damage.`;
         }
       }
 
@@ -226,7 +248,14 @@ export class totalccActor extends Actor {
 
     this.rolldice(roll);
 
-    this.GraphicCharRoll(Item, roll);
+    let AddedData = {};
+
+    if (ItemData.activation.useactivationtext)
+    {
+    AddedData.SpecialText = ItemData.activation.activationtext;
+    }
+
+    this.GraphicCharRoll(Item, roll, AddedData);
 
   }
   
@@ -336,6 +365,14 @@ export class totalccActor extends Actor {
       let entry;
       let table;
 
+
+      let AddedData = {};
+
+      if (ItemData.data.data.activation.useactivationtext)
+      {
+      AddedData.SpecialText = ItemData.data.data.activation.activationtext;
+      }
+
       
       const Packname = `totalcc.${ItemData.data.data.usetable}`;
       const pack = game.packs.get(Packname);
@@ -361,16 +398,16 @@ export class totalccActor extends Actor {
 
       if (!table)
       {
-        this.GraphicCharRoll(ItemData, roll);
+        this.GraphicCharRoll(ItemData, roll, AddedData);
         return;
       }
 
 
       const tableresult = await table.draw({'roll': roll, 'displayChat': false});
-      let RollCopy = {
-        TableCopy : tableresult.results[0].text
-      };
-      this.GraphicCharRoll(ItemData, roll, RollCopy);
+
+      AddedData.TableCopy = tableresult.results[0].text;
+
+      this.GraphicCharRoll(ItemData, roll, AddedData);
 
     }
 
