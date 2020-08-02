@@ -103,14 +103,13 @@ export class totalccItemSheet extends ItemSheet {
 
 
 
-    if (this.actor.owner) {
       let handler = ev => this._onDragItemStart(ev);
       html.find('h4.item-name').each((i, li) => {
         if (li.classList.contains("inventory-header")) return;
         li.setAttribute("draggable", true);
         li.addEventListener("dragstart", handler, false);
       });
-    }
+
 
 
     // Roll handlers, click handlers, etc. would go here.
