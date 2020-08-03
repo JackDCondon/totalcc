@@ -18,11 +18,6 @@ export class totalccActor extends Actor {
 
     Chardata.isnpc = (actorData.type === 'npc');
 
-    if (Chardata.attributes.hp)
-    {
-      Chardata.hp = Chardata.attributes.hp;
-      delete Chardata.attributes.hp;
-    }
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
