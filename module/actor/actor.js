@@ -404,9 +404,9 @@ export class totalccActor extends Actor {
       }
 
 
-      const tableresult = await table.draw({'roll': roll, 'displayChat': false});
-
-      AddedData.TableCopy = tableresult.results[0].text;
+      //const tableresult = await table.draw({'roll': roll.total, 'displayChat': true});
+      const tableresult = await table._getResultsForRoll(roll.total);
+      AddedData.TableCopy = tableresult[0].text;
 
       this.GraphicCharRoll(ItemData, roll, AddedData);
 
