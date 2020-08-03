@@ -456,7 +456,11 @@ export class totalccActorSheet extends ActorSheet {
           // Remove the type from the dataset since it's in the itemData.type prop.
           delete itemData.data["type"];
           // Finally, create the item!
+
+          if (!this.actor.items.find(elem => elem.name == wepvalue.name))
+          {
           this.actor.createOwnedItem(itemData);
+          }
         });
 
 
@@ -466,7 +470,7 @@ export class totalccActorSheet extends ActorSheet {
           console.log(key + ' ' + value);
           if (key !== "Weapons")
           {
-            if (this.form[key]) this.form[key].value = value;
+            //if (this.form[key]) this.form[key].value = value;
 
             //this.actor.data.data.key
           }
