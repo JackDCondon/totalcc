@@ -599,7 +599,7 @@
   border-radius: 5px;
   margin: 6px;
   padding: 4px;
-  max-height: 185px;
+  max-height: max-content;
 }
 
 .totalcc .ghettoTable .row {

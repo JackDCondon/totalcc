@@ -1,4 +1,5 @@
 import {DCC} from '../config.js';
+import {MCC} from '../config.js';
 
 /**
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
@@ -18,7 +19,6 @@ export class totalccActor extends Actor {
 
     Chardata.isnpc = (actorData.type === 'npc');
 
-
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
     if (actorData.type === 'character') this._prepareCharacterData(actorData);
@@ -35,7 +35,11 @@ export class totalccActor extends Actor {
     {
       abl.mod = DCC.abilitiesmodifiers[abl.value] || 0;
     }
+    //SET TECH LEVEL
+    data.abilities.intelligence.tl = CONFIG.MCC.TechLevel[data.abilities.intelligence.value] || 0;
 
+    
+    //SET AC
     data.attributes.ac.value = this.CalculateAC();
 
   }
@@ -317,6 +321,10 @@ export class totalccActor extends Actor {
       const MutationData = Mutation.data.data;
 
       let formula = this.GetItemActionDice(MutationData);
+
+      //Add mutation check bonus
+      formula += ` + ${CharData.attributes.mutationbonus.value}`;
+
       if (this.data.type === "character")
       {
         formula += ` + ${CharData.level.value}`;

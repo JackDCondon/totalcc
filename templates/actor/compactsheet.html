@@ -136,7 +136,7 @@
                         <div class="col"><label class="attack-label box-title" for="data.attributes.attack.value">Melee</label></div>
                         <div class="col"><label class="ranged-label box-title" for="data.attributes.ranged.value">Ranged</label></div>
                     </div>
-                    <div class="row separate">
+                    <div class="row">
                         <div class="col">
                             <input class="attack" type="text" id="data.attributes.attack.value"
                             name="data.attributes.attack.value"
@@ -150,6 +150,20 @@
                             data-dtype="String"/>
                         </div>
                     </div>
+
+                    {{#if data.isNPC}}
+                    <div class="row">
+                        <div class="col">
+                            <label class="MutantCast-lable box-title" for="data.attributes.mutationbonus.value">Mutation+</label>
+                        </div>
+                        <div class="col">
+                            <input class="mutantcast" type="text" id="data.attributes.mutationbonus.value"
+                            name="data.attributes.mutationbonus.value"
+                            value="{{data.attributes.mutationbonus.value}}"
+                            data-dtype="String"/>
+                        </div>
+                    </div>
+                    {{/if}}
 
 
                     <div class="row separate-last">

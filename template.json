@@ -43,6 +43,9 @@
           "hd" : {
             "value" : "1d4"
           },
+          "mutationbonus" : {
+            "value" : "0"
+          },
           "ac" : {
             "value" : 10,
             "mod" : 0

@@ -20,6 +20,8 @@ export function parseNPC(npcString) {
     npc["data.attributes.saves.ref.value"] = npcString.replace(/.*Ref ?(.+?),.*/, "$1");
     npc["data.attributes.saves.will.value"] = npcString.replace(/.*Will ?(.+?);*/, "$1");
 
+    if (npcString.includes("mutation")) npc["data.attributes.mutationbonus.value"] = npcString.match(/(?<=check )[+]\d/, "$1")[0];
+
     /* Speed */
     if (npc["data.attributes.speed.value"].includes("or")) {
         npc["data.attributes.speed.other"] = npc["data.attributes.speed.value"].replace(/.* or (.*)/, "$1");

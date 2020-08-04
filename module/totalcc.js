@@ -5,10 +5,12 @@ import { totalccItem } from "./item/item.js";
 import { totalccItemSheet } from "./item/item-sheet.js";
 import { preloadHandlebarsTemplates } from "./preloadTemplates.js";
 import {DCC} from './config.js';
+import {MCC} from './config.js';
 
 Hooks.once('init', async function() {
 
   CONFIG.DCC = DCC;
+  CONFIG.MCC = MCC;
 
   game.totalcc = {
     totalccActor,
