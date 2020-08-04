@@ -323,7 +323,10 @@ export class totalccActor extends Actor {
       let formula = this.GetItemActionDice(MutationData);
 
       //Add mutation check bonus
+      if (CharData.attributes.mutationbonus)
+      {
       formula += ` + ${CharData.attributes.mutationbonus.value}`;
+      }
 
       if (this.data.type === "character")
       {
