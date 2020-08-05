@@ -10,9 +10,25 @@ export function parseNPC(npcString) {
     npc.attacks = npcString.replace(/.*Atk ?(.+?);.*/, "$1");
     if (npcString.includes("Dmg ")) npc.damage = npcString.replace(/.*Dmg ?(.+?);.*/, "$1");
     npc["data.attributes.ac.value"] = npcString.replace(/.*AC ?(.+?);.*/, "$1");
+
+
+    if (npcString.includes("HD ")) npc["data.attributes.hd.value"] = npcString.replace(/.*HD ?(.+?);.*/, "$1");
+    //HP
+    if (npcString.includes("hp") || npcString.includes("HP"))
+    {
     npc["data.hp.value"] = npcString.replace(/.*(?:HP|hp) ?(\d+).*?;.*/, "$1");
     npc["data.hp.max"] = npcString.replace(/.*(?:HP|hp) ?(\d+).*?;.*/, "$1");
-    if (npcString.includes("HD ")) npc["data.attributes.hd.value"] = npcString.replace(/.*HD ?(.+?);.*/, "$1");
+    }
+    else if(npc["data.attributes.hd.value"])
+    {
+        const hpRollformula = npc["data.attributes.hd.value"];
+        let r = new Roll(hpRollformula);
+        r.roll();
+        npc["data.hp.value"] = r.total;
+        npc["data.hp.max"] = r.total;
+    }
+
+    
     npc["data.attributes.speed.value"] = npcString.replace(/.*MV ?(.+?);.*/, "$1");
     npc["data.attributes.actionDice.value"] = npcString.replace(/.*Act ?(.+?);.*/, "$1");
     if (npcString.includes("SP ")) npc["data.biography"] = npcString.replace(/.*SP ?(.+?);.*/, "$1");
