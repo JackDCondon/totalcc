@@ -29,11 +29,15 @@ export class totalccActor extends Actor {
    */
   _prepareCharacterData(actorData) {
     const data = actorData.data;
-
+    // Calc final abilities
+    for (let [id, abl] of Object.entries(data.abilities)) 
+    {
+      abl.final = abl.value || 0;
+    }
     // Ability modifiers
     for (let [id, abl] of Object.entries(data.abilities)) 
     {
-      abl.mod = DCC.abilitiesmodifiers[abl.value] || 0;
+      abl.mod = DCC.abilitiesmodifiers[abl.final] || 0;
     }
     //SET TECH LEVEL
     data.abilities.intelligence.tl = CONFIG.MCC.TechLevel[data.abilities.intelligence.value] || 0;

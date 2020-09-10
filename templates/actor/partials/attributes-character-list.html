@@ -1,0 +1,77 @@
+<nav class="attribute-tabs tabs" data-group="attributeTab">
+    <a class="item" data-tab="raw">Raw</a>
+    <a class="item" data-tab="flex">Flex</a>
+    <a class="item" data-tab="final">Final</a>
+</nav>
+
+<div class="attribute-body">
+    {{!-- RAW VALUES --}}
+    <ul class="tab ability-scores" data-group="attributeTab" data-tab="raw">
+        {{#each data.DCC.abilities as |ability id|}}
+            <li class="ability" data-ability="{{id}}">
+                <label class="ability-name box-title rollable">{{ability}}</label>
+                <br/>
+                <input class="ability-score" id="data.abilities.{{id}}.raw" name="data.abilities.{{id}}.raw"
+                    type="text"
+                    value="{{#with (lookup ../data.abilities id) as |ab|}}{{ ab.raw }}{{/with}}"
+                    data-dtype="Number"
+                    placeholder="10"
+                />
+            </li>
+        {{/each}}
+    </ul>
+
+
+    {{!-- FLEX VALUES --}}
+    <ul class="tab ability-scores" data-group="attributeTab" data-tab="flex">
+        {{#each data.DCC.abilities as |ability id|}}
+            <li class="ability" data-ability="{{id}}">
+                <label class="ability-name box-title rollable">{{ability}}</label>
+                <br/>
+                <input class="ability-score" id="data.abilities.{{id}}.value" name="data.abilities.{{id}}.value"
+                    type="text"
+                    value="{{#with (lookup ../data.abilities id) as |ab|}}{{ ab.value }}{{/with}}"
+                    data-dtype="Number"
+                    placeholder="10"
+                />
+            </li>
+        {{/each}}
+    </ul>
+
+
+    {{!-- FINAL VALUES --}}
+    <ul class="tab ability-scores" data-group="attributeTab" data-tab="final">
+        {{#each data.DCC.abilities as |ability id|}}
+            <li class="ability" data-ability="{{id}}">
+                <label class="ability-name box-title rollable">{{ability}}</label>
+                <br/>
+                <input class="ability-score" id="data.abilities.{{id}}.final" name="data.abilities.{{id}}.final"
+                    type="text"
+                    value="{{#with (lookup ../data.abilities id) as |ab|}}{{ ab.final }}{{/with}}"
+                    data-dtype="Number"
+                    placeholder="10"
+                    disabled
+                />
+
+                
+                <div class="ability-modifiers" title="Modifier">
+                    {{#with (lookup ../data.abilities [id]) as |ab|}}{{numberFormat ab.mod decimals=0 sign=true}}{{/with}}
+                </div>
+                
+                {{#ifeq id "luck" }}
+                <div class="floating-luck">
+                    <h4>FLEETING</h4>
+                    <span><input class="fleeting-luck" id="data.abilities.luck.fleeting" name="data.abilities.luck.fleeting"
+                        type="text"
+                        value="{{#with ../data.abilities.luck as |luck| }}{{luck.fleeting}}{{/with}}"
+                        data-dtype="Number"
+                        placeholder="0"
+                    /></span>
+                </div>
+                {{/ifeq}}
+                
+            </li>
+        {{/each}}
+    </ul>
+
+</div>

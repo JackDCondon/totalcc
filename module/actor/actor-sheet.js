@@ -19,7 +19,10 @@ export class totalccActorSheet extends ActorSheet {
       template: "systems/totalcc/templates/actor/compactsheet.html",
       width: 600,
       height: 800,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
+      tabs: [
+        { navSelector: ".sheet-tabs", contentSelector: ".characterinfo-tabs", initial: "description" },
+        { navSelector: ".attribute-tabs", contentSelector: ".attribute-body", initial: "final" }
+      ]
     });
   }
 

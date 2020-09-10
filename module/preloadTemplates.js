@@ -7,7 +7,8 @@ export const preloadHandlebarsTemplates = async function () {
         //Sheet tabs
         'systems/totalcc/templates/actor/partials/chargescomp.html',
         'systems/totalcc/templates/actor/partials/charateritems.html',
-        `systems/totalcc/templates/actor/partials/attributesgrid.html`
+        `systems/totalcc/templates/actor/partials/attributesgrid.html`,
+        `systems/totalcc/templates/actor/partials/attributes-character-list.html`
     ];
     return loadTemplates(templatePaths);
 };
