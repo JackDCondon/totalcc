@@ -30,19 +30,19 @@ export class totalccActor extends Actor {
   _prepareCharacterData(actorData) {
     const data = actorData.data;
     // Calc final abilities
-    for (let [id, abl] of Object.entries(data.abilities)) 
+    for (let [id, abl] of Object.entries(data.abilities))
     {
       abl.final = abl.value || 0;
     }
     // Ability modifiers
-    for (let [id, abl] of Object.entries(data.abilities)) 
+    for (let [id, abl] of Object.entries(data.abilities))
     {
       abl.mod = DCC.abilitiesmodifiers[abl.final] || 0;
     }
     //SET TECH LEVEL
     data.abilities.intelligence.tl = CONFIG.MCC.TechLevel[data.abilities.intelligence.value] || 0;
 
-    
+
     //SET AC
     data.attributes.ac.value = this.CalculateAC();
 
@@ -55,7 +55,7 @@ export class totalccActor extends Actor {
      */
     CalculateAC() {
       let acout = 10 + this.data.data.abilities.agility.mod;
-      this.data.items.forEach(function(item) 
+      this.data.items.forEach(function(item)
       {
         if (item.type === "armor" && item.data.iswearing)
         {
@@ -72,7 +72,7 @@ export class totalccActor extends Actor {
      */
     CalculateArmorPenelty() {
       let AP = 0;
-      this.data.items.forEach(function(item) 
+      this.data.items.forEach(function(item)
       {
         if (item.type === "armor" && item.data.iswearing)
         {
@@ -90,7 +90,7 @@ export class totalccActor extends Actor {
      */
     GetFumbleDice() {
       let fumbleout = "1d4";
-      this.data.items.forEach(function(item) 
+      this.data.items.forEach(function(item)
       {
 
         if (item.type === "armor" && item.data.iswearing)
@@ -145,7 +145,7 @@ export class totalccActor extends Actor {
       AddedData.SpecialText = WeaponData.activation.activationtext;
       }
 
-      let formula = this.GetItemActionDice(WeaponData); //TODO 
+      let formula = this.GetItemActionDice(WeaponData); //TODO
 
       let DamageFormula = `${WeaponStats.damage}`;
       if (this.data.type === "character")
@@ -177,12 +177,15 @@ export class totalccActor extends Actor {
 
 
       /* Roll the Attack */
-      let roll = new Roll(formula, {'critical': 20});
-      await this.rolldice(roll);
+
+      // let roll = new Roll(formula, {});
+      let diceRoll = new Roll(formula);
+      //diceRoll.evaluate();
+       await this.rolldice(diceRoll);
 
       if (!WeaponData.dontrolldamage)
       {
-        if (!this.isPC)
+        if (!this.hasPlayerOwner)
         {
           AddedData.hittext = `And scores <b>[[${DamageFormula}]]</b> ${WeaponStats.type} Damage`;
         }
@@ -193,21 +196,25 @@ export class totalccActor extends Actor {
       }
 
 
-      
+
 
       /** Handle Critical Hits **/
       let crit = "";
       //let critnum = new Roll(this.GetItemActionDice(WeaponData)).maximize().total;
-      let critdie = Roll.maximize(this.GetItemActionDice(WeaponData)).total;
+      let CritRoll = new Roll(this.GetItemActionDice(WeaponData));
+      CritRoll.evaluate({maximize: true});
 
-      if (Number(roll.dice[0].results[0]) === critdie) {
+
+      let critdie = CritRoll.total;
+
+      if (Number(diceRoll.dice[0].results[0]) === critdie) {
           const critTableFilter = `Crit Table ${CharData.attributes.crittable.value}`;
           const pack = game.packs.get('totalcc.criticalhits');
           await pack.getIndex(); //Load the compendium index
           let entry = pack.index.find(entity => entity.name.startsWith(critTableFilter));
           const table = await pack.getEntity(entry._id);
-          const roll = new Roll(`${CharData.attributes.critdice.value} + ${LuckMod}`);
-          const critResult = await table.draw({'roll': roll, 'displayChat': false});
+          const CritTableRoll = new Roll(`${CharData.attributes.critdice.value} + ${LuckMod}`);
+          const critResult = await table.draw({'roll': CritTableRoll, 'displayChat': false});
           crit = `<span style="color:green; font-weight: bolder">Critical Hit!</span> ${critResult.results[0].text}</span>`;
           AddedData.Crit = crit;
       }
@@ -215,20 +222,20 @@ export class totalccActor extends Actor {
       /** Handle Fumbles **/
       let fumble = "";
       let fumbleDie = this.GetFumbleDice();
-      
-      if (Number(roll.dice[0].results[0]) === 1) {
+
+      if (Number(diceRoll.dice[0].results[0]) === 1) {
           const pack = game.packs.get('totalcc.fumbles');
           await pack.getIndex(); //Load the compendium index
           let entry = pack.index.find(entity => entity.name.startsWith("Fumble"));
           const table = await pack.getEntity(entry._id);
-          const roll = new Roll(`${fumbleDie} - ${LuckMod}`);
-          const fumbleResult = await table.draw({'roll': roll, 'displayChat': false});
+          const FumbleRole = new Roll(`${fumbleDie} - ${LuckMod}`);
+          const fumbleResult = await table.draw({'roll': FumbleRole, 'displayChat': false});
           fumble = `<span style="color:red; font-weight: bolder">Fumble!</span> ${fumbleResult.results[0].text}</span>`;
           AddedData.Fumble = fumble;
       }
 
 
-      this.GraphicCharRoll(weapon, roll, AddedData);
+      this.GraphicCharRoll(weapon, diceRoll, AddedData);
 
 
   }
@@ -255,7 +262,7 @@ export class totalccActor extends Actor {
 
     let roll = new Roll(formula);
 
-    this.rolldice(roll);
+    await this.rolldice(roll);
 
     let AddedData = {};
 
@@ -267,7 +274,7 @@ export class totalccActor extends Actor {
     this.GraphicCharRoll(Item, roll, AddedData);
 
   }
-  
+
       /**
      * Roll a SKILL
      * @param {string} skillID     The weapon id (e.g. "m1", "r1")
@@ -298,7 +305,7 @@ export class totalccActor extends Actor {
       }
 
 
-       
+
       formula += `${AbilityMod} + ${SkillData.bonus}`;
 
       if (SkillData.additionalmod != "")
@@ -348,7 +355,7 @@ export class totalccActor extends Actor {
 
     }
 
-    
+
     async rollSpell(SpellID, options = {}) {
       const Spell = this.getOwnedItem(SpellID);
       const speaker = {alias: this.name, _id: this._id};
@@ -389,7 +396,7 @@ export class totalccActor extends Actor {
       AddedData.SpecialText = ItemData.data.data.activation.activationtext;
       }
 
-      
+
       const Packname = `totalcc.${ItemData.data.data.usetable}`;
       const pack = game.packs.get(Packname);
       if (pack)
@@ -539,14 +546,18 @@ export class totalccActor extends Actor {
 
 
 
-  async rolldice(roll)
+  async rolldice(inRoll)
   {
     if (game.dice3d) {
-      await game.dice3d.showForRoll(roll, game.user, false);  
+      await game.dice3d.showForRoll(inRoll, game.user, false);
+      if (!inRoll.rolled)
+      {
+        inRoll.roll();
+      }
     }
      else
      {
-      roll.roll();
+      inRoll.roll();
     }
   }
 
@@ -575,11 +586,11 @@ export class totalccActor extends Actor {
         rollhtml : RollHTML,
         additionalinfo : additionalinfo
       };
-  
+
       // Render the chat card template
       const template = `systems/totalcc/templates/chat/item-card.html`;
      const html = await renderTemplate(template, templateData);
-  
+
       // Basic chat message data
       const chatData = {
         user: game.user._id,
@@ -591,13 +602,13 @@ export class totalccActor extends Actor {
           alias: this.name,
         }
       };
-  
+
       // Toggle default roll mode
       //let rollMode = game.settings.get("core", "rollMode");
      // if (["gmroll", "blindroll"].includes(rollMode))
       //  chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
      // if (rollMode === "blindroll") chatData["blind"] = true;
-  
+
       // Create the chat message
       return ChatMessage.create(chatData);
   }
