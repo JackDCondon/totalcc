@@ -3,7 +3,8 @@ export const preloadHandlebarsTemplates = async function () {
         //Character Sheets
         'systems/totalcc/templates/actors/actor-sheet.html',
         'systems/totalcc/templates/actors/npc-sheet.html',
-        //Actor partials
+        //Apps partials
+        'systems/totalcc/templates/apps/diceChain.html',
         //Sheet tabs
         'systems/totalcc/templates/actor/partials/chargescomp.html',
         'systems/totalcc/templates/actor/partials/charateritems.html',

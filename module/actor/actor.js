@@ -181,7 +181,7 @@ export class totalccActor extends Actor {
       // let roll = new Roll(formula, {});
       let diceRoll = new Roll(formula);
       //diceRoll.evaluate();
-       await this.rolldice(diceRoll);
+      diceRoll = await this.rolldice(diceRoll);
 
       if (!WeaponData.dontrolldamage)
       {
@@ -262,7 +262,7 @@ export class totalccActor extends Actor {
 
     let roll = new Roll(formula);
 
-    await this.rolldice(roll);
+    roll = await this.rolldice(roll);
 
     let AddedData = {};
 
@@ -315,6 +315,8 @@ export class totalccActor extends Actor {
 
       /* Roll the SKILL */
       let roll = new Roll(formula, {CharData, SkillData});
+
+      roll = await this.rolldice(roll);
       //roll.roll();
 
       let label = `Rolling skill ${skill.name}`;
@@ -416,7 +418,7 @@ export class totalccActor extends Actor {
 
       if (!roll._rolled)
       {
-        await this.rolldice(roll);
+        roll = await this.rolldice(roll);
       }
 
       if (!table)
@@ -428,7 +430,10 @@ export class totalccActor extends Actor {
 
       //const tableresult = await table.draw({'roll': roll.total, 'displayChat': true});
       const tableresult = await table._getResultsForRoll(roll.total);
-      AddedData.TableCopy = tableresult[0].text;
+      if (tableresult[0] && tableresult[0].text)
+      {
+        AddedData.TableCopy = tableresult[0].text;
+      }
 
       this.GraphicCharRoll(ItemData, roll, AddedData);
 
@@ -546,19 +551,85 @@ export class totalccActor extends Actor {
 
 
 
+
+  
+/**
+ * Present a Dialog form which creates a d20 roll once submitted
+ * @return {Promise<Roll>}
+ * @private
+ */
+ async d20RollDialog(BaseRoll)
+ {
+   let template = "systems/totalcc/templates/apps/diceChain.html";
+   let dialogData = 
+   {
+     formula: BaseRoll.formula,
+     config: CONFIG.DCC
+   };
+   let DiceChain = CONFIG.DCC.DICE_CHAIN;
+   let DiceFace = BaseRoll.dice[0].faces;
+   let DiceChainIndex = DiceChain.findIndex( (element) => element == DiceFace);
+   const html = await renderTemplate(template, dialogData);
+   let dialogOptions = {};
+
+
+  
+
+   let title = "Dice Chain?";
+
+   // Create the Dialog window
+   let OutValue = await new Promise(resolve => {
+    let OutButtons = {};
+    for (let i = -3; i <= 3; i++) 
+    {
+     if(typeof DiceChain[DiceChainIndex + i] === 'undefined') 
+     {
+       // does not exist
+     }
+     else 
+     {
+       let NewButton = {};
+       let ButtonName = "Button" + i;
+       OutButtons[ButtonName] = 
+       {
+         label: "d" + DiceChain[DiceChainIndex+i],
+         callback: html => resolve({ faces: DiceChain[DiceChainIndex+i] , form : html[0].querySelector("form")})
+       }
+     }
+   }
+     new Dialog({
+       title: title,
+       content: html,
+       buttons: OutButtons,
+       default: "Button0",
+       close: () => resolve(null)
+     }, dialogOptions).render(true);
+   });
+
+   let FormMod = OutValue.form.elements[1].value;
+   BaseRoll.dice[0].faces = OutValue.faces;
+   
+   let NewRoll = new Roll(BaseRoll.formula + " + @mod", {mod : FormMod});
+   //NewRoll.evaluate();
+   return NewRoll;
+ }
+
   async rolldice(inRoll)
   {
+    inRoll = await this.d20RollDialog(inRoll);
+
     if (game.dice3d) {
       await game.dice3d.showForRoll(inRoll, game.user, false);
       if (!inRoll.rolled)
       {
-        inRoll.roll();
+        inRoll.evaluate();
       }
     }
      else
      {
-      inRoll.roll();
+      inRoll.evaluate();
     }
+    return inRoll;
   }
 
 
@@ -637,7 +708,6 @@ export class totalccActor extends Actor {
    // data.properties = props.filter((p) => !!p);
     return data;
   }
-
 
 
 
