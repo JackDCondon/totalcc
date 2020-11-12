@@ -148,6 +148,8 @@ export class totalccActor extends Actor {
       let formula = this.GetItemActionDice(WeaponData); //TODO
 
       let DamageFormula = `${WeaponStats.damage}`;
+
+
       if (this.data.type === "character")
       {
         LuckMod = CharData.abilities.luck.mod;
@@ -182,7 +184,6 @@ export class totalccActor extends Actor {
       let diceRoll = new Roll(formula);
       //diceRoll.evaluate();
       diceRoll = await this.rolldice(diceRoll);
-
       if (!WeaponData.dontrolldamage)
       {
         if (!this.hasPlayerOwner)
@@ -195,19 +196,10 @@ export class totalccActor extends Actor {
         }
       }
 
+      let FirstDiceRoll = Number(diceRoll.dice[0].total);
 
 
-
-      /** Handle Critical Hits **/
-      let crit = "";
-      //let critnum = new Roll(this.GetItemActionDice(WeaponData)).maximize().total;
-      let CritRoll = new Roll(this.GetItemActionDice(WeaponData));
-      CritRoll.evaluate({maximize: true});
-
-
-      let critdie = CritRoll.total;
-
-      if (Number(diceRoll.dice[0].results[0]) === critdie) {
+      if (FirstDiceRoll == diceRoll.dice[0].faces) {
           const critTableFilter = `Crit Table ${CharData.attributes.crittable.value}`;
           const pack = game.packs.get('totalcc.criticalhits');
           await pack.getIndex(); //Load the compendium index
@@ -215,22 +207,21 @@ export class totalccActor extends Actor {
           const table = await pack.getEntity(entry._id);
           const CritTableRoll = new Roll(`${CharData.attributes.critdice.value} + ${LuckMod}`);
           const critResult = await table.draw({'roll': CritTableRoll, 'displayChat': false});
-          crit = `<span style="color:green; font-weight: bolder">Critical Hit!</span> ${critResult.results[0].text}</span>`;
+          let crit = `<span style="color:green; font-weight: bolder">Critical Hit!</span> ${critResult.results[0].text}</span>`;
           AddedData.Crit = crit;
       }
 
       /** Handle Fumbles **/
-      let fumble = "";
       let fumbleDie = this.GetFumbleDice();
 
-      if (Number(diceRoll.dice[0].results[0]) === 1) {
+      if (FirstDiceRoll == 1) {
           const pack = game.packs.get('totalcc.fumbles');
           await pack.getIndex(); //Load the compendium index
           let entry = pack.index.find(entity => entity.name.startsWith("Fumble"));
           const table = await pack.getEntity(entry._id);
           const FumbleRole = new Roll(`${fumbleDie} - ${LuckMod}`);
           const fumbleResult = await table.draw({'roll': FumbleRole, 'displayChat': false});
-          fumble = `<span style="color:red; font-weight: bolder">Fumble!</span> ${fumbleResult.results[0].text}</span>`;
+          let fumble = `<span style="color:red; font-weight: bolder">Fumble!</span> ${fumbleResult.results[0].text}</span>`;
           AddedData.Fumble = fumble;
       }
 
@@ -524,34 +515,6 @@ export class totalccActor extends Actor {
     }
   }
 
-
-
-  DiceRollDialouge(subject) {
-    return new Promise((resolve, reject) => {
-      new Dialog({
-        title: "Dice Roll Mod",
-        content: `Modify Roll?`,
-        buttons: {
-          ok: {
-            icon: '<i class="fas fa-check"></i>',
-            label: "Roll",
-            callback: () => resolve(true)
-          },
-          cancel: {
-            icon: '<i class="fas fa-times"></i>',
-            label: "Cancel",
-            callback: () => resolve(false)
-          },
-        },
-        default: "ok",
-        close: () => resolve(false),
-      }, {classes: ["totalcc", "dialog"]}).render(true);
-    });
-  }
-
-
-
-
   
 /**
  * Present a Dialog form which creates a d20 roll once submitted
@@ -571,10 +534,6 @@ export class totalccActor extends Actor {
    let DiceChainIndex = DiceChain.findIndex( (element) => element == DiceFace);
    const html = await renderTemplate(template, dialogData);
    let dialogOptions = {};
-
-
-  
-
    let title = "Dice Chain?";
 
    // Create the Dialog window
