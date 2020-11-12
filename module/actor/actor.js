@@ -191,7 +191,10 @@ export class totalccActor extends Actor {
       {
         if (!this.hasPlayerOwner)
         {
-          AddedData.hittext = `And scores <b>[[${DamageFormula}]]</b> ${WeaponStats.type} Damage`;
+          let DamageRoll = new Roll(DamageFormula);
+          DamageRoll.evaluate();
+          let Damagehtml = this.formatRoll(DamageRoll, DamageRoll.formula);
+          AddedData.hittext = `And scores ${Damagehtml} ${WeaponStats.type} Damage`;
         }
         else
         {
@@ -228,7 +231,7 @@ export class totalccActor extends Actor {
           AddedData.Fumble = fumble;
       }
 
-
+      //AddedData.test = "[ [[ 1d10 ]] ]";
       this.GraphicCharRoll(weapon, diceRoll, AddedData);
 
       return true;
@@ -618,7 +621,9 @@ export class totalccActor extends Actor {
     }
 
     if (game.dice3d) {
-      await game.dice3d.showForRoll(inRoll, game.user, false);
+      //game.dice3d.showForRoll(roll, user, synchronize, whisper, blind)
+      let WisperUsers= [game.user];
+      let DidAnimate = await game.dice3d.showForRoll(inRoll, game.user, false, WisperUsers, false);
       if (!inRoll.rolled)
       {
         inRoll.evaluate();
@@ -642,7 +647,7 @@ export class totalccActor extends Actor {
 
   async GraphicCharRoll(item, roll, additionalinfo)
   {
-
+    
     const RollHTML = this.formatRoll(roll, roll.formula);
 
       // Basic template rendering data
@@ -652,7 +657,7 @@ export class totalccActor extends Actor {
         //tokenId: token ? `${token.scene._id}.${token.id}` : null,
         item: item,
         data: this.data,
-        roll : roll,
+        //roll : roll,
         rollhtml : RollHTML,
         additionalinfo : additionalinfo
       };
@@ -664,8 +669,11 @@ export class totalccActor extends Actor {
       // Basic chat message data
       const chatData = {
         user: game.user._id,
-        type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+        roll: roll,
+        isRoll: true,
         content: html,
+        flavor: html,
         speaker: {
           actor: this._id,
           token: this.token,

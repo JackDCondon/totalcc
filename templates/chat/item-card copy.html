@@ -1,41 +1,34 @@
-<div class="totalcc chat-card item-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}"
-    {{#if tokenId}}data-token-id="{{tokenId}}" {{/if}}>
-    <header class="card-header flexrow">
-        <img src="{{item.img}}" title="{{item.name}}" width="36" height="36" />
-        <h3 class="item-name"><a>{{item.name}}</a></h3>
-    </header>
+<section class="totalcc chat-message">
+    <div class="totalcc chat-block">
+        <div class="flexrow chat-header">
+            <div class="chat-title"><h2>Uses {{item.name}}</h2></div>
+            <div class="chat-img" style="background-image:url('{{item.img}}')"></div>
+        </div>
 
-    <div class="card-content">
-        {{{data.description}}}
-    </div>
 
-    <div class="card-buttons">
-        {{#if hasAttack}}<button data-action="attack">{{ localize "OSE.Attack" }}</button>{{/if}}
-
-        {{#if hasDamage}}
-        <button data-action="damage">
-            {{#if isHealing}}
-            {{ localize "OSE.Healing" }}
-            {{else}}
-            {{localize "OSE.Damage" }}
-            {{/if}}
-        </button>
+        {{#if item.data.data.charges.usescharges}}
+        <div class="chat-details">
+            <div class="roll-result"><div>Charges left: {{item.data.data.charges.value}} {{#if item.data.data.charges.max}} / {{item.data.data.charges.max}} {{/if}}</div>
+        </div>
         {{/if}}
 
-        {{#if data.save}}
-        <button data-action="save" data-save="{{data.save}}" disabled>
-            {{lookup config.saves_long data.save}} {{ localize "OSE.SavingThrow" }} 
-        </button>
+        {{#if roll}}
+        
+        <div class="chat-details">
+            <div class="roll-result"><b>{{roll.formula}} = {{{rollhtml}}} </b></div>
+        </div>
+        
+
         {{/if}}
 
-        {{#if data.roll}}
-        <button data-action="formula">{{ localize "OSE.Roll"}} {{data.roll}} {{#if data.blindroll}}({{localize 'OSE.items.BlindRoll'}}){{/if}}</button>
-        {{/if}}
-    </div>
 
-    <footer class="card-footer">
-        {{#each data.properties}}
-        <span>{{this}}</span>
+        {{#each additionalinfo as |lable id|}}
+        <div class="chat-details">
+            <div class="roll-result"><div>{{{lable}}}</div></div>
+        </div>
         {{/each}}
-    </footer>
-</div>
+
+
+
+    </div>
+</section>
