@@ -122,16 +122,13 @@ export class totalccActor extends Actor {
       let WeaponData = weapon.data.data;
       let WeaponStats = WeaponData.weaponstats;
       let LuckMod = 0;
-
       let AbilityMod = 0;
-      let mfwep;
-
       let AddedData = {};
 
 
       if (options.mfID)
       {
-        mfwep = weapon.HasMultifuncWep(options.mfID);
+        let mfwep = weapon.HasMultifuncWep(options.mfID);
         if (mfwep)
         {
           WeaponStats = mfwep.data.weaponstats;
@@ -145,8 +142,7 @@ export class totalccActor extends Actor {
       AddedData.SpecialText = WeaponData.activation.activationtext;
       }
 
-      let formula = this.GetItemActionDice(WeaponData); //TODO
-
+      let Attackformula = this.GetItemActionDice(WeaponData); //TODO
       let DamageFormula = `${WeaponStats.damage}`;
 
 
@@ -158,7 +154,7 @@ export class totalccActor extends Actor {
         {
           if (CharData.attributes.attack.value !== "")
           {
-            formula += ` + ${CharData.attributes.attack.value}`;
+            Attackformula += ` + ${CharData.attributes.attack.value}`;
           }
           AbilityMod = CharData.abilities.strength.mod;
           DamageFormula = `${WeaponStats.damage} + ${AbilityMod}`
@@ -167,13 +163,13 @@ export class totalccActor extends Actor {
         {
           if (CharData.attributes.ranged.value !== "")
           {
-            formula += ` + ${CharData.attributes.ranged.value}`;
+            Attackformula += ` + ${CharData.attributes.ranged.value}`;
           }
           AbilityMod = CharData.abilities.agility.mod;
         }
       }
 
-      formula += ` + ${AbilityMod} + ${WeaponStats.attack}`
+      Attackformula += ` + ${AbilityMod} + ${WeaponStats.attack}`
 
 
 
@@ -181,9 +177,16 @@ export class totalccActor extends Actor {
       /* Roll the Attack */
 
       // let roll = new Roll(formula, {});
-      let diceRoll = new Roll(formula);
+      let diceRoll = new Roll(Attackformula);
       //diceRoll.evaluate();
       diceRoll = await this.rolldice(diceRoll);
+
+      //CANCEL THE ROLL
+      if (diceRoll === null)
+      {
+        return false;
+      }
+
       if (!WeaponData.dontrolldamage)
       {
         if (!this.hasPlayerOwner)
@@ -228,6 +231,8 @@ export class totalccActor extends Actor {
 
       this.GraphicCharRoll(weapon, diceRoll, AddedData);
 
+      return true;
+
 
   }
 
@@ -254,6 +259,10 @@ export class totalccActor extends Actor {
     let roll = new Roll(formula);
 
     roll = await this.rolldice(roll);
+    if (roll === null)
+    {
+      return false;
+    }
 
     let AddedData = {};
 
@@ -263,7 +272,7 @@ export class totalccActor extends Actor {
     }
 
     this.GraphicCharRoll(Item, roll, AddedData);
-
+    return true;
   }
 
       /**
@@ -308,13 +317,17 @@ export class totalccActor extends Actor {
       let roll = new Roll(formula, {CharData, SkillData});
 
       roll = await this.rolldice(roll);
+      if (roll === null)
+      {
+        return false;
+      }
       //roll.roll();
 
       let label = `Rolling skill ${skill.name}`;
 
 
       this.rollFromTable(skill, roll, label);
-
+      return true;
     }
 
 
@@ -339,7 +352,11 @@ export class totalccActor extends Actor {
 
       /* Roll the MUTATION */
       let roll = new Roll(formula, {CharData, MutationData});
-      //roll.roll();
+      roll = await this.rolldice(roll);
+      if (roll === null)
+      {
+        return false;
+      }
 
       let label = `Rolling MUTATION: ${Mutation.name}`;
 
@@ -369,7 +386,10 @@ export class totalccActor extends Actor {
 
       /* Roll the SPELL */
       let roll = new Roll(formula, {CharData, SpellData});
-      //roll.roll();
+      if (roll === null)
+      {
+        return false;
+      }
 
       let label = `Rolling spell: ${Spell.name}`;
 
@@ -434,10 +454,15 @@ export class totalccActor extends Actor {
    * Roll a Saving Throw
    * @param {String} saveId       The save ID (e.g. "str")
    */
-  rollSavingThrow (saveId) {
+  async rollSavingThrow (saveId) {
     const save = this.data.data.attributes.saves[saveId];
     save.label = CONFIG.DCC.saves[saveId];
-    const roll = new Roll('1d20+@saveMod', { saveMod: save.value })
+    let roll = new Roll('1d20+@saveMod', { saveMod: save.value })
+    roll = await this.rolldice(roll);
+    if (roll === null)
+    {
+      return false;
+    }
 
     // Convert the roll to a chat message
     roll.toMessage({
@@ -452,7 +477,7 @@ export class totalccActor extends Actor {
    * @param {String} abilityId    The ability ID (e.g. "str")
    * @param {Object} options      Options which configure how ability checks are rolled
    */
-  rollAbilityCheck (abilityId, options = {}) {
+  async rollAbilityCheck (abilityId, options = {}) {
     const ability = this.data.data.abilities[abilityId]
     ability.label = CONFIG.DCC.abilities[abilityId]
 
@@ -461,6 +486,12 @@ export class totalccActor extends Actor {
     // Override the Roll for Luck Checks unless they explicitly click on the modifier
     if ((abilityId === 'luck') && (options.event.currentTarget.className !== 'ability-modifiers')) {
       roll = new Roll('1d20')
+    }
+
+    roll = await this.rolldice(roll);
+    if (roll === null)
+    {
+      return false;
     }
 
 
@@ -565,6 +596,11 @@ export class totalccActor extends Actor {
      }, dialogOptions).render(true);
    });
 
+   if (OutValue === null)
+   {
+     return null;
+   }
+
    let FormMod = OutValue.form.elements[1].value;
    BaseRoll.dice[0].faces = OutValue.faces;
    
@@ -576,6 +612,10 @@ export class totalccActor extends Actor {
   async rolldice(inRoll)
   {
     inRoll = await this.d20RollDialog(inRoll);
+    if (inRoll === null)
+    {
+      return null;
+    }
 
     if (game.dice3d) {
       await game.dice3d.showForRoll(inRoll, game.user, false);

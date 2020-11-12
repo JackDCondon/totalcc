@@ -76,10 +76,27 @@ export class totalccItem extends Item {
     }
 
 
+    let DidRoll = true;
+
+    if (ItemType === "weapon")
+    {
+      DidRoll = await this.actor.rollWeaponAttack(item._id, options);
+    } else if (ItemType === "skill")
+    {
+      DidRoll = await this.actor.rollSkill(item._id);
+    } else if (ItemType === "mutation")
+    {
+      DidRoll = await this.actor.rollMutation(item._id);
+    } else if (ItemType === "spell")
+    {
+      DidRoll = await this.actor.rollSpell(item._id);
+    } else 
+    {
+      DidRoll = await this.actor.rollItem(item._id);
+    }
 
 
-
-    if (item.data.charges.usescharges)
+    if (item.data.charges.usescharges && DidRoll)
     {
       if ((chargesleft - chargescost) < 0)
       {
@@ -91,52 +108,12 @@ export class totalccItem extends Item {
         item.data.charges.value-=chargescost;
         //item.update();
         this.update(item);
-        if (this.sheet.render)
-        {
-          this.sheet.render();
-          if (this.actor.sheet.render)
-          {
-            this.actor.sheet.render();
-          }
-        }
         //update({ "data.quantity.value": parseInt(event.target.value) });
       }
     }
-
-
-
-
-    if (ItemType === "weapon")
-    {
-      this.actor.rollWeaponAttack(item._id, options);
-      return;
-
-    }
-
-    if (ItemType === "skill")
-    {
-      this.actor.rollSkill(item._id);
-      return;
-
-    }
-
-    if (ItemType === "mutation")
-    {
-      this.actor.rollMutation(item._id);
-      return;
-
-    }
-
-    if (ItemType === "spell")
-    {
-      this.actor.rollSpell(item._id);
-      return;
-    }
-
-    this.actor.rollItem(item._id);
-
-
   }
+
+
 
 
     /**
