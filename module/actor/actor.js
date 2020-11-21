@@ -213,7 +213,7 @@ export class totalccActor extends Actor {
           const table = await pack.getEntity(entry._id);
           const CritTableRoll = new Roll(`${CharData.attributes.critdice.value} + ${LuckMod}`);
           const critResult = await table.draw({'roll': CritTableRoll, 'displayChat': false});
-          let crit = `<span style="color:green; font-weight: bolder">Critical Hit!</span> ${critResult.results[0].text}</span>`;
+          let crit = `<span style="color:green; font-weight: bolder">Critical Hit!</span> <br> ${critResult.results[0].text}</span>`;
           AddedData.Crit = crit;
       }
 
@@ -227,7 +227,7 @@ export class totalccActor extends Actor {
           const table = await pack.getEntity(entry._id);
           const FumbleRole = new Roll(`${fumbleDie} - ${LuckMod}`);
           const fumbleResult = await table.draw({'roll': FumbleRole, 'displayChat': false});
-          let fumble = `<span style="color:red; font-weight: bolder">Fumble!</span> ${fumbleResult.results[0].text}</span>`;
+          let fumble = `<span style="color:red; font-weight: bolder">Fumble!</span> <br> ${fumbleResult.results[0].text}</span>`;
           AddedData.Fumble = fumble;
       }
 

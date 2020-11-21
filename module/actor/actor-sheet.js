@@ -289,7 +289,7 @@ export class totalccActorSheet extends ActorSheet {
 
     // Drag events for macros.
     if (this.actor.owner) {
-      let handler = ev => this._onDragItemStart(ev);
+      let handler = ev => this._onDragStart(ev);
       html.find('h4.item-name').each((i, li) => {
         if (li.classList.contains("inventory-header")) return;
         li.setAttribute("draggable", true);
