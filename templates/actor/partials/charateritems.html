@@ -44,7 +44,7 @@
               {{> systems/totalcc/templates/actor/partials/chargescomp.html item=item}}
 
               <div class="item-controls">
-                <input class="itemequipt" type="checkbox" name="{{item.data.iswearing}}" id="item.data.iswearing" data-dtype="Boolean" {{checked item.data.iswearing}}/>
+                <input class="itemequipt" type="checkbox" name="{{item.data.iswearing}}" id="{{item._id}}.iswearing" data-dtype="Boolean" {{checked item.data.iswearing}}/>
                   <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                   <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
               </div>
