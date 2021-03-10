@@ -83,16 +83,16 @@ export class totalccItem extends Item {
       DidRoll = await this.actor.rollWeaponAttack(item._id, options);
     } else if (ItemType === "skill")
     {
-      DidRoll = await this.actor.rollSkill(item._id);
+      DidRoll = await this.actor.rollSkill(item._id, options);
     } else if (ItemType === "mutation")
     {
-      DidRoll = await this.actor.rollMutation(item._id);
+      DidRoll = await this.actor.rollMutation(item._id, options);
     } else if (ItemType === "spell")
     {
-      DidRoll = await this.actor.rollSpell(item._id);
+      DidRoll = await this.actor.rollSpell(item._id, options);
     } else 
     {
-      DidRoll = await this.actor.rollItem(item._id);
+      DidRoll = await this.actor.rollItem(item._id, options);
     }
 
 

@@ -202,10 +202,19 @@ export class totalccActor extends Actor {
         }
       }
 
-      let FirstDiceRoll = Number(diceRoll.dice[0].total);
+
+      let FirstDiceRoll;
+      if (diceRoll.Roll.dice[0] == null)
+      {
+        FirstDiceRoll =  Number(diceRoll.Roll.terms[0]);
+      }
+      else
+      {
+        FirstDiceRoll = Number(diceRoll.Roll.dice[0].total);
+      }
 
 
-      if (FirstDiceRoll == diceRoll.dice[0].faces) {
+      if (FirstDiceRoll == diceRoll.Faces) {
           const critTableFilter = `Crit Table ${CharData.attributes.crittable.value}`;
           const pack = game.packs.get('totalcc.criticalhits');
           await pack.getIndex(); //Load the compendium index
@@ -232,7 +241,7 @@ export class totalccActor extends Actor {
       }
 
       //AddedData.test = "[ [[ 1d10 ]] ]";
-      this.GraphicCharRoll(weapon, diceRoll, AddedData);
+      this.GraphicCharRoll(weapon, diceRoll.Roll, AddedData);
 
       return true;
 
@@ -274,7 +283,7 @@ export class totalccActor extends Actor {
     AddedData.SpecialText = ItemData.activation.activationtext;
     }
 
-    this.GraphicCharRoll(Item, roll, AddedData);
+    this.GraphicCharRoll(Item, roll.Roll, AddedData);
     return true;
   }
 
@@ -329,7 +338,7 @@ export class totalccActor extends Actor {
       let label = `Rolling skill ${skill.name}`;
 
 
-      this.rollFromTable(skill, roll, label);
+      this.rollFromTable(skill, roll.Roll, label);
       return true;
     }
 
@@ -355,7 +364,7 @@ export class totalccActor extends Actor {
 
       /* Roll the MUTATION */
       let roll = new Roll(formula, {CharData, MutationData});
-      roll = await this.rolldice(roll);
+      roll = await this.rolldice(roll, options);
       if (roll === null)
       {
         return false;
@@ -363,7 +372,7 @@ export class totalccActor extends Actor {
 
       let label = `Rolling MUTATION: ${Mutation.name}`;
 
-      this.rollFromTable(Mutation, roll, label);
+      this.rollFromTable(Mutation, roll.Roll, label);
 
 
     }
@@ -389,6 +398,7 @@ export class totalccActor extends Actor {
 
       /* Roll the SPELL */
       let roll = new Roll(formula, {CharData, SpellData});
+      roll = await this.rolldice(roll, options);
       if (roll === null)
       {
         return false;
@@ -396,7 +406,7 @@ export class totalccActor extends Actor {
 
       let label = `Rolling spell: ${Spell.name}`;
 
-      this.rollFromTable(Spell, roll, label);
+      this.rollFromTable(Spell, roll.Roll, label);
 
     }
 
@@ -468,7 +478,7 @@ export class totalccActor extends Actor {
     }
 
     // Convert the roll to a chat message
-    roll.toMessage({
+    roll.Roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this }),
       flavor: `${game.i18n.localize(save.label)} Save`
     })
@@ -499,7 +509,7 @@ export class totalccActor extends Actor {
 
 
     // Convert the roll to a chat message
-    roll.toMessage({
+    roll.Roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this }),
       flavor: `${game.i18n.localize(ability.label)} Check`
     })
@@ -555,7 +565,7 @@ export class totalccActor extends Actor {
  * @return {Promise<Roll>}
  * @private
  */
- async d20RollDialog(BaseRoll)
+ async d20RollDialog(BaseRoll, options = {})
  {
    let template = "systems/totalcc/templates/apps/diceChain.html";
    let dialogData = 
@@ -605,16 +615,33 @@ export class totalccActor extends Actor {
    }
 
    let FormMod = OutValue.form.elements[1].value;
+   let DiceOverride = OutValue.form.elements[2].value;
    BaseRoll.dice[0].faces = OutValue.faces;
    
-   let NewRoll = new Roll(BaseRoll.formula + " + @mod", {mod : FormMod});
+   let rollFormula = BaseRoll.formula;
+   let NewRoll = new Roll(rollFormula + " + @mod", {mod : FormMod});
+   if (DiceOverride != "")
+   {
+     NewRoll.terms[0] = DiceOverride
+     //rollFormula = DiceOverride;
+   }
+
+
+   let outdata = {
+     Roll : NewRoll,
+     Faces : OutValue.faces
+   };
+
+
+
    //NewRoll.evaluate();
-   return NewRoll;
+   return outdata;
  }
 
-  async rolldice(inRoll)
+
+  async rolldice(inRoll, options = {})
   {
-    inRoll = await this.d20RollDialog(inRoll);
+    inRoll = await this.d20RollDialog(inRoll, options);
     if (inRoll === null)
     {
       return null;
@@ -623,15 +650,15 @@ export class totalccActor extends Actor {
     if (game.dice3d) {
       //game.dice3d.showForRoll(roll, user, synchronize, whisper, blind)
       let WisperUsers= [game.user];
-      let DidAnimate = await game.dice3d.showForRoll(inRoll, game.user, false, WisperUsers, false);
-      if (!inRoll.rolled)
+      let DidAnimate = await game.dice3d.showForRoll(inRoll.Roll, game.user, false, WisperUsers, false);
+      if (!inRoll.Roll.rolled)
       {
-        inRoll.evaluate();
+        inRoll.Roll.evaluate();
       }
     }
      else
      {
-      inRoll.evaluate();
+      inRoll.Roll.evaluate();
     }
     return inRoll;
   }
